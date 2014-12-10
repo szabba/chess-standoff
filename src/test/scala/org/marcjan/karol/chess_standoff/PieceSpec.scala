@@ -49,4 +49,14 @@ class PieceSpec extends FlatSpec with Matchers {
 
     queenInvalidMoves foreach { Queen.canMoveBy(_) should be (false) }
   }
+
+  "A Rook" should "be able to move n squares straight along a main direction" in {
+    val rookValidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
+      case (xDelta, 0) => true
+      case (0, yDelta) => true
+      case _ => false
+    }
+
+    rookValidMoves foreach { Rook.canMoveBy(_) should be (true) }
+  }
 }
