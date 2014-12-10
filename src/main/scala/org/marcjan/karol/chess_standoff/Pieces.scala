@@ -33,7 +33,7 @@ object King extends Piece {
  * directions by any number of squares.
  */
 object Queen extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = false
+  override def canMoveBy(positionDelta: (Int, Int)): Boolean = true
 }
 
 /**
