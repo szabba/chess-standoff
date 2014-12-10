@@ -43,4 +43,12 @@ class PieceSpec extends FlatSpec with Matchers {
 
     queenValidMoves foreach { Queen.canMoveBy(_) should be (true)}
   }
+
+  it should "not be able to move non-diagonally" in {
+    val queenInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
+      case (xDelta, yDelta) => xDelta != yDelta
+    }
+
+    queenInvalidMoves foreach { Queen.canMoveBy(_) should be (false) }
+  }
 }
