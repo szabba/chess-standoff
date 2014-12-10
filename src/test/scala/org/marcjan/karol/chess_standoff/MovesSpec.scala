@@ -76,4 +76,10 @@ class MovesSpec extends FlatSpec with Matchers {
   it should "hold for (0, 0)" in {
     isZero(0, 0) should be (true)
   }
+
+  "movesExcept" should "return Nil when called with two identical arguments" in {
+    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+
+    movesExcept(someMoves, someMoves) should be (Nil)
+  }
 }
