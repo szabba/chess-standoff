@@ -3,6 +3,19 @@ package org.marcjan.karol.chess_standoff
 import org.scalatest.{Matchers, FlatSpec}
 
 class PieceSpec extends FlatSpec with Matchers {
+
+  /**
+   * Returns a list of all displacements with the x and y deltas in the given
+   * ranges.
+   *
+   * @param ofX range of the x displacement
+   * @param ofY range of the y displacement
+   * @return list of all displacements with the x and y components in the given
+   *         ranges
+   */
+  def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
+    ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
+
   "A King" should "be able to move by one square in any direction" in {
     King.canMoveBy((1, 0)) should be (true)
     King.canMoveBy((-1, 0)) should be (true)
