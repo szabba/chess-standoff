@@ -10,7 +10,7 @@ class DisplacementSpec extends FlatSpec with Matchers {
     isDiagonal((1, 1)) should be (true)
   }
 
-  "(2, 2)" should "be diagonal" in {
+   "(2, 2)" should "be diagonal" in {
     isDiagonal((2, 2)) should be (true)
   }
 }

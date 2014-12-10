@@ -10,5 +10,5 @@ object Displacement {
    * @return is the displacement diagonal?
    */
   def isDiagonal(displacement: (Int, Int)): Boolean =
-    displacement == (1, 1)
+    List((1, 1), (2, 2)) contains displacement
 }
