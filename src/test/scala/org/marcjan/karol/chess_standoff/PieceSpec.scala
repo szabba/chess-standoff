@@ -93,4 +93,23 @@ class PieceSpec extends FlatSpec with Matchers {
       Bishop.canMoveBy(_) should be (false)
     }
   }
+
+  val knightMoves = List(
+    (2, 1), (2, -1), (-2, 1), (-2, -1),
+    (1, 2), (1, -2), (-1, 2), (-1, -2)
+  )
+
+  "A Knight" should "be able to move by two squares along one edge and one along the other" in {
+    knightMoves foreach {
+      Knight.canMoveBy(_) should be (true)
+    }
+  }
+
+  it should "not be able to move unless the displacement is two squares along one edge and one along the other" in {
+    standardChessboardMoves filter {
+      knightMoves contains _
+    } foreach {
+      Knight.canMoveBy(_) should be (false)
+    }
+  }
 }
