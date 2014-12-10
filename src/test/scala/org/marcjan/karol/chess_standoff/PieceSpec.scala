@@ -27,6 +27,21 @@ class PieceSpec extends FlatSpec with Matchers {
     displacement match { case (xDelta, yDelta) => xDelta == yDelta }
   }
 
+  /**
+   * Returns true when the given displacement is along the board's edge. It is
+   * left unspecified for the zero displacement.
+   *
+   * @param displacement a displacement as a tuple of (xDelta, yDelta)
+   * @return is the displacement along the board's edge?
+   */
+  def isAlongBoardEdge(displacement: (Int, Int)): Boolean = {
+    displacement match {
+      case (_, 0) => true
+      case (0, _) => true
+      case _ => false
+    }
+  }
+
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
       case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
