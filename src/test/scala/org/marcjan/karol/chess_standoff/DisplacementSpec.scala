@@ -56,4 +56,20 @@ class DisplacementSpec extends FlatSpec with Matchers {
   it should "not hold for (-1, 1)" in {
     isAlongBoardEdge((-1, 1)) should be (false)
   }
+
+  "isZero" should "not hold for (0, 1)" in {
+    isZero((0, 1)) should be (false)
+  }
+
+  it should "not hold for (1, 0)" in {
+    isZero((1, 0)) should be (false)
+  }
+
+  it should "not hold for (-1, 0)" in {
+    isZero((-1, 0)) should be (false)
+  }
+
+  it should "not hold for (2, 3)" in {
+    isZero((2, 3)) should be (false)
+  }
 }
