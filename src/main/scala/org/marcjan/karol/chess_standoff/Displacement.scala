@@ -35,5 +35,5 @@ object Displacement {
    * @param displacement a displacement as a tuple of (xDelta, yDelta)
    * @return is the displacement zero?
    */
-  def isZero(displacement: (Int, Int)): Boolean = false
+  def isZero(displacement: (Int, Int)): Boolean = displacement == (0, 0)
 }
