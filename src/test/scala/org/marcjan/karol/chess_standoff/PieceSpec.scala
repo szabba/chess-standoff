@@ -4,7 +4,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class PieceSpec extends FlatSpec with Matchers {
 
-  import Moves.{isAlongBoardEdge, isDiagonal}
+  import Moves.{isAlongBoardEdge, isDiagonal, isZero}
 
   /**
    * Returns a list of all displacements with the x and y deltas in the given
@@ -34,20 +34,15 @@ class PieceSpec extends FlatSpec with Matchers {
   def movesExcept(movesToExclude: List[(Int, Int)]) =
     Moves.movesExcept(standardChessboardMoves, movesToExclude)
 
-  "A King" should "be able to move by one square in any direction" in {
-    val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
-      case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
-    }
+  val kingMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter (isZero)
 
-    kingsValidMoves foreach { King.canMoveBy(_) should be (true) }
+  "A King" should "be able to move by one square in any direction" in {
+
+    kingMoves foreach { King.canMoveBy(_) should be (true) }
   }
 
   it should "not be able to move beyond one square in any direction" in {
-    val outOfKingsRange = displacementsWithRanges(-2 to 2, -2 to 2) filter {
-      case (xDelta, yDelta) => xDelta == 2 || yDelta == 2
-    }
-
-    outOfKingsRange foreach {
+    movesExcept(kingMoves) filter (isZero) foreach {
       King.canMoveBy(_) should be (false)
     }
   }
