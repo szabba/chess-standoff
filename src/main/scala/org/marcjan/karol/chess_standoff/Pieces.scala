@@ -12,7 +12,11 @@ sealed abstract class Piece {
  * square.
  */
 object King extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = false
+  override def canMoveBy(positionDelta: (Int, Int)): Boolean =
+    positionDelta match {
+      case (1, 0) => true
+      case _ => false
+    }
 }
 
 /**
