@@ -2,7 +2,7 @@ package org.marcjan.karol.chess_standoff
 
 import org.scalatest.{Matchers, FlatSpec}
 
-class DisplacementSpec extends FlatSpec with Matchers {
+class MovesSpec extends FlatSpec with Matchers {
 
   import Moves._
 
