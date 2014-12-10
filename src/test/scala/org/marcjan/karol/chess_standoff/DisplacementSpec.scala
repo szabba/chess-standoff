@@ -72,4 +72,8 @@ class DisplacementSpec extends FlatSpec with Matchers {
   it should "not hold for (2, 3)" in {
     isZero((2, 3)) should be (false)
   }
+
+  it should "hold for (0, 0)" in {
+    isZero(0, 0) should be (true)
+  }
 }
