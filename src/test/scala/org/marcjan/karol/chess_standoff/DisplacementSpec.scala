@@ -13,4 +13,8 @@ class DisplacementSpec extends FlatSpec with Matchers {
    it should "hold for (2, 2)" in {
     isDiagonal((2, 2)) should be (true)
   }
+
+  it should "hold for (-1, -1)" in {
+    isDiagonal((-1, -1)) should be (true)
+  }
 }
