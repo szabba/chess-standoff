@@ -82,4 +82,10 @@ class MovesSpec extends FlatSpec with Matchers {
 
     movesExcept(someMoves, someMoves) should be (Nil)
   }
+
+  it should "return Nil when the first argument is empty" in {
+    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+
+    movesExcept(Nil, someMoves) should be (Nil)
+  }
 }
