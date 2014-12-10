@@ -24,6 +24,18 @@ class PieceSpec extends FlatSpec with Matchers {
 
   val movesAlongBoardEdge = standardChessboardMoves filter (isAlongBoardEdge)
 
+  /**
+   * Returns a list of all the moves possible on a standard chessboard except
+   * for the one's in the argument list.
+   * @param movesToExclude list of moves to exclude
+   * @return moves possible on a standard chessboard except for those present in
+   *         the argument
+   */
+  def movesExcept(movesToExclude: List[(Int, Int)]) =
+    standardChessboardMoves filter ((move) => {
+      ! (movesToExclude contains move)
+    })
+
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
       case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
