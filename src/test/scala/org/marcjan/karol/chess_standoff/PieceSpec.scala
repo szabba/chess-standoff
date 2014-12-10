@@ -37,4 +37,13 @@ class PieceSpec extends FlatSpec with Matchers {
     King.canMoveBy((0, 2)) should be (false)
     King.canMoveBy((1, 2)) should be (false)
   }
+
+  "A Queen" should "be able to move n squares in any direction" in {
+    1 to 8 map ((n) => {
+      List((1, 1), (-1, 1), (1, -1), (-1, 1)) map {
+        case (xMultiplier, yMultiplier) =>
+          Queen.canMoveBy((xMultiplier * n, yMultiplier * n)) should be(true)
+      }
+    })
+  }
 }
