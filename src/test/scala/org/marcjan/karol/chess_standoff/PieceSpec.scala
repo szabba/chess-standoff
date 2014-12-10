@@ -4,7 +4,7 @@ import org.scalatest.{Matchers, FlatSpec}
 
 class PieceSpec extends FlatSpec with Matchers {
 
-  import Displacement.isDiagonal
+  import Displacement.{isDiagonal, isAlongBoardEdge}
 
   /**
    * Returns a list of all displacements with the x and y deltas in the given
@@ -17,21 +17,6 @@ class PieceSpec extends FlatSpec with Matchers {
    */
   def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
     ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
-
-  /**
-   * Returns true when the given displacement is along the board's edge. It is
-   * left unspecified for the zero displacement.
-   *
-   * @param displacement a displacement as a tuple of (xDelta, yDelta)
-   * @return is the displacement along the board's edge?
-   */
-  def isAlongBoardEdge(displacement: (Int, Int)): Boolean = {
-    displacement match {
-      case (_, 0) => true
-      case (0, _) => true
-      case _ => false
-    }
-  }
 
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
@@ -58,10 +43,8 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move non-diagonally" in {
-    val queenInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
-      case (xDelta, yDelta) => xDelta != yDelta
-    }
-
+    val queenInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter(isAlongBoardEdge)
+    
     queenInvalidMoves foreach { Queen.canMoveBy(_) should be (false) }
   }
 
