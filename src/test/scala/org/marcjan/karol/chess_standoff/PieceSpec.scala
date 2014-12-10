@@ -76,7 +76,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move non-diagonally" in {
-    standardChessboardMoves filter (!isDiagonal(_)) foreach {
+    movesExcept(diagonalMoves) foreach {
       Bishop.canMoveBy(_) should be (false)
     }
   }
