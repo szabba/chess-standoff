@@ -32,9 +32,7 @@ class PieceSpec extends FlatSpec with Matchers {
    *         the argument
    */
   def movesExcept(movesToExclude: List[(Int, Int)]) =
-    standardChessboardMoves filter ((move) => {
-      ! (movesToExclude contains move)
-    })
+    Moves.movesExcept(standardChessboardMoves, movesToExclude)
 
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
