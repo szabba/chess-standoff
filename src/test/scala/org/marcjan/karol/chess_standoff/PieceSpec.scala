@@ -30,25 +30,13 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move beyond one square in any direction" in {
-    King.canMoveBy((2, 2)) should be (false)
-    King.canMoveBy((2, 1)) should be (false)
-    King.canMoveBy((2, 0)) should be (false)
-    King.canMoveBy((2, -1)) should be (false)
-    King.canMoveBy((2, -2)) should be (false)
+    val outOfKingsRange = displacementsWithRanges(-2 to 2, -2 to 2) filter {
+      case (xDelta, yDelta) => xDelta == 2 || yDelta == 2
+    }
 
-    King.canMoveBy((1, -2)) should be (false)
-    King.canMoveBy((0, -2)) should be (false)
-    King.canMoveBy((-1, -2)) should be (false)
-    King.canMoveBy((-2, -2)) should be (false)
-
-    King.canMoveBy((-2, -1)) should be (false)
-    King.canMoveBy((-2, 0)) should be (false)
-    King.canMoveBy((-2, 1)) should be (false)
-    King.canMoveBy((-2, 2)) should be (false)
-
-    King.canMoveBy((-1, 2)) should be (false)
-    King.canMoveBy((0, 2)) should be (false)
-    King.canMoveBy((1, 2)) should be (false)
+    outOfKingsRange foreach {
+      King.canMoveBy(_) should be (false)
+    }
   }
 
   "A Queen" should "be able to move n squares in any direction" in {
