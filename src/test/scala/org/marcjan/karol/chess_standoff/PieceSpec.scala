@@ -4,7 +4,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class PieceSpec extends FlatSpec with Matchers {
 
-  import org.marcjan.karol.chess_standoff.Displacement.{isAlongBoardEdge, isDiagonal}
+  import Moves.{isAlongBoardEdge, isDiagonal}
 
   /**
    * Returns a list of all displacements with the x and y deltas in the given

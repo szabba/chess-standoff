@@ -4,7 +4,7 @@ import org.scalatest.{Matchers, FlatSpec}
 
 class DisplacementSpec extends FlatSpec with Matchers {
 
-  import Displacement._
+  import Moves._
 
   "isDiagonal" should "hold for (1, 1)" in {
     isDiagonal((1, 1)) should be (true)

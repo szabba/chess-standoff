@@ -1,6 +1,6 @@
 package org.marcjan.karol.chess_standoff
 
-object Displacement {
+object Moves {
 
   /**
    * Returns true when the given displacement is diagonal and false otherwise.
