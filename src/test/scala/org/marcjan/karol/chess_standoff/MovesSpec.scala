@@ -99,4 +99,16 @@ class MovesSpec extends FlatSpec with Matchers {
     allMoves contains (0, 7) should be (true)
     allMoves contains (3, -1) should be (true)
   }
+
+  it should "filter nothing when the arguments have no common elements" in {
+    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+    val someOtherMoves = List((3, 2), (7, 0), (8, 6))
+
+    val allMoves = movesExcept(someMoves, someOtherMoves)
+
+    allMoves contains (2, 3) should be (true)
+    allMoves contains (-1, 4) should be (true)
+    allMoves contains (0, 7) should be (true)
+    allMoves contains (3, -1) should be (true)
+  }
 }
