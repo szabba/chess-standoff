@@ -42,7 +42,13 @@ object Queen extends Piece {
  * directions by any number of squares.
  */
 object Rook extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = true
+  override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
+    positionDelta match {
+      case (_, 0) => true
+      case (0, _) => true
+      case _ => false
+    }
+  }
 }
 
 /**
