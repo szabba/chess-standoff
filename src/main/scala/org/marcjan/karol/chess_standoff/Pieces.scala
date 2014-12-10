@@ -32,6 +32,8 @@ object King extends Piece {
 object Queen extends Piece {
   override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
     positionDelta match {
+      case (_, 0) => true
+      case (0, _) => true
       case (xDelta, yDelta) => xDelta == yDelta
     }
   }
