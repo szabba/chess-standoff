@@ -18,6 +18,10 @@ class PieceSpec extends FlatSpec with Matchers {
   def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
     ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
 
+  val standardChessboardMoves = displacementsWithRanges(-8 to 8, -8 to 8)
+
+  val diagonalMoves = standardChessboardMoves filter (isDiagonal)
+
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
       case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
@@ -37,9 +41,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   "A Queen" should "be able to move n squares diagonally in any direction" in {
-    val queenDiagMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter(isDiagonal)
-
-    queenDiagMoves foreach { Queen.canMoveBy(_) should be (true)}
+    diagonalMoves foreach { Queen.canMoveBy(_) should be (true)}
   }
 
   it should "be able to move n squares along the board's edge" in {
@@ -78,5 +80,17 @@ class PieceSpec extends FlatSpec with Matchers {
     }
 
     rookInvalidMoves foreach { Rook.canMoveBy(_) should be (false) }
+  }
+
+  "A Bishop" should "be able to move n squares diagonally in any direction" in {
+    diagonalMoves foreach {
+      Bishop.canMoveBy(_) should be (true)
+    }
+  }
+
+  it should "not be able to move non-diagonally" in {
+    standardChessboardMoves filter (!isDiagonal(_)) foreach {
+      Bishop.canMoveBy(_) should be (false)
+    }
   }
 }
