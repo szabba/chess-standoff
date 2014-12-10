@@ -4,6 +4,8 @@ import org.scalatest.{Matchers, FlatSpec}
 
 class PieceSpec extends FlatSpec with Matchers {
 
+  import Displacement.isDiagonal
+
   /**
    * Returns a list of all displacements with the x and y deltas in the given
    * ranges.
@@ -15,17 +17,6 @@ class PieceSpec extends FlatSpec with Matchers {
    */
   def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
     ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
-
-  /**
-   * Returns true when the given displacement is diagonal and false otherwise.
-   * It is left unspecified for the zero displacement.
-   *
-   * @param displacement a displacement as a tuple of (xDelta, yDelta)
-   * @return is the displacement diagonal?
-   */
-  def isDiagonal(displacement: (Int, Int)): Boolean = {
-    displacement match { case (xDelta, yDelta) => xDelta == yDelta }
-  }
 
   /**
    * Returns true when the given displacement is along the board's edge. It is
