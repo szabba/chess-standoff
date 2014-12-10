@@ -93,10 +93,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move unless the displacement is two squares along one edge and one along the other" in {
-    standardChessboardMoves filter(
-      (move) => {
-        ! (knightMoves contains move)
-    }) foreach {
+    movesExcept(knightMoves) foreach {
       Knight.canMoveBy(_) should be (false)
     }
   }
