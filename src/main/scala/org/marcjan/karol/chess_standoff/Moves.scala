@@ -46,10 +46,8 @@ object Moves {
    * @return moves in the first list but not the second
    */
   def movesExcept(from: List[(Int, Int)], movesToExclude: List[(Int, Int)]) = {
-    movesToExclude match {
-      case Nil => from
-      case _ => Nil
-    }
+    from filter (
+      (move) => { ! (movesToExclude contains move) }
+    )
   }
-
 }
