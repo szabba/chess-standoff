@@ -22,6 +22,8 @@ class PieceSpec extends FlatSpec with Matchers {
 
   val diagonalMoves = standardChessboardMoves filter (isDiagonal)
 
+  val movesAlongBoardEdge = standardChessboardMoves filter (isAlongBoardEdge)
+
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
       case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
@@ -45,10 +47,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "be able to move n squares along the board's edge" in {
-    val queenMovesAlongEdge = displacementsWithRanges(-8 to 8, -8 to 8) filter(
-      isAlongBoardEdge)
-
-    queenMovesAlongEdge foreach { Queen.canMoveBy(_) should be (true) }
+    movesAlongBoardEdge foreach { Queen.canMoveBy(_) should be (true) }
   }
 
   it should "not be able to move unless the displacement is diagonal or along the board's edge" in {
@@ -63,13 +62,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   "A Rook" should "be able to move n squares along the board's edge" in {
-    val rookValidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
-      case (_, 0) => true
-      case (0, _) => true
-      case _ => false
-    }
-
-    rookValidMoves foreach { Rook.canMoveBy(_) should be (true) }
+    movesAlongBoardEdge foreach { Rook.canMoveBy(_) should be (true) }
   }
 
   it should "not be able to move unless the displacements is along the board's edge" in {
