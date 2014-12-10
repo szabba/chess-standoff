@@ -16,6 +16,17 @@ class PieceSpec extends FlatSpec with Matchers {
   def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
     ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
 
+  /**
+   * Returns true when the given displacement is diagonal and false otherwise.
+   * It is left unspecified for the zero displacement.
+   *
+   * @param displacement a displacement as a tuple of (xDelta, yDelta)
+   * @return is the displacement diagonal?
+   */
+  def isDiagonal(displacement: (Int, Int)): Boolean = {
+    displacement match { case (xDelta, yDelta) => xDelta == yDelta }
+  }
+
   "A King" should "be able to move by one square in any direction" in {
     val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
       case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
