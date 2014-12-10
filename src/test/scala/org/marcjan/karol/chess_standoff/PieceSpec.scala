@@ -61,11 +61,9 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   "A Queen" should "be able to move n squares diagonally in any direction" in {
-    val queenValidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
-      case (xDelta, yDelta) => xDelta == yDelta && xDelta != 0
-    }
+    val queenDiagMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter(isDiagonal)
 
-    queenValidMoves foreach { Queen.canMoveBy(_) should be (true)}
+    queenDiagMoves foreach { Queen.canMoveBy(_) should be (true)}
   }
 
   it should "not be able to move non-diagonally" in {
