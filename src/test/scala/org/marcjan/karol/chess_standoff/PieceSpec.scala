@@ -42,10 +42,11 @@ class PieceSpec extends FlatSpec with Matchers {
     queenDiagMoves foreach { Queen.canMoveBy(_) should be (true)}
   }
 
-  it should "not be able to move non-diagonally" in {
-    val queenInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter(isAlongBoardEdge)
-    
-    queenInvalidMoves foreach { Queen.canMoveBy(_) should be (false) }
+  it should "be able to move n squares along the board's edge" in {
+    val queenMovesAlongEdge = displacementsWithRanges(-8 to 8, -8 to 8) filter(
+      isAlongBoardEdge)
+
+    queenMovesAlongEdge foreach { Queen.canMoveBy(_) should be (true) }
   }
 
   "A Rook" should "be able to move n squares along the board's edge" in {
