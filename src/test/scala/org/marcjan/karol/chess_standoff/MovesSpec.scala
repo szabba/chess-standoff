@@ -88,4 +88,15 @@ class MovesSpec extends FlatSpec with Matchers {
 
     movesExcept(Nil, someMoves) should be (Nil)
   }
+
+  it should "filter nothing when the second argument is Nil" in {
+    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+
+    val allMoves = movesExcept(someMoves, Nil)
+
+    allMoves contains (2, 3) should be (true)
+    allMoves contains (-1, 4) should be (true)
+    allMoves contains (0, 7) should be (true)
+    allMoves contains (3, -1) should be (true)
+  }
 }
