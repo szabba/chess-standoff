@@ -17,16 +17,13 @@ class PieceSpec extends FlatSpec with Matchers {
     ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
 
   "A King" should "be able to move by one square in any direction" in {
-    King.canMoveBy((1, 0)) should be (true)
-    King.canMoveBy((-1, 0)) should be (true)
+    val kingsValidMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter {
+      case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
+    }
 
-    King.canMoveBy((0, 1)) should be (true)
-    King.canMoveBy((0, -1)) should be (true)
-
-    King.canMoveBy((1, 1)) should be (true)
-    King.canMoveBy((1, -1)) should be (true)
-    King.canMoveBy((-1, 1)) should be (true)
-    King.canMoveBy((1, -1)) should be (true)
+    kingsValidMoves foreach {
+      King.canMoveBy(_) should be (true)
+    }
   }
 
   it should "not be able to move beyond one square in any direction" in {
