@@ -66,13 +66,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move unless the displacements is along the board's edge" in {
-    val rookInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
-      case (_, 0) => false
-      case (0, _) => false
-      case _ => true
-    }
-
-    rookInvalidMoves foreach { Rook.canMoveBy(_) should be (false) }
+    movesExcept(movesAlongBoardEdge) foreach { Rook.canMoveBy(_) should be (false) }
   }
 
   "A Bishop" should "be able to move n squares diagonally in any direction" in {
