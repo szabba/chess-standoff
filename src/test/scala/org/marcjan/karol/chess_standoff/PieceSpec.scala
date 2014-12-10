@@ -59,4 +59,14 @@ class PieceSpec extends FlatSpec with Matchers {
 
     rookValidMoves foreach { Rook.canMoveBy(_) should be (true) }
   }
+
+  it should "not be able to move unless the displacements is along the board's edge" in {
+    val rookInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
+      case (_, 0) => false
+      case (0, _) => false
+      case _ => true
+    }
+
+    rookInvalidMoves foreach { Rook.canMoveBy(_) should be (false) }
+  }
 }
