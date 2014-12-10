@@ -21,5 +21,11 @@ object Displacement {
    * @param displacement a displacement as a tuple of (xDelta, yDelta)
    * @return is the displacement along the board's edge?
    */
-  def isAlongBoardEdge(displacement: (Int, Int)): Boolean = false
+  def isAlongBoardEdge(displacement: (Int, Int)): Boolean = {
+    displacement match {
+      case (_, 0) => true
+      case (0, _) => true
+      case _ => false
+    }
+  }
 }
