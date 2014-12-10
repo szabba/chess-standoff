@@ -36,4 +36,15 @@ object Moves {
    * @return is the displacement zero?
    */
   def isZero(displacement: (Int, Int)): Boolean = displacement == (0, 0)
+
+  /**
+   * Returns a list of all the moves in the first list except for those in the
+   * second one.
+   *
+   * @param from list of moves to choose from
+   * @param movesToExclude list of moves to exclude
+   * @return moves in the first list but not the second
+   */
+  def movesExcept(from: List[(Int, Int)], movesToExclude: List[(Int, Int)]) = Nil
+
 }
