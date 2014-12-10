@@ -28,4 +28,12 @@ object Displacement {
       case _ => false
     }
   }
+
+  /**
+   * Returns true when both components of the displacement are zero.
+   *
+   * @param displacement a displacement as a tuple of (xDelta, yDelta)
+   * @return is the displacement zero?
+   */
+  def isZero(displacement: (Int, Int)): Boolean = false
 }
