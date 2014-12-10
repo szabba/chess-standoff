@@ -52,11 +52,10 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   "A Queen" should "be able to move n squares in any direction" in {
-    1 to 8 map ((n) => {
-      List((1, 1), (-1, 1), (1, -1), (-1, 1)) map {
-        case (xMultiplier, yMultiplier) =>
-          Queen.canMoveBy((xMultiplier * n, yMultiplier * n)) should be(true)
-      }
-    })
+    val queenValidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
+      case (xDelta, yDelta) => xDelta == yDelta && xDelta != 0
+    }
+
+    queenValidMoves map { Queen.canMoveBy(_) should be (true)}
   }
 }
