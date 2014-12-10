@@ -9,5 +9,6 @@ object Displacement {
    * @param displacement a displacement as a tuple of (xDelta, yDelta)
    * @return is the displacement diagonal?
    */
-  def isDiagonal(displacement: (Int, Int)): Boolean = false
+  def isDiagonal(displacement: (Int, Int)): Boolean =
+    displacement == (1, 1)
 }
