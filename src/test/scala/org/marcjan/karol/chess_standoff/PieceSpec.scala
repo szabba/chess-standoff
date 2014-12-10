@@ -18,7 +18,7 @@ class PieceSpec extends FlatSpec with Matchers {
   def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
     ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
 
-  val standardChessboardMoves = displacementsWithRanges(-8 to 8, -8 to 8)
+  val standardChessboardMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter (isZero)
 
   val diagonalMoves = standardChessboardMoves filter (isDiagonal)
 
@@ -42,7 +42,7 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move beyond one square in any direction" in {
-    movesExcept(kingMoves) filter (isZero) foreach {
+    movesExcept(kingMoves) foreach {
       King.canMoveBy(_) should be (false)
     }
   }
