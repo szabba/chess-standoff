@@ -41,6 +41,7 @@ class MovesSpec extends FlatSpec with Matchers {
   it should "hold for (0, -1)" in {
     isAlongBoardEdge((0, -1)) should be (true)
   }
+
   it should "hold for (-1, 0)" in {
     isAlongBoardEdge((-1, 0)) should be (true)
   }
@@ -110,5 +111,25 @@ class MovesSpec extends FlatSpec with Matchers {
     allMoves contains (-1, 4) should be (true)
     allMoves contains (0, 7) should be (true)
     allMoves contains (3, -1) should be (true)
+  }
+
+  it should "keep elements of the first argument not in the second" in {
+    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+    val movesToExclude = List((-1, 4), (3, -1))
+
+    val filtered = movesExcept(someMoves, movesToExclude)
+
+    filtered contains (2, 3) should be (true)
+    filtered contains (0, 7) should be (true)
+  }
+
+  it should "not keep element of the first argument present in the second" in {
+     val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+     val movesToExclude = List((-1, 4), (3, -1))
+
+     val filtered = movesExcept(someMoves, movesToExclude)
+
+     filtered contains (-1, 4) should be (false)
+     filtered contains (3, -1) should be (false)
   }
 }
