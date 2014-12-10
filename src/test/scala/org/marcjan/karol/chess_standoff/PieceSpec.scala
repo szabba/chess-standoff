@@ -1,10 +1,10 @@
 package org.marcjan.karol.chess_standoff
 
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.{FlatSpec, Matchers}
 
 class PieceSpec extends FlatSpec with Matchers {
 
-  import Displacement.{isDiagonal, isAlongBoardEdge}
+  import org.marcjan.karol.chess_standoff.Displacement.{isAlongBoardEdge, isDiagonal}
 
   /**
    * Returns a list of all displacements with the x and y deltas in the given
@@ -106,9 +106,10 @@ class PieceSpec extends FlatSpec with Matchers {
   }
 
   it should "not be able to move unless the displacement is two squares along one edge and one along the other" in {
-    standardChessboardMoves filter {
-      knightMoves contains _
-    } foreach {
+    standardChessboardMoves filter(
+      (move) => {
+        ! (knightMoves contains move)
+    }) foreach {
       Knight.canMoveBy(_) should be (false)
     }
   }

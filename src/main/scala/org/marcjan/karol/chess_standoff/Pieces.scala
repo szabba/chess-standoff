@@ -68,5 +68,13 @@ object Bishop extends Piece {
  * one, tracing the letter L's shape.
  */
 object Knight extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = false
+  override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
+    val components = List(positionDelta._1, positionDelta._2)
+    val absComponents = components map (math.abs) sortWith (_ < _)
+
+    absComponents match {
+      case List(1, 2) => true
+      case _ => false
+    }
+  }
 }
