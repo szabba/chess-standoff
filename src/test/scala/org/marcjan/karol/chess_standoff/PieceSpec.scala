@@ -49,6 +49,17 @@ class PieceSpec extends FlatSpec with Matchers {
     queenMovesAlongEdge foreach { Queen.canMoveBy(_) should be (true) }
   }
 
+  it should "not be able to move unless the displacement is diagonal or along the board's edge" in {
+    val queenInvalidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter(
+      (displacement) => {
+        if (isDiagonal(displacement)) false
+        else if (isAlongBoardEdge(displacement)) false
+        else true
+      })
+
+    queenInvalidMoves foreach { Queen.canMoveBy(_) should be (false) }
+  }
+
   "A Rook" should "be able to move n squares along the board's edge" in {
     val rookValidMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter {
       case (_, 0) => true
