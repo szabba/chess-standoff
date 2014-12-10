@@ -21,9 +21,7 @@ class PieceSpec extends FlatSpec with Matchers {
       case (xDelta, yDelta) => math.abs(xDelta) == 1 || math.abs(yDelta) == 1
     }
 
-    kingsValidMoves foreach {
-      King.canMoveBy(_) should be (true)
-    }
+    kingsValidMoves foreach { King.canMoveBy(_) should be (true) }
   }
 
   it should "not be able to move beyond one square in any direction" in {
