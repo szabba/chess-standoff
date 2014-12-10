@@ -6,11 +6,11 @@ class DisplacementSpec extends FlatSpec with Matchers {
 
   import Displacement._
 
-  "(1, 1)" should "be diagonal" in {
+  "isDiagonal" should "hold for (1, 1)" in {
     isDiagonal((1, 1)) should be (true)
   }
 
-   "(2, 2)" should "be diagonal" in {
+   it should "hold for (2, 2)" in {
     isDiagonal((2, 2)) should be (true)
   }
 }
