@@ -64,8 +64,8 @@ object Bishop extends Piece {
 
 /**
  * A Knight piece. It moves by two squares in one of the non-diagonal
- * directions and then by two squares in a direction perpendicular to the first
- * one, tracing the letter L's shape.
+ * directions and then by two squares along one edge of the board and one along
+ * the other, tracing the shape of the letter 'L'.
  */
 object Knight extends Piece {
   override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
