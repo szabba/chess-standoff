@@ -6,7 +6,16 @@ package org.marcjan.karol.chess_standoff
  * @param xDelta displacement along the horizontal edge
  * @param yDelta displacement along the vertical edge
  */
-class Move(val xDelta: Int, val yDelta: Int)
+class Move(val xDelta: Int, val yDelta: Int) {
+
+  /**
+   * Returns true when the move is diagonal.
+   *
+   * @return is the move diagonal?
+   */
+  def isDiagonal(): Boolean =
+    Move.isDiagonal((xDelta, yDelta))
+}
 
 /**
  * Object containing functions that deal with displacements/chess moves

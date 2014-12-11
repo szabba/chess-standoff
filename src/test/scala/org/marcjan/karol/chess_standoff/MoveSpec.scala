@@ -47,24 +47,24 @@ class MoveSpec extends UnitSpec {
 
   import Move._
 
-  "isDiagonal" should "hold for (1, 1)" in {
-    isDiagonal((1, 1)) should be (true)
+  "isDiagonal" should "hold for Move(1, 1)" in {
+    Move(1, 1).isDiagonal should be (true)
   }
 
-   it should "hold for (2, 2)" in {
-    isDiagonal((2, 2)) should be (true)
+   it should "hold for Move(2, 2)" in {
+    Move(2, 2).isDiagonal should be (true)
   }
 
-  it should "hold for (-1, -1)" in {
-    isDiagonal((-1, -1)) should be (true)
+  it should "hold for Move(-1, -1)" in {
+    Move(-1, -1).isDiagonal should be (true)
   }
 
-  it should "not hold for (2, 3)" in {
-    isDiagonal((2, 3)) should be (false)
+  it should "not hold for Move(2, 3)" in {
+    Move(2, 3).isDiagonal should be (false)
   }
 
-  it should "not hold for (-3, 2)" in {
-    isDiagonal((-3, 2)) should be (false)
+  it should "not hold for Move(-3, 2)" in {
+    Move(-3, 2).isDiagonal should be (false)
   }
 
   "isAlongBoardEdge" should "hold for (0, 1)" in {
