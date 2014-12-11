@@ -73,4 +73,11 @@ class PositionSpec extends UnitSpec {
 
     (position + move).row should be (position.row + move.yDelta)
   }
+
+  it should "have column shifted by the Move's xDelta" in {
+    val position = Position(7, 3)
+    val move = Move(4, 1)
+
+    (position + move).column should be (position.column + move.xDelta)
+  }
 }
