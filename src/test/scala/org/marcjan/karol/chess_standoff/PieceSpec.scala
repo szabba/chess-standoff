@@ -1,11 +1,12 @@
 package org.marcjan.karol.chess_standoff
 
+import org.scalatest.words.CanVerb
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
  * Spec for chess pieces.
  */
-class PieceSpec extends UnitSpec {
+class PieceSpec extends UnitSpec with CanVerb {
 
   /**
    * Returns a list of all displacements with the x and y deltas in the given
@@ -110,5 +111,21 @@ class PieceSpec extends UnitSpec {
     movesExcept(knightMoves) foreach {
       new Knight(dummyPosition).canMoveBy(_) should be (false)
     }
+  }
+
+  "A Piece" can "only move to a position if it can move by it's difference " ++
+    "with the piece's position" in {
+
+    val pieces = List(
+      new King(dummyPosition), new Queen(dummyPosition),
+      new Rook(dummyPosition), new Bishop(dummyPosition),
+      new Knight(dummyPosition))
+
+    pieces foreach (piece => {
+      standardChessboardMoves foreach (move => {
+
+        piece.canMoveTo(piece.position + move) should be (piece.canMoveBy(move))
+      })
+    })
   }
 }

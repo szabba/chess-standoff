@@ -20,7 +20,8 @@ sealed abstract class Piece(val position: Position) {
    * @param position position to check with
    * @return could the piece be moved to the specified position?
    */
-  def canMoveTo(position: Position): Boolean = false
+  def canMoveTo(position: Position): Boolean =
+    canMoveBy(position - this.position)
 }
 
 /**
