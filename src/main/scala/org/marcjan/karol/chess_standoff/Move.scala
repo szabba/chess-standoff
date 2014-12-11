@@ -19,7 +19,7 @@ class Move(val xDelta: Int, val yDelta: Int) {
    */
   def ==(move: Move) =
     xDelta == move.xDelta && yDelta == move.yDelta
-  
+
   /**
    * Returns true when the move is diagonal. Left unspecified when isZero is
    * true.
@@ -62,41 +62,6 @@ object Move {
    */
   def apply(xDelta: Int, yDelta: Int): Move =
     new Move(xDelta, yDelta)
-
-  /**
-   * Returns true when the given displacement is diagonal and false otherwise.
-   * It is left unspecified for the zero displacement.
-   *
-   * @param displacement a displacement as a tuple of (xDelta, yDelta)
-   * @return is the displacement diagonal?
-   */
-  def isDiagonal(displacement: (Int, Int)): Boolean =
-    displacement match {
-      case (xDelta, yDelta) => xDelta == yDelta
-    }
-
-  /**
-   * Returns true when the given displacement is along the board's edge. It is
-   * left unspecified for the zero displacement.
-   *
-   * @param displacement a displacement as a tuple of (xDelta, yDelta)
-   * @return is the displacement along the board's edge?
-   */
-  def isAlongBoardEdge(displacement: (Int, Int)): Boolean = {
-    displacement match {
-      case (_, 0) => true
-      case (0, _) => true
-      case _ => false
-    }
-  }
-
-  /**
-   * Returns true when both components of the displacement are zero.
-   *
-   * @param displacement a displacement as a tuple of (xDelta, yDelta)
-   * @return is the displacement zero?
-   */
-  def isZero(displacement: (Int, Int)): Boolean = displacement == (0, 0)
 
   /**
    * Returns a list of all the moves in the first list except for those in the

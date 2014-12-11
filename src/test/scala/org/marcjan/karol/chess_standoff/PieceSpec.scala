@@ -7,8 +7,6 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class PieceSpec extends UnitSpec {
 
-  import Move.{isAlongBoardEdge, isDiagonal, isZero}
-
   /**
    * Returns a list of all displacements with the x and y deltas in the given
    * ranges.
