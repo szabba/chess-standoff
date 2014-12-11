@@ -73,6 +73,15 @@ class PositionSpec extends UnitSpec {
     (position - position isZero) should be (true)
   }
 
+  it should "give a Move whose xDelta is the difference in columns between them" in {
+    val somePosition = Position(7, 3)
+    val otherPosition = Position(1, 4)
+
+    val move = somePosition - otherPosition
+
+    move.xDelta should be (somePosition.column - otherPosition.column)
+  }
+
   "A shifted Position" should "have row shifted by the Move's yDelta" in {
     val position = Position(7, 3)
     val move = Move(4, 1)
