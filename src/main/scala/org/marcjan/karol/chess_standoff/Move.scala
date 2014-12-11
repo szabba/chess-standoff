@@ -6,7 +6,7 @@ package org.marcjan.karol.chess_standoff
  * @param xDelta displacement along the horizontal edge
  * @param yDelta displacement along the vertical edge
  */
-class Move(val xDelta: Int, yDelta: Int)
+class Move(val xDelta: Int, val yDelta: Int)
 
 /**
  * Object containing functions that deal with displacements/chess moves

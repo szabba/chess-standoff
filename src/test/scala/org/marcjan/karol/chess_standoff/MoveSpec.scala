@@ -16,6 +16,15 @@ class MoveSpec extends UnitSpec {
     move.xDelta should be (xDelta)
   }
 
+  it should "have the given yDelta" in {
+    val xDelta = 7
+    val yDelta = 3
+
+    val move = new Move(xDelta, yDelta)
+
+    move.yDelta should be (yDelta)
+  }
+
   import Move._
 
   "isDiagonal" should "hold for (1, 1)" in {
