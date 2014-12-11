@@ -18,14 +18,15 @@ class PieceSpec extends UnitSpec {
    * @return list of all displacements with the x and y components in the given
    *         ranges
    */
-  def displacementsWithRanges(ofX: Range, ofY: Range): List[(Int, Int)] =
-    ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => (xDelta, yDelta)))
+  def displacementsWithRanges(ofX: Range, ofY: Range): List[Move] =
+    ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => Move(xDelta, yDelta)))
 
-  val standardChessboardMoves = displacementsWithRanges(-8 to 8, -8 to 8) filter (isZero)
+  val standardChessboardMoves =
+    displacementsWithRanges(-8 to 8, -8 to 8) filter { _.isZero }
 
-  val diagonalMoves = standardChessboardMoves filter (isDiagonal)
+  val diagonalMoves = standardChessboardMoves filter { _.isDiagonal }
 
-  val movesAlongBoardEdge = standardChessboardMoves filter (isAlongBoardEdge)
+  val movesAlongBoardEdge = standardChessboardMoves filter { _.isAlongBoardEdge }
 
   /**
    * Returns a list of all the moves possible on a standard chessboard except
@@ -34,10 +35,10 @@ class PieceSpec extends UnitSpec {
    * @return moves possible on a standard chessboard except for those present in
    *         the argument
    */
-  def movesExcept(movesToExclude: List[(Int, Int)]) =
+  def movesExcept(movesToExclude: List[Move]) =
     Move.movesExcept(standardChessboardMoves, movesToExclude)
 
-  val kingMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter (isZero)
+  val kingMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter (_.isZero)
 
   "A King" should "be able to move by one square in any direction" in {
 
@@ -85,8 +86,8 @@ class PieceSpec extends UnitSpec {
   }
 
   val knightMoves = List(
-    (2, 1), (2, -1), (-2, 1), (-2, -1),
-    (1, 2), (1, -2), (-1, 2), (-1, -2)
+    Move(2, 1), Move(2, -1), Move(-2, 1), Move(-2, -1),
+    Move(1, 2), Move(1, -2), Move(-1, 2), Move(-1, -2)
   )
 
   "A Knight" should "be able to move by two squares along one edge and one along the other" in {

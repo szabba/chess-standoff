@@ -11,7 +11,7 @@ sealed abstract class Piece {
    * @param positionDelta the displacement as a tuple of (xDelta, yDelta)
    * @return can the Piece be moved by the given displacement?
    */
-  def canMoveBy(positionDelta: (Int, Int)): Boolean
+  def canMoveBy(move: Move): Boolean
 }
 
 /**
@@ -19,10 +19,8 @@ sealed abstract class Piece {
  * square.
  */
 object King extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean =
-    positionDelta match { case (xDelta, yDelta) =>
-        (-1 to 1 contains xDelta) && (-1 to 1 contains yDelta)
-    }
+  override def canMoveBy(move: Move): Boolean =
+    (-1 to 1 contains move.xDelta) && (-1 to 1 contains move.yDelta)
 }
 
 /**
@@ -30,13 +28,8 @@ object King extends Piece {
  * directions by any number of squares.
  */
 object Queen extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
-    positionDelta match {
-      case (_, 0) => true
-      case (0, _) => true
-      case (xDelta, yDelta) => xDelta == yDelta
-    }
-  }
+  override def canMoveBy(move: Move): Boolean =
+    move.yDelta == 0 || move.xDelta == 0 || move.xDelta == move.yDelta
 }
 
 /**
@@ -44,13 +37,8 @@ object Queen extends Piece {
  * directions by any number of squares.
  */
 object Rook extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
-    positionDelta match {
-      case (_, 0) => true
-      case (0, _) => true
-      case _ => false
-    }
-  }
+  override def canMoveBy(move: Move): Boolean =
+    move.xDelta == 0 || move.yDelta == 0
 }
 
 /**
@@ -58,8 +46,8 @@ object Rook extends Piece {
  * directions by any number of squares.
  */
 object Bishop extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean =
-    positionDelta._1 == positionDelta._2
+  override def canMoveBy(move: Move): Boolean =
+    move.xDelta == move.yDelta
 }
 
 /**
@@ -68,8 +56,8 @@ object Bishop extends Piece {
  * the other, tracing the shape of the letter 'L'.
  */
 object Knight extends Piece {
-  override def canMoveBy(positionDelta: (Int, Int)): Boolean = {
-    val components = List(positionDelta._1, positionDelta._2)
+  override def canMoveBy(move: Move): Boolean = {
+    val components = List(move.xDelta, move.yDelta)
     val absComponents = components map (math.abs) sortWith (_ < _)
 
     absComponents match {

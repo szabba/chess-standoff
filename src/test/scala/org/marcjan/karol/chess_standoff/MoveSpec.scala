@@ -120,57 +120,57 @@ class MoveSpec extends UnitSpec {
   import Move.movesExcept
 
   "Move.movesExcept" should "return Nil when called with two identical arguments" in {
-    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+    val someMoves = List(Move(2, 3), Move(-1, 4), Move(0, 7), Move(3, -1))
 
     movesExcept(someMoves, someMoves) should be (Nil)
   }
 
   it should "return Nil when the first argument is empty" in {
-    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+    val someMoves = List(Move(2, 3), Move(-1, 4), Move(0, 7), Move(3, -1))
 
     movesExcept(Nil, someMoves) should be (Nil)
   }
 
   it should "filter nothing when the second argument is Nil" in {
-    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
+    val someMoves = List(Move(2, 3), Move(-1, 4), Move(0, 7), Move(3, -1))
 
     val allMoves = movesExcept(someMoves, Nil)
 
-    allMoves contains (2, 3) should be (true)
-    allMoves contains (-1, 4) should be (true)
-    allMoves contains (0, 7) should be (true)
-    allMoves contains (3, -1) should be (true)
+    allMoves contains Move(2, 3) should be (true)
+    allMoves contains Move(-1, 4) should be (true)
+    allMoves contains Move(0, 7) should be (true)
+    allMoves contains Move(3, -1) should be (true)
   }
 
   it should "filter nothing when the arguments have no common elements" in {
-    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
-    val someOtherMoves = List((3, 2), (7, 0), (8, 6))
+    val someMoves = List(Move(2, 3), Move(-1, 4), Move(0, 7), Move(3, -1))
+    val someOtherMoves = List(Move(3, 2), Move(7, 0), Move(8, 6))
 
     val allMoves = movesExcept(someMoves, someOtherMoves)
 
-    allMoves contains (2, 3) should be (true)
-    allMoves contains (-1, 4) should be (true)
-    allMoves contains (0, 7) should be (true)
-    allMoves contains (3, -1) should be (true)
+    allMoves contains Move(2, 3) should be (true)
+    allMoves contains Move(-1, 4) should be (true)
+    allMoves contains Move(0, 7) should be (true)
+    allMoves contains Move(3, -1) should be (true)
   }
 
   it should "keep elements of the first argument not in the second" in {
-    val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
-    val movesToExclude = List((-1, 4), (3, -1))
+    val someMoves = List(Move(2, 3), Move(-1, 4), Move(0, 7), Move(3, -1))
+    val movesToExclude = List(Move(-1, 4), Move(3, -1))
 
     val filtered = movesExcept(someMoves, movesToExclude)
 
-    filtered contains (2, 3) should be (true)
-    filtered contains (0, 7) should be (true)
+    filtered contains Move(2, 3) should be (true)
+    filtered contains Move(0, 7) should be (true)
   }
 
   it should "not keep element of the first argument present in the second" in {
-     val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
-     val movesToExclude = List((-1, 4), (3, -1))
+     val someMoves = List(Move(2, 3), Move(-1, 4), Move(0, 7), Move(3, -1))
+     val movesToExclude = List(Move(-1, 4), Move(3, -1))
 
      val filtered = movesExcept(someMoves, movesToExclude)
 
-     filtered contains (-1, 4) should be (false)
-     filtered contains (3, -1) should be (false)
+     filtered contains Move(-1, 4) should be (false)
+     filtered contains Move(3, -1) should be (false)
   }
 }
