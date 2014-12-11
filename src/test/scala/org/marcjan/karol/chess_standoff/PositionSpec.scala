@@ -66,4 +66,11 @@ class PositionSpec extends UnitSpec {
 
     somePosition == otherPosition should be (false)
   }
+
+  "A shifted Position" should "have row shifted by the Move's yDelta" in {
+    val position = Position(7, 3)
+    val move = Move(4, 1)
+
+    (position + move).row should be (position.row + move.yDelta)
+  }
 }
