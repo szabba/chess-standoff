@@ -57,4 +57,13 @@ class PositionSpec extends UnitSpec {
 
     somePosition == otherPosition should be (false)
   }
+
+  it should "not be equal to a position within a different column" in {
+    val row = 7
+
+    val somePosition = Position(row, 3)
+    val otherPosition = Position(row, 4)
+
+    somePosition == otherPosition should be (false)
+  }
 }
