@@ -19,25 +19,24 @@ class Move(val xDelta: Int, val yDelta: Int) {
    */
   def ==(move: Move) =
     xDelta == move.xDelta && yDelta == move.yDelta
-
-  private def asTuple: (Int, Int) = (xDelta, yDelta)
-
-  // FIXME: Implement directly
+  
   /**
-   * Returns true when the move is diagonal.
+   * Returns true when the move is diagonal. Left unspecified when isZero is
+   * true.
    *
    * @return is the move diagonal?
    */
   def isDiagonal: Boolean =
-    Move.isDiagonal(asTuple)
+    xDelta == yDelta
 
   /**
-   * Returns true when the move is along the board's edge.
+   * Returns true when the move is along the board's edge. Left unspecified when
+   * isZero is true.
    *
    * @return is the move along an edge of the board?
    */
   def isAlongBoardEdge: Boolean =
-    Move.isAlongBoardEdge(asTuple)
+    xDelta == 0 || yDelta == 0
 
   /**
    * Returns true when the move is zero, ie wouldn't shift a position.
@@ -45,7 +44,7 @@ class Move(val xDelta: Int, val yDelta: Int) {
    * @return is the move zero?
    */
   def isZero: Boolean =
-    Move.isZero(asTuple)
+    xDelta == 0 && yDelta == 0
 }
 
 /**
