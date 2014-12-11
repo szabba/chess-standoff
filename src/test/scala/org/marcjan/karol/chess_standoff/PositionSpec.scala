@@ -13,4 +13,13 @@ class PositionSpec extends UnitSpec {
 
     position.row should be (row)
   }
+
+  it should "have the given column" in {
+    val row = 7
+    val column = 3
+
+    val position = new Position(row, column)
+
+    position.column should be (column)
+  }
 }
