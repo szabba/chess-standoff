@@ -67,6 +67,12 @@ class PositionSpec extends UnitSpec {
     somePosition == otherPosition should be (false)
   }
 
+  "Subtracting Positions" should "give a zero Move when they are the same" in {
+    val position = Position(7, 3)
+
+    (position - position isZero) should be (true)
+  }
+
   "A shifted Position" should "have row shifted by the Move's yDelta" in {
     val position = Position(7, 3)
     val move = Move(4, 1)
