@@ -68,7 +68,7 @@ class Bishop(position: Position) extends Piece(position) {
 class Knight(position: Position) extends Piece(position) {
   override def canMoveBy(move: Move): Boolean = {
     val components = List(move.xDelta, move.yDelta)
-    val absComponents = components map (math.abs) sortWith (_ < _)
+    val absComponents = components map math.abs sortWith (_ < _)
 
     absComponents match {
       case List(1, 2) => true
