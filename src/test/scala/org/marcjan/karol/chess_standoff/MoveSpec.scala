@@ -3,7 +3,7 @@ package org.marcjan.karol.chess_standoff
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
- * Spec for the functions in the Move object.
+ * Spec for chessboard moves.
  */
 class MoveSpec extends UnitSpec {
 
