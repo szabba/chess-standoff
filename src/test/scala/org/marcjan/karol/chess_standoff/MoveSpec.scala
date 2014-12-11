@@ -119,7 +119,7 @@ class MoveSpec extends UnitSpec {
 
   import Move.movesExcept
 
-  "movesExcept" should "return Nil when called with two identical arguments" in {
+  "Move.movesExcept" should "return Nil when called with two identical arguments" in {
     val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
 
     movesExcept(someMoves, someMoves) should be (Nil)
