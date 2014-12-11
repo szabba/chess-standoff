@@ -1,6 +1,14 @@
 package org.marcjan.karol.chess_standoff
 
 /**
+ * Typesafe representation for a displacement on a chessboard.
+ *
+ * @param xDelta displacement along the horizontal edge
+ * @param yDelta displacement along the vertical edge
+ */
+class Move(xDelta: Int, yDelta: Int)
+
+/**
  * Object containing functions that deal with displacements/chess moves
  * represented as Int tuples.
  */
