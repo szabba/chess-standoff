@@ -18,6 +18,14 @@ class Position(val row: Int, val column: Int) {
     row == p.row && column == p.column
 
   /**
+   * Returns a move <em>m</em> such that <em>this + m == somewhere</em>.
+   *
+   * @param somewhere
+   * @return
+   */
+  def -(somewhere: Position): Move = Move(0, 0)
+
+  /**
    * Returns the position shifted by the given move.
    *
    * @param move move to shift by
