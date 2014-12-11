@@ -2,6 +2,9 @@ package org.marcjan.karol.chess_standoff
 
 import org.scalatest.{FlatSpec, Matchers}
 
+/**
+ * Spec for chess pieces.
+ */
 class PieceSpec extends UnitSpec {
 
   import Moves.{isAlongBoardEdge, isDiagonal, isZero}

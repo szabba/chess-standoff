@@ -2,6 +2,9 @@ package org.marcjan.karol.chess_standoff
 
 import org.scalatest.{Matchers, FlatSpec}
 
+/**
+ * Spec for the functions in the Moves object.
+ */
 class MovesSpec extends UnitSpec {
 
   import Moves._
