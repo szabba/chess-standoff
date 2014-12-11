@@ -20,7 +20,6 @@ object Position {
    * @param column column containing the square
    * @return a position
    */
-  def apply(row: Int, column: Int): Position = {
-    new Position(row, 0)
-  }
+  def apply(row: Int, column: Int): Position =
+    new Position(row, column)
 }
