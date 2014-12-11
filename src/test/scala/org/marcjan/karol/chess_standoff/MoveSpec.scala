@@ -45,6 +45,12 @@ class MoveSpec extends UnitSpec {
     otherMove.yDelta should be (oneMove.yDelta)
   }
 
+  it should "be equal to itself" in {
+    val move = Move(7, 3)
+
+    (move == move) should be (true)
+  }
+
   "isDiagonal" should "hold for Move(1, 1)" in {
     Move(1, 1).isDiagonal should be (true)
   }

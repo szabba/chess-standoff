@@ -14,7 +14,7 @@ class Move(val xDelta: Int, val yDelta: Int) {
    * @param move move to compare against
    * @return are the two moves equal?
    */
-  def ==(move: Move) = false
+  def ==(move: Move) = true
 
   private def asTuple: (Int, Int) = (xDelta, yDelta)
 
