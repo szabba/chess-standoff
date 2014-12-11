@@ -105,8 +105,11 @@ object Move {
    * @return moves in the first list but not the second
    */
   def movesExcept(from: List[Move], movesToExclude: List[Move]) = {
-    from filter (
-      (move) => { ! (movesToExclude contains move) }
-    )
+    def keep(move: Move) =
+      !(movesToExclude exists {
+        _ == move
+      })
+
+    from filter keep
   }
 }
