@@ -55,7 +55,7 @@ class Move(val xDelta: Int, val yDelta: Int) {
 object Move {
 
   /**
-   * Shortand for creating Moves without the new keyword.
+   * Shortcut for creating Moves without the new keyword.
    *
    * @param xDelta displacement along the horizontal edge
    * @param yDelta displacement along the vertical edge
