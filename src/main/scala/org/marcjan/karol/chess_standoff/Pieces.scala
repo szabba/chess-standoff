@@ -3,7 +3,8 @@ package org.marcjan.karol.chess_standoff
 /**
  * A chess piece.
  */
-sealed abstract class Piece {
+sealed abstract class Piece(val position: Position) {
+
   /**
    * Returns true if the Piece can move by the given displacement and false
    * otherwise. The result for a zero displacement is left unspecified.
@@ -18,7 +19,7 @@ sealed abstract class Piece {
  * A King piece. It can move in any of the eight directions but only by one
  * square.
  */
-object King extends Piece {
+class King(position: Position) extends Piece(position) {
   override def canMoveBy(move: Move): Boolean =
     (-1 to 1 contains move.xDelta) && (-1 to 1 contains move.yDelta)
 }
@@ -27,7 +28,7 @@ object King extends Piece {
  * A Queen piece. It can move along a straight line in any of the eight
  * directions by any number of squares.
  */
-object Queen extends Piece {
+class Queen(position: Position) extends Piece(position) {
   override def canMoveBy(move: Move): Boolean =
     move.yDelta == 0 || move.xDelta == 0 || move.xDelta == move.yDelta
 }
@@ -36,7 +37,7 @@ object Queen extends Piece {
  * A Rook piece. It can move along a straight line in the four non-diagonal
  * directions by any number of squares.
  */
-object Rook extends Piece {
+class Rook(position: Position) extends Piece(position) {
   override def canMoveBy(move: Move): Boolean =
     move.xDelta == 0 || move.yDelta == 0
 }
@@ -45,7 +46,7 @@ object Rook extends Piece {
  * A Bishop piece. It can move along a straight line in the four diagonal
  * directions by any number of squares.
  */
-object Bishop extends Piece {
+class Bishop(position: Position) extends Piece(position) {
   override def canMoveBy(move: Move): Boolean =
     move.xDelta == move.yDelta
 }
@@ -55,7 +56,7 @@ object Bishop extends Piece {
  * directions and then by two squares along one edge of the board and one along
  * the other, tracing the shape of the letter 'L'.
  */
-object Knight extends Piece {
+class Knight(position: Position) extends Piece(position) {
   override def canMoveBy(move: Move): Boolean = {
     val components = List(move.xDelta, move.yDelta)
     val absComponents = components map (math.abs) sortWith (_ < _)
