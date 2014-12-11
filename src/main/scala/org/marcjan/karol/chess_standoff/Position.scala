@@ -21,6 +21,6 @@ object Position {
    * @return a position
    */
   def apply(row: Int, column: Int): Position = {
-    new Position(0, 0)
+    new Position(row, 0)
   }
 }
