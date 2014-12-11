@@ -16,6 +16,14 @@ class Position(val row: Int, val column: Int) {
    */
   def ==(p: Position): Boolean =
     row == p.row && column == p.column
+
+  /**
+   * Returns the position shifted by the given move.
+   *
+   * @param move move to shift by
+   * @return position shifted by the given move
+   */
+  def +(move: Move): Position = Position(0, 0)
 }
 
 /**
