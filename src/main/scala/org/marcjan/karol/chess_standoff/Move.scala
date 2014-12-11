@@ -8,6 +8,9 @@ package org.marcjan.karol.chess_standoff
  */
 class Move(val xDelta: Int, val yDelta: Int) {
 
+  override def toString: String =
+    "Move(" ++ xDelta.toString ++ ", " ++ yDelta.toString ++ ")"
+
   /**
    * Returns true when the two moves are equal.
    *
