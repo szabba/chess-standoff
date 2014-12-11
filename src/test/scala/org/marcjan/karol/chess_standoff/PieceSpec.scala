@@ -18,7 +18,7 @@ class PieceSpec extends UnitSpec with CanVerb {
    *         ranges
    */
   def displacementsWithRanges(ofX: Range, ofY: Range): List[Move] =
-    ofX.toList.flatMap((xDelta) => ofY.toList.map((yDelta) => Move(xDelta, yDelta)))
+    ofX.toList.flatMap(xDelta => ofY.toList.map(yDelta => Move(xDelta, yDelta)))
 
   val standardChessboardMoves =
     displacementsWithRanges(-8 to 8, -8 to 8) filter { _.isZero }
@@ -66,7 +66,9 @@ class PieceSpec extends UnitSpec with CanVerb {
     }
   }
 
-  it should "not be able to move unless the displacement is diagonal or along the board's edge" in {
+  it should "not be able to move unless the displacement is diagonal or " ++
+    "along the board's edge" in {
+
     movesExcept(diagonalMoves ++ movesAlongBoardEdge) foreach {
       new Queen(dummyPosition).canMoveBy(_) should be (false)
     }
@@ -78,7 +80,9 @@ class PieceSpec extends UnitSpec with CanVerb {
     }
   }
 
-  it should "not be able to move unless the displacements is along the board's edge" in {
+  it should "not be able to move unless the displacements is along the " ++
+    "board's edge" in {
+
     movesExcept(movesAlongBoardEdge) foreach {
       new Rook(dummyPosition).canMoveBy(_) should be (false)
     }
@@ -101,20 +105,24 @@ class PieceSpec extends UnitSpec with CanVerb {
     Move(1, 2), Move(1, -2), Move(-1, 2), Move(-1, -2)
   )
 
-  "A Knight" should "be able to move by two squares along one edge and one along the other" in {
+  "A Knight" should "be able to move by two squares along one edge and one " ++
+    "along the other" in {
+
     knightMoves foreach {
       new Knight(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
-  it should "not be able to move unless the displacement is two squares along one edge and one along the other" in {
+  it should "not be able to move unless the displacement is two squares " ++
+    "along one edge and one along the other" in {
+
     movesExcept(knightMoves) foreach {
       new Knight(dummyPosition).canMoveBy(_) should be (false)
     }
   }
 
-  "A Piece" can "only move to a position if it can move by it's difference " ++
-    "with the piece's position" in {
+  "A Piece" can "only move to a position if it can move by the end " ++
+    "position's difference with the piece's position" in {
 
     val pieces = List(
       new King(dummyPosition), new Queen(dummyPosition),
