@@ -1,4 +1,4 @@
-import org.marcjan.karol.chess_standoff.{Board, UnitSpec}
+package org.marcjan.karol.chess_standoff
 
 /**
  * Spec for the chessboard.
