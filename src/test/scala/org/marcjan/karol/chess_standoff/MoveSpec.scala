@@ -160,10 +160,10 @@ class MoveSpec extends UnitSpec {
 
     val allMoves = movesExcept(someMoves, Nil)
 
-    allMoves contains Move(2, 3) should be (true)
-    allMoves contains Move(-1, 4) should be (true)
-    allMoves contains Move(0, 7) should be (true)
-    allMoves contains Move(3, -1) should be (true)
+    allMoves exists { _ == Move(2, 3) } should be (true)
+    allMoves exists { _ == Move(-1, 4) } should be (true)
+    allMoves exists { _ == Move(0, 7) } should be (true)
+    allMoves exists { _ == Move(3, -1) } should be (true)
   }
 
   it should "filter nothing when the arguments have no common elements" in {
@@ -172,10 +172,10 @@ class MoveSpec extends UnitSpec {
 
     val allMoves = movesExcept(someMoves, someOtherMoves)
 
-    allMoves contains Move(2, 3) should be (true)
-    allMoves contains Move(-1, 4) should be (true)
-    allMoves contains Move(0, 7) should be (true)
-    allMoves contains Move(3, -1) should be (true)
+    allMoves exists { _ == Move(2, 3) } should be (true)
+    allMoves exists { _ == Move(-1, 4) } should be (true)
+    allMoves exists { _ == Move(0, 7) } should be (true)
+    allMoves exists { _ == Move(3, -1) } should be (true)
   }
 
   it should "keep elements of the first argument not in the second" in {
@@ -184,8 +184,8 @@ class MoveSpec extends UnitSpec {
 
     val filtered = movesExcept(someMoves, movesToExclude)
 
-    filtered contains Move(2, 3) should be (true)
-    filtered contains Move(0, 7) should be (true)
+    filtered exists { _ == Move(2, 3) } should be (true)
+    filtered exists { _ == Move(0, 7) } should be (true)
   }
 
   it should "not keep element of the first argument present in the second" in {
@@ -194,7 +194,7 @@ class MoveSpec extends UnitSpec {
 
      val filtered = movesExcept(someMoves, movesToExclude)
 
-     filtered contains Move(-1, 4) should be (false)
-     filtered contains Move(3, -1) should be (false)
+     filtered exists { _ == Move(-1, 4) } should be (false)
+     filtered exists { _ == Move(3, -1) } should be (false)
   }
 }
