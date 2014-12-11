@@ -15,6 +15,16 @@ class Move(val xDelta: Int, val yDelta: Int)
 object Move {
 
   /**
+   * Shortand for creating Moves without the new keyword.
+   *
+   * @param xDelta displacement along the horizontal edge
+   * @param yDelta displacement along the vertical edge
+   * @return a move
+   */
+  def apply(xDelta: Int, yDelta: Int): Move =
+    new Move(0, 0)
+
+  /**
    * Returns true when the given displacement is diagonal and false otherwise.
    * It is left unspecified for the zero displacement.
    *
