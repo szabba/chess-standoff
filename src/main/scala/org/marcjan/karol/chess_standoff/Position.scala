@@ -15,7 +15,7 @@ class Position(val row: Int, val column: Int) {
    * @return are the positions equal?
    */
   def ==(p: Position): Boolean =
-    row == p.row
+    row == p.row && column == p.column
 }
 
 /**
