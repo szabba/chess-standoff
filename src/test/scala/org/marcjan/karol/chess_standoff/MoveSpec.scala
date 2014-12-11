@@ -45,8 +45,6 @@ class MoveSpec extends UnitSpec {
     otherMove.yDelta should be (oneMove.yDelta)
   }
 
-  import Move._
-
   "isDiagonal" should "hold for Move(1, 1)" in {
     Move(1, 1).isDiagonal should be (true)
   }
@@ -118,6 +116,8 @@ class MoveSpec extends UnitSpec {
   it should "hold for Move(0, 0)" in {
     Move(0, 0).isZero should be (true)
   }
+
+  import Move.movesExcept
 
   "movesExcept" should "return Nil when called with two identical arguments" in {
     val someMoves = List((2, 3), (-1, 4), (0, 7), (3, -1))
