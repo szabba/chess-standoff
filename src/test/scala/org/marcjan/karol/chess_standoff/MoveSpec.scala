@@ -34,6 +34,16 @@ class MoveSpec extends UnitSpec {
 
     otherMove.xDelta should be (oneMove.xDelta)
   }
+  
+  it should "have the same yDelta the same whether created with or without new" in {
+    val xDelta = 7
+    val yDelta = -3
+
+    val oneMove = new Move(xDelta, yDelta)
+    val otherMove = Move(xDelta, yDelta)
+
+    otherMove.yDelta should be (oneMove.yDelta)
+  }
 
   import Move._
 
