@@ -4,7 +4,7 @@ package org.marcjan.karol.chess_standoff
  * Object containing functions that deal with displacements/chess moves
  * represented as Int tuples.
  */
-object Moves {
+object Move {
 
   /**
    * Returns true when the given displacement is diagonal and false otherwise.

@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class PieceSpec extends UnitSpec {
 
-  import Moves.{isAlongBoardEdge, isDiagonal, isZero}
+  import Move.{isAlongBoardEdge, isDiagonal, isZero}
 
   /**
    * Returns a list of all displacements with the x and y deltas in the given
@@ -35,7 +35,7 @@ class PieceSpec extends UnitSpec {
    *         the argument
    */
   def movesExcept(movesToExclude: List[(Int, Int)]) =
-    Moves.movesExcept(standardChessboardMoves, movesToExclude)
+    Move.movesExcept(standardChessboardMoves, movesToExclude)
 
   val kingMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter (isZero)
 

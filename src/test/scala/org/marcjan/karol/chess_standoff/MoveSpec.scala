@@ -3,11 +3,11 @@ package org.marcjan.karol.chess_standoff
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
- * Spec for the functions in the Moves object.
+ * Spec for the functions in the Move object.
  */
-class MovesSpec extends UnitSpec {
+class MoveSpec extends UnitSpec {
 
-  import Moves._
+  import Move._
 
   "isDiagonal" should "hold for (1, 1)" in {
     isDiagonal((1, 1)) should be (true)
