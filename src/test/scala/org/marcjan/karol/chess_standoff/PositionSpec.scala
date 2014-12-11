@@ -22,4 +22,14 @@ class PositionSpec extends UnitSpec {
 
     position.column should be (column)
   }
+
+  it should "have the same row whether created with or without new" in {
+    val row = 7
+    val column = 3
+
+    val somePosition = new Position(row, column)
+    val otherPosition = Position(row, column)
+
+    otherPosition.row should be (somePosition.row)
+  }
 }
