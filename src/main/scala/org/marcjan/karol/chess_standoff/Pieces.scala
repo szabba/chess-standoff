@@ -13,6 +13,14 @@ sealed abstract class Piece(val position: Position) {
    * @return can the Piece be moved by the given displacement?
    */
   def canMoveBy(move: Move): Boolean
+
+  /**
+   * Returns true if the Piece could be moved to the specified position.
+   *
+   * @param position position to check with
+   * @return could the piece be moved to the specified position?
+   */
+  def canMoveTo(position: Position): Boolean = false
 }
 
 /**
