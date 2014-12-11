@@ -22,7 +22,7 @@ object Move {
    * @return a move
    */
   def apply(xDelta: Int, yDelta: Int): Move =
-    new Move(xDelta, 0)
+    new Move(xDelta, yDelta)
 
   /**
    * Returns true when the given displacement is diagonal and false otherwise.
