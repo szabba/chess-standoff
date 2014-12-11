@@ -8,13 +8,23 @@ package org.marcjan.karol.chess_standoff
  */
 class Move(val xDelta: Int, val yDelta: Int) {
 
+  private def asTuple: (Int, Int) = (xDelta, yDelta)
+
   /**
    * Returns true when the move is diagonal.
    *
    * @return is the move diagonal?
    */
-  def isDiagonal(): Boolean =
-    Move.isDiagonal((xDelta, yDelta))
+  def isDiagonal: Boolean =
+    Move.isDiagonal(asTuple)
+
+  /**
+   * Returns true when the move is along the board's edge.
+   *
+   * @return is the movement along an edge of the board?
+   */
+  def isAlongBoardEdge: Boolean =
+    Move.isAlongBoardEdge(asTuple)
 }
 
 /**

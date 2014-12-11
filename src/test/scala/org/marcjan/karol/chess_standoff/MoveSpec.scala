@@ -67,36 +67,36 @@ class MoveSpec extends UnitSpec {
     Move(-3, 2).isDiagonal should be (false)
   }
 
-  "isAlongBoardEdge" should "hold for (0, 1)" in {
-    isAlongBoardEdge((0, 1)) should be (true)
+  "isAlongBoardEdge" should "hold for Move(0, 1)" in {
+    Move(0, 1).isAlongBoardEdge should be (true)
   }
 
-  it should "hold for (0, 2)" in {
-    isAlongBoardEdge((0, 2)) should be (true)
+  it should "hold for Move(0, 2)" in {
+    Move(0, 2).isAlongBoardEdge should be (true)
   }
 
-  it should "hold for (1, 0)" in {
-    isAlongBoardEdge((1, 0)) should be (true)
+  it should "hold for Move(1, 0)" in {
+    Move(1, 0).isAlongBoardEdge should be (true)
   }
 
-  it should "hold for (0, -1)" in {
-    isAlongBoardEdge((0, -1)) should be (true)
+  it should "hold for Move(0, -1)" in {
+    Move(0, -1).isAlongBoardEdge should be (true)
   }
 
-  it should "hold for (-1, 0)" in {
-    isAlongBoardEdge((-1, 0)) should be (true)
+  it should "hold for Move(-1, 0)" in {
+    Move(-1, 0).isAlongBoardEdge should be (true)
   }
 
-  it should "not hold for (1, 2)" in {
-    isAlongBoardEdge((1, 2)) should be (false)
+  it should "not hold for Move(1, 2)" in {
+    Move(1, 2).isAlongBoardEdge should be (false)
   }
 
-  it should "not hold for (1, 1)" in {
-    isAlongBoardEdge((1, 1)) should be (false)
+  it should "not hold for Move(1, 1)" in {
+    Move(1, 1).isAlongBoardEdge should be (false)
   }
 
-  it should "not hold for (-1, 1)" in {
-    isAlongBoardEdge((-1, 1)) should be (false)
+  it should "not hold for Move(-1, 1)" in {
+    Move(-1, 1).isAlongBoardEdge should be (false)
   }
 
   "isZero" should "not hold for (0, 1)" in {
