@@ -8,8 +8,17 @@ package org.marcjan.karol.chess_standoff
  */
 class Move(val xDelta: Int, val yDelta: Int) {
 
+  /**
+   * Returns true when the two moves are equal.
+   *
+   * @param move move to compare against
+   * @return are the two moves equal?
+   */
+  def ==(move: Move) = false
+
   private def asTuple: (Int, Int) = (xDelta, yDelta)
 
+  // FIXME: Implement directly
   /**
    * Returns true when the move is diagonal.
    *
