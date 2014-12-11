@@ -42,4 +42,10 @@ class PositionSpec extends UnitSpec {
 
     otherPosition.column should be (somePosition.column)
   }
+
+  it should "be equal to itself" in {
+    val somePosition = Position(7, 3)
+
+    somePosition == somePosition should be (true)
+  }
 }
