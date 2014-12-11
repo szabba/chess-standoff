@@ -21,10 +21,18 @@ class Move(val xDelta: Int, val yDelta: Int) {
   /**
    * Returns true when the move is along the board's edge.
    *
-   * @return is the movement along an edge of the board?
+   * @return is the move along an edge of the board?
    */
   def isAlongBoardEdge: Boolean =
     Move.isAlongBoardEdge(asTuple)
+
+  /**
+   * Returns true when the move is zero, ie wouldn't shift a position.
+   *
+   * @return is the move zero?
+   */
+  def isZero: Boolean =
+    Move.isZero(asTuple)
 }
 
 /**

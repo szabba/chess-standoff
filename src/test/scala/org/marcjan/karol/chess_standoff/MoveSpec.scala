@@ -99,24 +99,24 @@ class MoveSpec extends UnitSpec {
     Move(-1, 1).isAlongBoardEdge should be (false)
   }
 
-  "isZero" should "not hold for (0, 1)" in {
-    isZero((0, 1)) should be (false)
+  "isZero" should "not hold for Move(0, 1)" in {
+    Move(0, 1).isZero should be (false)
   }
 
-  it should "not hold for (1, 0)" in {
-    isZero((1, 0)) should be (false)
+  it should "not hold for Move(1, 0)" in {
+    Move(1, 0).isZero should be (false)
   }
 
-  it should "not hold for (-1, 0)" in {
-    isZero((-1, 0)) should be (false)
+  it should "not hold for Move(-1, 0)" in {
+    Move(-1, 0).isZero should be (false)
   }
 
-  it should "not hold for (2, 3)" in {
-    isZero((2, 3)) should be (false)
+  it should "not hold for Move(2, 3)" in {
+    Move(2, 3).isZero should be (false)
   }
 
-  it should "hold for (0, 0)" in {
-    isZero(0, 0) should be (true)
+  it should "hold for Move(0, 0)" in {
+    Move(0, 0).isZero should be (true)
   }
 
   "movesExcept" should "return Nil when called with two identical arguments" in {
