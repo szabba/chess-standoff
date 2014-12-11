@@ -7,6 +7,15 @@ import org.scalatest.{Matchers, FlatSpec}
  */
 class MoveSpec extends UnitSpec {
 
+  "A Move" should "have the given xDelta" in {
+    val xDelta = 7
+    val yDelta = 3
+
+    val move = new Move(xDelta, yDelta)
+
+    move.xDelta should be (xDelta)
+  }
+
   import Move._
 
   "isDiagonal" should "hold for (1, 1)" in {
