@@ -8,7 +8,7 @@ sealed abstract class Piece {
    * Returns true if the Piece can move by the given displacement and false
    * otherwise. The result for a zero displacement is left unspecified.
    *
-   * @param positionDelta the displacement as a tuple of (xDelta, yDelta)
+   * @param move the displacement as a tuple of (xDelta, yDelta)
    * @return can the Piece be moved by the given displacement?
    */
   def canMoveBy(move: Move): Boolean
