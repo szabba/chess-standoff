@@ -24,7 +24,8 @@ class Position(val row: Int, val column: Int) {
    * @return position shifted by the given move
    */
   def +(move: Move): Position = Position(
-    row + move.yDelta, 0)
+    row + move.yDelta,
+    column + move.xDelta)
 }
 
 /**
