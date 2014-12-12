@@ -20,7 +20,12 @@ sealed abstract class Piece(val position: Position) extends CanMoverBy {
  * square.
  */
 class King(position: Position) extends Piece(position) {
-  override def canMoveBy(move: Move): Boolean =
+  def canMoveBy(move: Move): Boolean =
+    King.canMoveBy(move)
+}
+
+object King extends CanMoverBy {
+  def canMoveBy(move: Move): Boolean =
     (-1 to 1 contains move.xDelta) && (-1 to 1 contains move.yDelta)
 }
 
@@ -29,7 +34,12 @@ class King(position: Position) extends Piece(position) {
  * directions by any number of squares.
  */
 class Queen(position: Position) extends Piece(position) {
-  override def canMoveBy(move: Move): Boolean =
+  def canMoveBy(move: Move): Boolean =
+    Queen.canMoveBy(move)
+}
+
+object Queen extends CanMoverBy {
+  def canMoveBy(move: Move): Boolean =
     move.yDelta == 0 || move.xDelta == 0 || move.xDelta == move.yDelta
 }
 
@@ -38,7 +48,12 @@ class Queen(position: Position) extends Piece(position) {
  * directions by any number of squares.
  */
 class Rook(position: Position) extends Piece(position) {
-  override def canMoveBy(move: Move): Boolean =
+  def canMoveBy(move: Move): Boolean =
+    Rook.canMoveBy(move)
+}
+
+object Rook extends CanMoverBy {
+  def canMoveBy(move: Move): Boolean =
     move.xDelta == 0 || move.yDelta == 0
 }
 
@@ -47,7 +62,12 @@ class Rook(position: Position) extends Piece(position) {
  * directions by any number of squares.
  */
 class Bishop(position: Position) extends Piece(position) {
-  override def canMoveBy(move: Move): Boolean =
+  def canMoveBy(move: Move): Boolean =
+    Bishop.canMoveBy(move)
+}
+
+object Bishop extends CanMoverBy {
+  def canMoveBy(move: Move): Boolean =
     move.xDelta == move.yDelta
 }
 
@@ -57,6 +77,11 @@ class Bishop(position: Position) extends Piece(position) {
  * the other, tracing the shape of the letter 'L'.
  */
 class Knight(position: Position) extends Piece(position) {
+  override def canMoveBy(move: Move): Boolean =
+    Knight.canMoveBy(move)
+}
+
+object Knight extends CanMoverBy {
   override def canMoveBy(move: Move): Boolean = {
     val components = List(move.xDelta, move.yDelta)
     val absComponents = components map math.abs sortWith (_ < _)
