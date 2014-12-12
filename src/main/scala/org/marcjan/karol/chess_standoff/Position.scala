@@ -17,6 +17,12 @@ class Position(val row: Int, val column: Int) {
   def ==(p: Position): Boolean =
     row == p.row && column == p.column
 
+  override def equals(p: Any): Boolean =
+    p match {
+      case p: Position => this == p
+      case _ => false
+    }
+
   /**
    * Returns a move <em>m</em> such that <em>this + m == somewhere</em>.
    *
