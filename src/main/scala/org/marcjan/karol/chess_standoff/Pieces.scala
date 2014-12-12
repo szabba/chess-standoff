@@ -3,16 +3,7 @@ package org.marcjan.karol.chess_standoff
 /**
  * A chess piece.
  */
-sealed abstract class Piece(val position: Position) {
-
-  /**
-   * Returns true if the Piece can move by the given displacement and false
-   * otherwise. The result for a zero displacement is left unspecified.
-   *
-   * @param move the displacement as a tuple of (xDelta, yDelta)
-   * @return can the Piece be moved by the given displacement?
-   */
-  def canMoveBy(move: Move): Boolean
+sealed abstract class Piece(val position: Position) extends CanMoverBy {
 
   /**
    * Returns true if the Piece could be moved to the specified position.
