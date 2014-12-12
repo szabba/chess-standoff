@@ -9,7 +9,7 @@ class BoardSpec extends UnitSpec {
     val rows = 7
     val columns = 6
 
-    val board = new Board(rows, columns)
+    val board = Board(rows, columns)
 
     board.rows should be (rows)
   }
@@ -18,7 +18,7 @@ class BoardSpec extends UnitSpec {
     val rows = 7
     val columns = 6
 
-    val board = new Board(rows, columns)
+    val board = Board(rows, columns)
 
     board.columns should be (columns)
   }
@@ -27,7 +27,7 @@ class BoardSpec extends UnitSpec {
     val rows = 7
     val columns = 6
 
-    val board = new Board(rows, columns)
+    val board = Board(rows, columns)
 
     board.pieces.isEmpty should be (true)
   }
@@ -37,7 +37,7 @@ class BoardSpec extends UnitSpec {
     val columns = 6
 
     val rook = new Rook(Position(6, 3))
-    val board = new Board(rows, columns, List(rook))
+    val board = Board(rows, columns, List(rook))
 
     board.pieces.contains(rook) should be (true)
   }
@@ -49,7 +49,7 @@ class BoardSpec extends UnitSpec {
     val pieces = List(
       new King(Position(0, 0)), new Queen(Position(2, 3)), new Rook(Position(6, 5)))
 
-    val board = new Board(rows, cols, pieces)
+    val board = Board(rows, cols, pieces)
 
     pieces foreach {
       board.pieces.contains(_) should be (true)
