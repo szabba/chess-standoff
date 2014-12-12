@@ -3,7 +3,7 @@ package org.marcjan.karol.chess_standoff
 /**
  * A chess piece.
  */
-sealed class Piece(template: CanMoverBy, val position: Position) extends CanMoverBy {
+sealed class Piece(kind: PieceKind, val position: Position) extends CanMoverBy {
 
   /**
    * Returns true if the object can move by the given displacement and false
@@ -13,7 +13,7 @@ sealed class Piece(template: CanMoverBy, val position: Position) extends CanMove
    * @return can the object be moved by the given displacement?
    */
   override def canMoveBy(move: Move): Boolean =
-    template.canMoveBy(move)
+    kind.canMoveBy(move)
 
   /**
     * Returns true if the Piece could be moved to the specified position.
@@ -27,13 +27,29 @@ sealed class Piece(template: CanMoverBy, val position: Position) extends CanMove
 }
 
 /**
+ * A kind of chess piece.
+ */
+sealed trait PieceKind extends CanMoverBy {
+
+  /**
+   * Shortcut for creating a piece of this kind.
+   *
+   * @param position position to place the piece at
+   * @return a piece
+   */
+  def apply(position: Position) =
+    new Piece(this, position)
+}
+
+/**
  * A King piece. It can move in any of the eight directions but only by one
  * square.
  */
 class King(position: Position) extends Piece(King, position)
 
-object King extends CanMoverBy {
-  def canMoveBy(move: Move): Boolean =
+object King extends PieceKind {
+
+  override def canMoveBy(move: Move): Boolean =
     (-1 to 1 contains move.xDelta) && (-1 to 1 contains move.yDelta)
 }
 
@@ -43,8 +59,8 @@ object King extends CanMoverBy {
  */
 class Queen(position: Position) extends Piece(Queen, position)
 
-object Queen extends CanMoverBy {
-  def canMoveBy(move: Move): Boolean =
+object Queen extends PieceKind {
+  override def canMoveBy(move: Move): Boolean =
     move.yDelta == 0 || move.xDelta == 0 || move.xDelta == move.yDelta
 }
 
@@ -54,8 +70,8 @@ object Queen extends CanMoverBy {
  */
 class Rook(position: Position) extends Piece(Rook, position)
 
-object Rook extends CanMoverBy {
-  def canMoveBy(move: Move): Boolean =
+object Rook extends PieceKind {
+  override def canMoveBy(move: Move): Boolean =
     move.xDelta == 0 || move.yDelta == 0
 }
 
@@ -65,8 +81,8 @@ object Rook extends CanMoverBy {
  */
 class Bishop(position: Position) extends Piece(Bishop, position)
 
-object Bishop extends CanMoverBy {
-  def canMoveBy(move: Move): Boolean =
+object Bishop extends PieceKind {
+  override def canMoveBy(move: Move): Boolean =
     move.xDelta == move.yDelta
 }
 
@@ -77,7 +93,7 @@ object Bishop extends CanMoverBy {
  */
 class Knight(position: Position) extends Piece(Knight, position)
 
-object Knight extends CanMoverBy {
+object Knight extends PieceKind {
   override def canMoveBy(move: Move): Boolean = {
     val components = List(move.xDelta, move.yDelta)
     val absComponents = components map math.abs sortWith (_ < _)
