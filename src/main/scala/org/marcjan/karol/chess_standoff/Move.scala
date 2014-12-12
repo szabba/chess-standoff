@@ -62,21 +62,4 @@ object Move {
    */
   def apply(xDelta: Int, yDelta: Int): Move =
     new Move(xDelta, yDelta)
-
-  /**
-   * Returns a list of all the moves in the first list except for those in the
-   * second one.
-   *
-   * @param from list of moves to choose from
-   * @param movesToExclude list of moves to exclude
-   * @return moves in the first list but not the second
-   */
-  def movesExcept(from: List[Move], movesToExclude: List[Move]) = {
-    def keep(move: Move) =
-      !(movesToExclude exists {
-        _ == move
-      })
-
-    from filter keep
-  }
 }

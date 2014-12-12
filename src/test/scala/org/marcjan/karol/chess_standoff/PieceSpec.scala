@@ -37,7 +37,8 @@ class PieceSpec extends UnitSpec with CanVerb {
    *         the argument
    */
   def movesExcept(movesToExclude: List[Move]) =
-    Move.movesExcept(standardChessboardMoves, movesToExclude)
+    standardChessboardMoves filterNot (move =>
+      movesToExclude exists { _ == move })
 
   val kingMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter (_.isZero)
 
