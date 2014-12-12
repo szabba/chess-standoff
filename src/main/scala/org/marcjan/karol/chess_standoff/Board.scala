@@ -18,7 +18,7 @@ class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List(
       0 until columns map (column =>
         Position(row, column)))
 
-  val safePositions =
+  private val safePositions =
     allPositions filter (position =>
       pieces.forall(
         ! _.canMoveTo(position)))

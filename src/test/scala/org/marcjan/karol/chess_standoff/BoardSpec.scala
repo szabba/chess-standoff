@@ -61,30 +61,6 @@ class BoardSpec extends UnitSpec {
         0 until board.columns map (column =>
           Position(row, column)))
 
-  it should "have all positions safe when it contains no pieces" in {
-    val rows = 7
-    val cols = 6
-
-    val board = Board(rows, cols)
-
-    positionsOn(board) foreach {
-      board.safePositions.contains(_)
-    }
-  }
-
-  it should "consider all positions a piece can move to as unsafe" in {
-    val rows = 7
-    val cols = 6
-
-    val queen = Queen(Position(6, 5))
-
-    val board = Board(rows, cols, List(queen))
-
-    positionsOn(board) foreach (position =>
-      if (queen.canMoveTo(position))
-        board.safePositions.contains(position) should be (false))
-  }
-
   it should "know that a piece can be safely put anywhere on it when " ++
     "it's empty" in {
 
