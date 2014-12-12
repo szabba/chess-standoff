@@ -47,7 +47,7 @@ class BoardSpec extends UnitSpec {
     val cols = 6
 
     val pieces = List(
-      new King(Position(0, 0)), new Queen(Position(2, 3)), new Rook(Position(6, 5)))
+      King(Position(0, 0)), Queen(Position(2, 3)), Rook(Position(6, 5)))
 
     val board = Board(rows, cols, pieces)
 

@@ -41,11 +41,8 @@ trait PieceKind extends CanMoverBy {
 }
 
 /**
- * A King piece. It can move in any of the eight directions but only by one
- * square.
+ * A King can move in any of the eight directions but only by one square.
  */
-class King(position: Position) extends Piece(King, position)
-
 object King extends PieceKind {
 
   override def canMoveBy(move: Move): Boolean =
@@ -53,45 +50,37 @@ object King extends PieceKind {
 }
 
 /**
- * A Queen piece. It can move along a straight line in any of the eight
- * directions by any number of squares.
+ * A Queen can move along a straight line in any of the eight directions by any
+ * number of squares.
  */
-class Queen(position: Position) extends Piece(Queen, position)
-
 object Queen extends PieceKind {
   override def canMoveBy(move: Move): Boolean =
     move.yDelta == 0 || move.xDelta == 0 || move.xDelta == move.yDelta
 }
 
 /**
- * A Rook piece. It can move along a straight line in the four non-diagonal
- * directions by any number of squares.
+ * A Rook can move along a straight line in the four non-diagonal directions by
+ * any number of squares.
  */
-class Rook(position: Position) extends Piece(Rook, position)
-
 object Rook extends PieceKind {
   override def canMoveBy(move: Move): Boolean =
     move.xDelta == 0 || move.yDelta == 0
 }
 
 /**
- * A Bishop piece. It can move along a straight line in the four diagonal
- * directions by any number of squares.
+ * A Bishop can move along a straight line in the four diagonal directions by
+ * any number of squares.
  */
-class Bishop(position: Position) extends Piece(Bishop, position)
-
 object Bishop extends PieceKind {
   override def canMoveBy(move: Move): Boolean =
     move.xDelta == move.yDelta
 }
 
 /**
- * A Knight piece. It moves by two squares in one of the non-diagonal
- * directions and then by two squares along one edge of the board and one along
- * the other, tracing the shape of the letter 'L'.
+ * A Knight moves by two squares in one of the non-diagonal directions and then
+ * by two squares along one edge of the board and one along the other, tracing
+ * the shape of the letter 'L'.
  */
-class Knight(position: Position) extends Piece(Knight, position)
-
 object Knight extends PieceKind {
   override def canMoveBy(move: Move): Boolean = {
     val components = List(move.xDelta, move.yDelta)
