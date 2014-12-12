@@ -71,4 +71,17 @@ class BoardSpec extends UnitSpec {
       board.safePositions.contains(_)
     }
   }
+
+  it should "consider all positions a piece can move to as unsafe" in {
+    val rows = 7
+    val cols = 6
+
+    val queen = new Queen(Position(6, 5))
+
+    val board = Board(rows, cols, List(queen))
+
+    positionsOn(board) foreach (position =>
+      if (queen.canMoveTo(position))
+        board.safePositions.contains(position) should be (false))
+  }
 }
