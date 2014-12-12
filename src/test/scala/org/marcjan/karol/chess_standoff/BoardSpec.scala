@@ -71,22 +71,22 @@ class BoardSpec extends UnitSpec {
       ) should be (true)
   }
 
-  it should "know that a new piece can only be placed safeky where an old " ++
+  var canMoveNowhere: PieceKind = new PieceKind {
+    /**
+     * Returns true if the object can move by the given displacement and false
+     * otherwise. The result for a zero displacement is left unspecified.
+     *
+     * @param move the displacement as a tuple of (xDelta, yDelta)
+     * @return can the object be moved by the given displacement?
+     */
+    override def canMoveBy(move: Move): Boolean = false
+  }
+
+  it should "know that a new piece can only be placed safely where an old " ++
     "one cannot move" in {
 
     val rook = Rook(Position(2, 2))
     val board = Board(3, 3, List(rook))
-
-    val canMoveNowhere = new PieceKind {
-      /**
-       * Returns true if the object can move by the given displacement and false
-       * otherwise. The result for a zero displacement is left unspecified.
-       *
-       * @param move the displacement as a tuple of (xDelta, yDelta)
-       * @return can the object be moved by the given displacement?
-       */
-      override def canMoveBy(move: Move): Boolean = false
-    }
 
     board.safePlacesFor(canMoveNowhere) forall (! rook.canMoveTo(_)
       ) should be (true)
@@ -112,5 +112,17 @@ class BoardSpec extends UnitSpec {
       newBoards exists {
         _.pieces exists { _.position == position }
       }) should be (true)
+  }
+
+  it should "not place a new piece anywhere when no position on it is safe" in {
+
+    val board = Board(
+      5, 5,
+      List(
+        Rook(Position(4, 1)), Rook(Position(3, 4)),
+        Queen(Position(2, 2)),
+        Rook(Position(1, 0)), Rook(Position(0, 3))))
+
+    board.placeWithoutConflict(canMoveNowhere).isEmpty should be (true)
   }
 }

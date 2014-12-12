@@ -35,7 +35,7 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
         kind(candidatePosition).canMoveTo(piece.position)))
 
   def placeWithoutConflict(kind: PieceKind): Iterable[Board] =
-    allPositions map (position =>
+    safePositions map (position =>
       Board(rows, columns, pieces :+ kind(position)))
 }
 
