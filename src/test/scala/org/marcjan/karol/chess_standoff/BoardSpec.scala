@@ -125,4 +125,16 @@ class BoardSpec extends UnitSpec {
 
     board.placeWithoutConflict(canMoveNowhere).isEmpty should be (true)
   }
+
+  it should "not place a new piece anywhere when it would have to endanger" ++
+    "an old one to do so" in {
+
+    val board = Board(3, 3,
+      List(
+        King(Position(0, 0)),
+        King(Position(0, 2)),
+        King(Position(2, 0))))
+
+    board.placeWithoutConflict(Queen).isEmpty should be (true)
+  }
 }
