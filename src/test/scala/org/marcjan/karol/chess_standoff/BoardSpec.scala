@@ -31,4 +31,14 @@ class BoardSpec extends UnitSpec {
 
     board.pieces.isEmpty should be (true)
   }
+
+  it should "contain a piece when given one" in {
+    val rows = 7
+    val columns = 6
+
+    val rook = new Rook(Position(6, 3))
+    val board = new Board(rows, columns, List(rook))
+
+    board.pieces.contains(rook) should be (true)
+  }
 }
