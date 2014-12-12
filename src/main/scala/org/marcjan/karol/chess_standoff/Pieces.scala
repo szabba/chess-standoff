@@ -3,7 +3,7 @@ package org.marcjan.karol.chess_standoff
 /**
  * A chess piece.
  */
-sealed class Piece(kind: PieceKind, val position: Position) extends CanMoverBy {
+sealed class Piece(val kind: PieceKind, val position: Position) extends CanMoverBy {
 
   /**
    * Returns true if the object can move by the given displacement and false
@@ -28,7 +28,7 @@ sealed class Piece(kind: PieceKind, val position: Position) extends CanMoverBy {
 /**
  * A kind of chess piece.
  */
-sealed trait PieceKind extends CanMoverBy {
+trait PieceKind extends CanMoverBy {
 
   /**
    * Shortcut for creating a piece of this kind.

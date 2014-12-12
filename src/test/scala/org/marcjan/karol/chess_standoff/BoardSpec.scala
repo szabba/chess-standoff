@@ -94,4 +94,25 @@ class BoardSpec extends UnitSpec {
        board.safePlacesFor(King) contains _
       ) should be (true)
   }
+
+  it should "know that a new piece can only be safe where an old one " ++
+    "cannot move" in {
+
+    val rook = Rook(Position(2, 2))
+    val board = Board(3, 3, List(rook))
+
+    val canMoveNowhere = new PieceKind {
+      /**
+       * Returns true if the object can move by the given displacement and false
+       * otherwise. The result for a zero displacement is left unspecified.
+       *
+       * @param move the displacement as a tuple of (xDelta, yDelta)
+       * @return can the object be moved by the given displacement?
+       */
+      override def canMoveBy(move: Move): Boolean = false
+    }
+
+    board.safePlacesFor(canMoveNowhere) forall (! rook.canMoveTo(_)
+      ) should be (true)
+  }
 }

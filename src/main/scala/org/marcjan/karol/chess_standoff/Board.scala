@@ -31,7 +31,8 @@ class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List(
    * @return all the positions at which the piece of this kind can be placed
    *         safely
    */
-  def safePlacesFor(kind: PieceKind): Seq[Position] = allPositions
+  def safePlacesFor(kind: PieceKind): Seq[Position] =
+    safePositions
 }
 
 /**
