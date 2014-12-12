@@ -36,7 +36,7 @@ class BoardSpec extends UnitSpec {
     val rows = 7
     val columns = 6
 
-    val rook = new Rook(Position(6, 3))
+    val rook = Rook(Position(6, 3))
     val board = Board(rows, columns, List(rook))
 
     board.pieces.contains(rook) should be (true)
@@ -76,7 +76,7 @@ class BoardSpec extends UnitSpec {
     val rows = 7
     val cols = 6
 
-    val queen = new Queen(Position(6, 5))
+    val queen = Queen(Position(6, 5))
 
     val board = Board(rows, cols, List(queen))
 

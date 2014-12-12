@@ -1,7 +1,6 @@
 package org.marcjan.karol.chess_standoff
 
 import org.scalatest.words.CanVerb
-import org.scalatest.{FlatSpec, Matchers}
 
 /**
  * Spec for chess pieces.
@@ -45,25 +44,25 @@ class PieceSpec extends UnitSpec with CanVerb {
   "A King" should "be able to move by one square in any direction" in {
 
     kingMoves foreach {
-      new King(dummyPosition).canMoveBy(_) should be (true)
+      King(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move beyond one square in any direction" in {
     movesExcept(kingMoves) foreach {
-      new King(dummyPosition).canMoveBy(_) should be (false)
+      King(dummyPosition).canMoveBy(_) should be (false)
     }
   }
 
   "A Queen" should "be able to move n squares diagonally in any direction" in {
     diagonalMoves foreach {
-      new Queen(dummyPosition).canMoveBy(_) should be (true)
+      Queen(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
   it should "be able to move n squares along the board's edge" in {
     movesAlongBoardEdge foreach {
-      new Queen(dummyPosition).canMoveBy(_) should be (true)
+      Queen(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
@@ -71,13 +70,13 @@ class PieceSpec extends UnitSpec with CanVerb {
     "along the board's edge" in {
 
     movesExcept(diagonalMoves ++ movesAlongBoardEdge) foreach {
-      new Queen(dummyPosition).canMoveBy(_) should be (false)
+      Queen(dummyPosition).canMoveBy(_) should be (false)
     }
   }
 
   "A Rook" should "be able to move n squares along the board's edge" in {
     movesAlongBoardEdge foreach {
-      new Rook(dummyPosition).canMoveBy(_) should be (true)
+      Rook(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
@@ -85,19 +84,19 @@ class PieceSpec extends UnitSpec with CanVerb {
     "board's edge" in {
 
     movesExcept(movesAlongBoardEdge) foreach {
-      new Rook(dummyPosition).canMoveBy(_) should be (false)
+      Rook(dummyPosition).canMoveBy(_) should be (false)
     }
   }
 
   "A Bishop" should "be able to move n squares diagonally in any direction" in {
     diagonalMoves foreach {
-      new Bishop(dummyPosition).canMoveBy(_) should be (true)
+      Bishop(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move non-diagonally" in {
     movesExcept(diagonalMoves) foreach {
-      new Bishop(dummyPosition).canMoveBy(_) should be (false)
+      Bishop(dummyPosition).canMoveBy(_) should be (false)
     }
   }
 
@@ -110,7 +109,7 @@ class PieceSpec extends UnitSpec with CanVerb {
     "along the other" in {
 
     knightMoves foreach {
-      new Knight(dummyPosition).canMoveBy(_) should be (true)
+      Knight(dummyPosition).canMoveBy(_) should be (true)
     }
   }
 
@@ -118,7 +117,7 @@ class PieceSpec extends UnitSpec with CanVerb {
     "along one edge and one along the other" in {
 
     movesExcept(knightMoves) foreach {
-      new Knight(dummyPosition).canMoveBy(_) should be (false)
+      Knight(dummyPosition).canMoveBy(_) should be (false)
     }
   }
 
@@ -126,9 +125,9 @@ class PieceSpec extends UnitSpec with CanVerb {
     "position's difference with the piece's position" in {
 
     val pieces = List(
-      new King(dummyPosition), new Queen(dummyPosition),
-      new Rook(dummyPosition), new Bishop(dummyPosition),
-      new Knight(dummyPosition))
+      King(dummyPosition), Queen(dummyPosition),
+      Rook(dummyPosition), Bishop(dummyPosition),
+      Knight(dummyPosition))
 
     pieces foreach (piece => {
       standardChessboardMoves foreach (move => {
