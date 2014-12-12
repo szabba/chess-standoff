@@ -23,7 +23,6 @@ sealed class Piece(kind: PieceKind, val position: Position) extends CanMoverBy {
    */
   def canMoveTo(position: Position): Boolean =
     canMoveBy(position - this.position)
-
 }
 
 /**

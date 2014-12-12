@@ -13,16 +13,25 @@ class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List(
 
   val pieces = piecesGiven
 
-  val safePositions = {
-    val allPositions =
-      0 until rows flatMap (row =>
-        0 until columns map (column =>
-          Position(row, column)))
+  private val allPositions =
+    0 until rows flatMap (row =>
+      0 until columns map (column =>
+        Position(row, column)))
 
+  val safePositions =
     allPositions filter (position =>
       pieces.forall(
         ! _.canMoveTo(position)))
-  }
+
+  /**
+   * Returns an iterable that contains all positions at which a piece of the
+   * given kind can be placed without danger to it and those already on board.
+   *
+   * @param kind a kind of piece
+   * @return all the positions at which the piece of this kind can be placed
+   *         safely
+   */
+  def safePlacesFor(kind: PieceKind): Seq[Position] = allPositions
 }
 
 /**

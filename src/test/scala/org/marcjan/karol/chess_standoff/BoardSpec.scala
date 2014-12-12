@@ -84,4 +84,14 @@ class BoardSpec extends UnitSpec {
       if (queen.canMoveTo(position))
         board.safePositions.contains(position) should be (false))
   }
+
+  it should "know that a piece can be safely put anywhere on it when " ++
+    "it's empty" in {
+
+    val board = Board(1, 5)
+
+     positionsOn(board) forall (
+       board.safePlacesFor(King) contains _
+      ) should be (true)
+  }
 }
