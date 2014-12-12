@@ -1,7 +1,5 @@
 package org.marcjan.karol.chess_standoff
 
-import scala.collection.LinearSeq
-
 /**
  * A chessboard with possibly non-standard size.
  *
@@ -9,9 +7,9 @@ import scala.collection.LinearSeq
  * @param columns number of columns the board should have
  * @param piecesGiven a sequence of chess pieces you wish to place on the board
  */
-class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List()) {
+class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
 
-  val pieces = piecesGiven
+  val pieces: Seq[Piece] = piecesGiven
 
   private val allPositions =
     0 until rows flatMap (row =>
@@ -35,6 +33,10 @@ class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List(
     safePositions filterNot (candidatePosition =>
       pieces exists (piece =>
         kind(candidatePosition).canMoveTo(piece.position)))
+
+  def placeWithoutConflict(kind: PieceKind): Iterable[Board] =
+    allPositions map (position =>
+      Board(rows, columns, pieces :+ kind(position)))
 }
 
 /**
@@ -50,6 +52,6 @@ object Board {
    * @param pieces a sequence of chess pieces you wish to place on the board
    * @return a board
    */
-  def apply(rows: Int, columns: Int, pieces: LinearSeq[Piece]=List()): Board =
+  def apply(rows: Int, columns: Int, pieces: Seq[Piece]=List()): Board =
     new Board(rows, columns, pieces)
 }

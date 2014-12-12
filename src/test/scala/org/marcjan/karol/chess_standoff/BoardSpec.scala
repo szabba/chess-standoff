@@ -102,4 +102,15 @@ class BoardSpec extends UnitSpec {
       Bishop(safePlace).canMoveTo(rook.position)
       ).isEmpty should be (true)
   }
+
+  it should "place new piece anywhere if it's empty" in {
+    val board = Board(3, 4)
+
+    val newBoards = board.placeWithoutConflict(Queen)
+
+    positionsOn(board) forall (position =>
+      newBoards exists {
+        _.pieces exists { _.position == position }
+      }) should be (true)
+  }
 }
