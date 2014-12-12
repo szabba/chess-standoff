@@ -22,4 +22,13 @@ class BoardSpec extends UnitSpec {
 
     board.columns should be (columns)
   }
+
+  it should "contain no pieces unless some are given" in {
+    val rows = 7
+    val columns = 6
+
+    val board = new Board(rows, columns)
+
+    board.pieces.isEmpty should be (true)
+  }
 }
