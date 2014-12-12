@@ -95,8 +95,8 @@ class BoardSpec extends UnitSpec {
       ) should be (true)
   }
 
-  it should "know that a new piece can only be safe where an old one " ++
-    "cannot move" in {
+  it should "know that a new piece can only be placed safeky where an old " ++
+    "one cannot move" in {
 
     val rook = Rook(Position(2, 2))
     val board = Board(3, 3, List(rook))
@@ -114,5 +114,16 @@ class BoardSpec extends UnitSpec {
 
     board.safePlacesFor(canMoveNowhere) forall (! rook.canMoveTo(_)
       ) should be (true)
+  }
+
+  it should "know that a new piece can only be placed safely in a place " ++
+    "from which it cannot reach an old one" in {
+
+    val rook = Rook(Position(2, 2))
+    val board = Board(5, 5, List(rook))
+
+    board.safePlacesFor(Bishop).filter(safePlace =>
+      Bishop(safePlace).canMoveTo(rook.position)
+      ).isEmpty should be (true)
   }
 }

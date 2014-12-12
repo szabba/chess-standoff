@@ -32,7 +32,9 @@ class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List(
    *         safely
    */
   def safePlacesFor(kind: PieceKind): Seq[Position] =
-    safePositions
+    safePositions filterNot (candidatePosition =>
+      pieces exists (piece =>
+        kind(candidatePosition).canMoveTo(piece.position)))
 }
 
 /**
