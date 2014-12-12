@@ -41,4 +41,18 @@ class BoardSpec extends UnitSpec {
 
     board.pieces.contains(rook) should be (true)
   }
+
+  it should "contain each piece it's given" in {
+    val rows = 7
+    val cols = 6
+
+    val pieces = List(
+      new King(Position(0, 0)), new Queen(Position(2, 3)), new Rook(Position(6, 5)))
+
+    val board = new Board(rows, cols, pieces)
+
+    pieces foreach {
+      board.pieces.contains(_) should be (true)
+    }
+  }
 }
