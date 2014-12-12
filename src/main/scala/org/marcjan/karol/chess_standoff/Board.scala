@@ -10,7 +10,14 @@ import scala.collection.LinearSeq
  * @param piecesGiven a sequence of chess pieces you wish to place on the board
  */
 class Board(val rows: Int, val columns: Int, piecesGiven: LinearSeq[Piece]=List()) {
+
   val pieces = piecesGiven
+
+  val safePositions = {
+    0 until rows flatMap (row =>
+      0 until columns map (column =>
+        Position(row, column)))
+  }
 }
 
 /**

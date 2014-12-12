@@ -55,4 +55,20 @@ class BoardSpec extends UnitSpec {
       board.pieces.contains(_) should be (true)
     }
   }
+
+  def positionsOn(board: Board) =
+    0 until board.rows flatMap (row =>
+        0 until board.columns map (column =>
+          Position(row, column)))
+
+  it should "have all positions safe when it contains no pieces" in {
+    val rows = 7
+    val cols = 6
+
+    val board = Board(rows, cols)
+
+    positionsOn(board) foreach {
+      board.safePositions.contains(_)
+    }
+  }
 }
