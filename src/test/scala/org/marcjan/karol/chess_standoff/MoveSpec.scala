@@ -1,7 +1,5 @@
 package org.marcjan.karol.chess_standoff
 
-import org.scalatest.{Matchers, FlatSpec}
-
 /**
  * Spec for chessboard moves.
  */
