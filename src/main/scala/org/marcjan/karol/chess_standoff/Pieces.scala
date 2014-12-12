@@ -3,26 +3,34 @@ package org.marcjan.karol.chess_standoff
 /**
  * A chess piece.
  */
-sealed abstract class Piece(val position: Position) extends CanMoverBy {
+sealed class Piece(template: CanMoverBy, val position: Position) extends CanMoverBy {
 
   /**
-   * Returns true if the Piece could be moved to the specified position.
+   * Returns true if the object can move by the given displacement and false
+   * otherwise. The result for a zero displacement is left unspecified.
+   *
+   * @param move the displacement as a tuple of (xDelta, yDelta)
+   * @return can the object be moved by the given displacement?
+   */
+  override def canMoveBy(move: Move): Boolean =
+    template.canMoveBy(move)
+
+  /**
+    * Returns true if the Piece could be moved to the specified position.
    *
    * @param position position to check with
    * @return could the piece be moved to the specified position?
    */
   def canMoveTo(position: Position): Boolean =
     canMoveBy(position - this.position)
+
 }
 
 /**
  * A King piece. It can move in any of the eight directions but only by one
  * square.
  */
-class King(position: Position) extends Piece(position) {
-  def canMoveBy(move: Move): Boolean =
-    King.canMoveBy(move)
-}
+class King(position: Position) extends Piece(King, position)
 
 object King extends CanMoverBy {
   def canMoveBy(move: Move): Boolean =
@@ -33,10 +41,7 @@ object King extends CanMoverBy {
  * A Queen piece. It can move along a straight line in any of the eight
  * directions by any number of squares.
  */
-class Queen(position: Position) extends Piece(position) {
-  def canMoveBy(move: Move): Boolean =
-    Queen.canMoveBy(move)
-}
+class Queen(position: Position) extends Piece(Queen, position)
 
 object Queen extends CanMoverBy {
   def canMoveBy(move: Move): Boolean =
@@ -47,10 +52,7 @@ object Queen extends CanMoverBy {
  * A Rook piece. It can move along a straight line in the four non-diagonal
  * directions by any number of squares.
  */
-class Rook(position: Position) extends Piece(position) {
-  def canMoveBy(move: Move): Boolean =
-    Rook.canMoveBy(move)
-}
+class Rook(position: Position) extends Piece(Rook, position)
 
 object Rook extends CanMoverBy {
   def canMoveBy(move: Move): Boolean =
@@ -61,10 +63,7 @@ object Rook extends CanMoverBy {
  * A Bishop piece. It can move along a straight line in the four diagonal
  * directions by any number of squares.
  */
-class Bishop(position: Position) extends Piece(position) {
-  def canMoveBy(move: Move): Boolean =
-    Bishop.canMoveBy(move)
-}
+class Bishop(position: Position) extends Piece(Bishop, position)
 
 object Bishop extends CanMoverBy {
   def canMoveBy(move: Move): Boolean =
@@ -76,10 +75,7 @@ object Bishop extends CanMoverBy {
  * directions and then by two squares along one edge of the board and one along
  * the other, tracing the shape of the letter 'L'.
  */
-class Knight(position: Position) extends Piece(position) {
-  override def canMoveBy(move: Move): Boolean =
-    Knight.canMoveBy(move)
-}
+class Knight(position: Position) extends Piece(Knight, position)
 
 object Knight extends CanMoverBy {
   override def canMoveBy(move: Move): Boolean = {
