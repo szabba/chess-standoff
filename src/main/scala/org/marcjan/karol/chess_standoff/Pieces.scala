@@ -38,6 +38,20 @@ trait PieceKind extends CanMoverBy {
    */
   def apply(position: Position) =
     new Piece(this, position)
+
+  /**
+   * Returns the name of the piece kind in English algebraic notation.
+   *
+   * @return name of the piece kind in algebraic notation
+   */
+  override def toString: String =
+    this match {
+      case King => "K"
+      case Queen => "Q"
+      case Rook => "R"
+      case Bishop => "B"
+      case Knight => "N"
+    }
 }
 
 /**
