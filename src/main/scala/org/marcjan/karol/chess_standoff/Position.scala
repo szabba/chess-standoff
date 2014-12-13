@@ -23,6 +23,9 @@ class Position(val row: Int, val column: Int) {
       case _ => false
     }
 
+  override def toString: String =
+    "Position(" ++ row.toString ++ ", " ++ column.toString ++ ")"
+
   /**
    * Returns a move <em>m</em> such that <em>this + m == somewhere</em>.
    *
