@@ -190,4 +190,11 @@ class BoardSpec extends UnitSpec {
     boards.isEmpty should be (false)
     boards.forall(_.pieces.length == kinds.length) should be (true)
   }
+
+  it should "not contain duplicate boards" in {
+
+    val boards = Board.findSafePlacement(3, 4, List(King, King, Rook))
+
+    boards.groupBy(_.toString).forall(_._2.length == 1) should be (true)
+  }
 }

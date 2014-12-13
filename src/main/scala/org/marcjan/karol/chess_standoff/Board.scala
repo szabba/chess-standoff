@@ -74,6 +74,7 @@ object Board {
         boards.flatMap(_.placeWithoutConflict(pieces.head)),
         pieces.tail)
 
-    loop(List(Board(rows, columns)), pieces)
+    loop(List(Board(rows, columns)), pieces).groupBy(
+      _.toString).toSeq.map(_._2.head)
   }
 }
