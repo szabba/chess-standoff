@@ -22,7 +22,10 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
   private val safePositions =
     allPositions filter (position =>
       pieces.forall(
-        ! _.canMoveTo(position)))
+        ! _.canMoveTo(position))
+    ) filterNot (position =>
+      pieces map(_.position) exists(_ == position)
+    )
 
   /**
    * Returns an iterable that contains all positions at which a piece of the

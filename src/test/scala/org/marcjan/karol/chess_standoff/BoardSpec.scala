@@ -197,4 +197,14 @@ class BoardSpec extends UnitSpec {
 
     boards.groupBy(_.toString).forall(_._2.length == 1) should be (true)
   }
+
+  it should "not place two piece's in one position on any of the boards" in {
+
+    val boards = Board.findSafePlacement(4, 4,
+      List(Rook, Rook, Knight, Knight, Knight, Knight))
+
+    boards.forall(
+      _.pieces.groupBy(_.position).forall(_._2.length == 1)
+    ) should be (true)
+  }
 }
