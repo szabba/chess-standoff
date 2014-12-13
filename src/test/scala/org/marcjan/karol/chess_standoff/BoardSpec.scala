@@ -152,4 +152,15 @@ class BoardSpec extends UnitSpec {
 
     boards.length should be (1)
   }
+
+  it should "contain as many boards as there are positions on each board " ++
+    "when given a single piece kind" in {
+
+    val rows = 3
+    val columns = 4
+
+    val boards = Board.findSafePlacement(3, 4, List(King))
+
+    boards.length should be (rows * columns)
+  }
 }

@@ -66,5 +66,11 @@ object Board {
     new Board(rows, columns, pieces)
 
   def findSafePlacement(rows: Int, columns: Int, pieces: Seq[PieceKind]=List()):
-    Seq[Board] = List(Board(rows, columns))
+    Seq[Board] = {
+
+    if (pieces.isEmpty)
+      List(Board(rows, columns))
+    else
+      1 to (rows * columns) map (_ => Board(rows, columns))
+  }
 }
