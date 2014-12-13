@@ -1,5 +1,7 @@
 package org.marcjan.karol.chess_standoff
 
+import scala.collection.mutable.HashMap
+
 /**
  * A displacement between two squares on a chessboard.
  *
@@ -53,6 +55,9 @@ class Move(val xDelta: Int, val yDelta: Int) {
  */
 object Move {
 
+  private val cache: HashMap[Int, HashMap[Int, Move]] =
+    new HashMap[Int, HashMap[Int, Move]]()
+
   /**
    * Shortcut for creating Moves without the new keyword.
    *
@@ -61,5 +66,8 @@ object Move {
    * @return a move
    */
   def apply(xDelta: Int, yDelta: Int): Move =
-    new Move(xDelta, yDelta)
+    cache.getOrElseUpdate(
+      xDelta, new HashMap[Int, Move]()
+    ).getOrElseUpdate(
+        yDelta, new Move(xDelta, yDelta))
 }
