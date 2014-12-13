@@ -1,5 +1,7 @@
 package org.marcjan.karol.chess_standoff
 
+import scala.collection.mutable.HashMap
+
 /**
  * A chess piece.
  */
@@ -28,6 +30,16 @@ sealed class Piece(val kind: PieceKind, val position: Position) extends CanMover
     canMoveBy(position - this.position)
 }
 
+private object PieceCache {
+  private val cache = new HashMap[PieceKind, HashMap[Position, Piece]]()
+
+  def get(kind: PieceKind, position: Position): Piece =
+    cache.getOrElseUpdate(
+      kind, new HashMap[Position, Piece]()
+    ).getOrElseUpdate(
+      position, new Piece(kind, position))
+}
+
 /**
  * A kind of chess piece.
  */
@@ -40,7 +52,7 @@ trait PieceKind extends CanMoverBy {
    * @return a piece
    */
   def apply(position: Position) =
-    new Piece(this, position)
+    PieceCache.get(this, position)
 
   /**
    * Returns the name of the piece kind in English algebraic notation.
