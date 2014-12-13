@@ -44,7 +44,7 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
    * @param kind kind of the piece to add
    * @return possibly empty iterable of boards
    */
-  def placeWithoutConflict(kind: PieceKind): Iterable[Board] =
+  def placeWithoutConflict(kind: PieceKind): Seq[Board] =
     safePlacesFor(kind) map (position =>
       Board(rows, columns, pieces :+ kind(position)))
 }
@@ -71,6 +71,6 @@ object Board {
     if (pieces.isEmpty)
       List(Board(rows, columns))
     else
-      1 to (rows * columns) map (_ => Board(rows, columns))
+      Board(rows, columns).placeWithoutConflict(Rook)
   }
 }
