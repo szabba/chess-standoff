@@ -34,6 +34,13 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
       pieces exists (piece =>
         kind(candidatePosition).canMoveTo(piece.position)))
 
+  /**
+   * Creates all board that result from adding a piece of the given kind
+   * somewhere safe.
+   *
+   * @param kind kind of the piece to add
+   * @return possibly empty iterable of boards
+   */
   def placeWithoutConflict(kind: PieceKind): Iterable[Board] =
     safePlacesFor(kind) map (position =>
       Board(rows, columns, pieces :+ kind(position)))
