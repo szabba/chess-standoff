@@ -5,6 +5,9 @@ package org.marcjan.karol.chess_standoff
  */
 sealed class Piece(val kind: PieceKind, val position: Position) extends CanMoverBy {
 
+  override def toString: String =
+    kind.toString ++ " at " ++ position.toString
+
   /**
    * Returns true if the object can move by the given displacement and false
    * otherwise. The result for a zero displacement is left unspecified.
