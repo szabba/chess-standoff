@@ -1,5 +1,7 @@
 package org.marcjan.karol.chess_standoff
 
+import scala.collection.mutable.HashMap
+
 /**
  * A position of a square on the chessboard.
  *
@@ -52,6 +54,9 @@ class Position(val row: Int, val column: Int) {
  */
 object Position {
 
+  private val cache: HashMap[Int, HashMap[Int, Position]] =
+    new HashMap[Int, HashMap[Int, Position]]()
+
   /**
    * Shortcut for creating Positions without the new keyword.
    *
@@ -60,5 +65,8 @@ object Position {
    * @return a position
    */
   def apply(row: Int, column: Int): Position =
-    new Position(row, column)
+    cache.getOrElseUpdate(
+      row, new HashMap[Int, Position]()
+    ).getOrElseUpdate(
+      column, new Position(row, column))
 }
