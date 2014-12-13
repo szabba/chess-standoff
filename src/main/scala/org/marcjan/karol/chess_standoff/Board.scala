@@ -68,9 +68,12 @@ object Board {
   def findSafePlacement(rows: Int, columns: Int, pieces: Seq[PieceKind]=List()):
     Seq[Board] = {
 
-    if (pieces.isEmpty)
-      List(Board(rows, columns))
-    else
-      Board(rows, columns).placeWithoutConflict(pieces.head)
+    def loop(boards: Seq[Board], pieces: Seq[PieceKind]): Seq[Board] =
+      if (pieces.isEmpty) boards
+      else loop(
+        boards.flatMap(_.placeWithoutConflict(pieces.head)),
+        pieces.tail)
+
+    loop(List(Board(rows, columns)), pieces)
   }
 }

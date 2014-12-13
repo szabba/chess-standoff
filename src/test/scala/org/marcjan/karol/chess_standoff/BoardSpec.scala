@@ -180,4 +180,14 @@ class BoardSpec extends UnitSpec {
 
     boards.forall(_.pieces forall { _.kind == kind }) should be (true)
   }
+
+  it should "contain as many pieces in every board as many kinds were given" in {
+
+    val kinds = List(King, King, Rook)
+
+    val boards = Board.findSafePlacement(3, 4, kinds)
+
+    boards.isEmpty should be (false)
+    boards.forall(_.pieces.length == kinds.length) should be (true)
+  }
 }
