@@ -9,6 +9,9 @@ package org.marcjan.karol.chess_standoff
  */
 class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
 
+  override def toString: String =
+    pieces.map(_.toString).sorted.mkString(", ")
+
   val pieces: Seq[Piece] = piecesGiven
 
   private val allPositions =
