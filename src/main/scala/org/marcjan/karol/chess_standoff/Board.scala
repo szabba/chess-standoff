@@ -29,7 +29,7 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
    * @return all the positions at which the piece of this kind can be placed
    *         safely
    */
-  def safePlacesFor(kind: PieceKind): Seq[Position] =
+  private[chess_standoff] def safePlacesFor(kind: PieceKind): Seq[Position] =
     safePositions filterNot (candidatePosition =>
       pieces exists (piece =>
         kind(candidatePosition).canMoveTo(piece.position)))
