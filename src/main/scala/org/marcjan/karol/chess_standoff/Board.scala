@@ -64,4 +64,7 @@ object Board {
    */
   def apply(rows: Int, columns: Int, pieces: Seq[Piece]=List()): Board =
     new Board(rows, columns, pieces)
+
+  def findSafePlacement(rows: Int, columns: Int, pieces: Seq[PieceKind]=List()):
+    Seq[Board] = List(Board(rows, columns))
 }

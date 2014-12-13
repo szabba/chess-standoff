@@ -137,4 +137,19 @@ class BoardSpec extends UnitSpec {
 
     board.placeWithoutConflict(Queen).isEmpty should be (true)
   }
+
+  "findSafePlacement" should "contain only empty boards when given no " ++
+    "pieces" in {
+
+    val boards = Board.findSafePlacement(3, 4)
+
+    boards.forall(_.pieces.isEmpty) should be (true)
+  }
+
+  it should "contain only one board when given no pieces" in {
+
+    val boards = Board.findSafePlacement(3, 4)
+
+    boards.length should be (1)
+  }
 }
