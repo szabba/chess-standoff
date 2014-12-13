@@ -71,6 +71,6 @@ object Board {
     if (pieces.isEmpty)
       List(Board(rows, columns))
     else
-      Board(rows, columns).placeWithoutConflict(Rook)
+      Board(rows, columns).placeWithoutConflict(pieces.head)
   }
 }

@@ -170,4 +170,14 @@ class BoardSpec extends UnitSpec {
 
     boards.forall(_.pieces.length == 1) should be (true)
   }
+
+  it should "only contain board's with a piece of the kind specified when " ++
+    "one is given" in {
+
+    val kind = King
+
+    val boards = Board.findSafePlacement(3, 4, List(kind))
+
+    boards.forall(_.pieces forall { _.kind == kind }) should be (true)
+  }
 }
