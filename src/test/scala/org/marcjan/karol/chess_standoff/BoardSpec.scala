@@ -138,8 +138,7 @@ class BoardSpec extends UnitSpec {
     board.placeWithoutConflict(Queen).isEmpty should be (true)
   }
 
-  "safeAt" should "be true for all positions and piece kinds " ++
-    "on an empty board" in {
+  "safeAt" should "hold for all positions and piece kinds on an empty board" in {
 
     val board = Board(4, 3)
 
@@ -149,7 +148,7 @@ class BoardSpec extends UnitSpec {
       ) should be (true)
   }
 
-  it should "not be true for positions where an existing piece could move" in {
+  it should "not hold for positions where an existing piece could move" in {
 
     val knight = Knight(Position(2, 2))
     val board = Board(5, 5, List(knight))
@@ -162,6 +161,17 @@ class BoardSpec extends UnitSpec {
     board.safeAt(Position(3, 4), canMoveNowhere) should be (false)
     board.safeAt(Position(4, 1), canMoveNowhere) should be (false)
     board.safeAt(Position(4, 3), canMoveNowhere) should be (false)
+  }
+
+  it should "not hold for positions where a piece already resides" in {
+    val knight = Knight(Position(2, 2))
+    val king = King(Position(0, 0))
+    val board = Board(5, 5, List(king, knight))
+
+    List(King, Queen, Rook, Bishop, Knight) exists (candidateKind =>
+      board.pieces exists (existingPiece =>
+        board.safeAt(existingPiece.position, candidateKind)
+        )) should be (false)
   }
 
   "findSafePlacement" should "contain only empty boards when given no " ++
