@@ -58,7 +58,18 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
         kind(candidatePosition).canMoveTo(piece.position)))
 
   /**
-   * Creates all board that result from adding a piece of the given kind
+   * Checks whether a piece of the given kind can be placed at the given
+   * position on the board.
+   *
+   * @param position position to check at
+   * @param kind kind of chess piecce to check for
+   * @return can a piece of the given kind be safely placed at the given
+   *         position on this board?
+   */
+  def safeAt(position: Position, kind: PieceKind): Boolean = true
+
+  /**
+   * Creates all boards that result from adding a piece of the given kind
    * somewhere safe.
    *
    * @param kind kind of the piece to add

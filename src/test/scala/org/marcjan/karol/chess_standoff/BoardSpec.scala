@@ -138,6 +138,17 @@ class BoardSpec extends UnitSpec {
     board.placeWithoutConflict(Queen).isEmpty should be (true)
   }
 
+  "safeAt" should "be true for all positions and piece kinds " ++
+    "on an empty board" in {
+
+    val board = Board(4, 3)
+
+    positionsOn(board) forall (position =>
+      List(King, Queen, Rook, Bishop, Knight) forall (pieceKind =>
+        board.safeAt(position, pieceKind))
+      ) should be (true)
+  }
+
   "findSafePlacement" should "contain only empty boards when given no " ++
     "pieces" in {
 
