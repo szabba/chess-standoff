@@ -66,7 +66,8 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
    * @return can a piece of the given kind be safely placed at the given
    *         position on this board?
    */
-  def safeAt(position: Position, kind: PieceKind): Boolean = true
+  def safeAt(position: Position, kind: PieceKind): Boolean =
+    pieces forall { _.canMoveTo(position).unary_! }
 
   /**
    * Creates all boards that result from adding a piece of the given kind

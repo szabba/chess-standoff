@@ -149,6 +149,21 @@ class BoardSpec extends UnitSpec {
       ) should be (true)
   }
 
+  it should "not be true for positions where an existing piece could move" in {
+
+    val knight = Knight(Position(2, 2))
+    val board = Board(5, 5, List(knight))
+
+    board.safeAt(Position(0, 1), canMoveNowhere) should be (false)
+    board.safeAt(Position(0, 3), canMoveNowhere) should be (false)
+    board.safeAt(Position(1, 0), canMoveNowhere) should be (false)
+    board.safeAt(Position(1, 4), canMoveNowhere) should be (false)
+    board.safeAt(Position(3, 0), canMoveNowhere) should be (false)
+    board.safeAt(Position(3, 4), canMoveNowhere) should be (false)
+    board.safeAt(Position(4, 1), canMoveNowhere) should be (false)
+    board.safeAt(Position(4, 3), canMoveNowhere) should be (false)
+  }
+
   "findSafePlacement" should "contain only empty boards when given no " ++
     "pieces" in {
 
