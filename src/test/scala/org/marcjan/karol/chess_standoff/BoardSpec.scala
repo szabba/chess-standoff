@@ -174,6 +174,25 @@ class BoardSpec extends UnitSpec {
         )) should be (false)
   }
 
+  it should "not hold for positions from which the new piece could move to " ++
+    "a position held by an existing one" in {
+
+    val bishop = Bishop(Position(2, 2))
+    val board = Board(5, 5, List(bishop))
+
+    board.safeAt(Position(0, 2), Rook) should be (false)
+    board.safeAt(Position(1, 2), Rook) should be (false)
+
+    board.safeAt(Position(3, 2), Rook) should be (false)
+    board.safeAt(Position(4, 2), Rook) should be (false)
+
+    board.safeAt(Position(2, 0), Rook) should be (false)
+    board.safeAt(Position(2, 1), Rook) should be (false)
+
+    board.safeAt(Position(2, 3), Rook) should be (false)
+    board.safeAt(Position(2, 4), Rook) should be (false)
+  }
+
   "findSafePlacement" should "contain only empty boards when given no " ++
     "pieces" in {
 
