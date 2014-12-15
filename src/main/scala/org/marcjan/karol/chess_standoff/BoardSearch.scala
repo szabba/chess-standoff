@@ -42,4 +42,57 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
           decrKind(kindCounts, kind)))
     })
   }
+
+  private def needsWorkAndDone(guess: Guess): (List[Guess], List[Board]) = {
+
+    val (board, pos, kindCounts) = guess
+    val nextPos = incrPos(pos)
+
+    val expanded = makeGuesses(guess)
+
+    val done = expanded.map(
+      _._1
+    ).filter(
+        _.pieces.length == pieces.length
+      ).toList
+
+    val mightNeedWork = expanded.filterNot(
+      _._1.pieces.length == pieces.length
+    ).map {
+      case (board, kindCounts) => (board, nextPos, kindCounts)
+    }
+
+    val needsWork =
+
+      if (nextPos != Position(rows, 0))
+
+        mightNeedWork.toList ++
+          List((board, nextPos, kindCounts))
+
+      else Nil
+
+    (needsWork, done)
+  }
+
+  private var found = 0
+
+  private def loop(guesses: List[Guess], results: List[Board]=Nil): List[Board] = {
+
+    guesses match {
+      case Nil => results
+      case guess :: rest =>
+
+        val (needWork, done) = needsWorkAndDone(guess)
+
+        loop(needWork ++ rest, done ++ results)
+    }
+  }
+
+  def findAll(): List[Board] = {
+    loop(List((
+      Board(rows, columns),
+      Position(0, 0),
+      pieces.groupBy(x => x).mapValues(_.length)
+      )))
+  }
 }
