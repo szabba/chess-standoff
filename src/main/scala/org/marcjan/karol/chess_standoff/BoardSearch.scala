@@ -1,5 +1,7 @@
 package org.marcjan.karol.chess_standoff
 
+import scala.annotation.tailrec
+
 
 private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) {
 
@@ -76,6 +78,7 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
 
   private var found = 0
 
+  @tailrec
   private def loop(guesses: List[Guess], results: List[Board]=Nil): List[Board] = {
 
     guesses match {
