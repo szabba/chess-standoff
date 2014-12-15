@@ -9,6 +9,37 @@ package org.marcjan.karol.chess_standoff
  */
 class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
 
+  /**
+   * Returns true when the board is valid, that is:
+   * <ul>
+   *   <li>all the pieces are actually on the board,</li>
+   *   <li>no two pieces hold the same position,</li>
+   *   <li>and no piece can take another.</li>
+   * </ul>
+   *
+   * @return is this board valid?
+   */
+  def isValid(): Boolean = {
+    val allInRange =
+      pieces.forall(p =>
+        0 <= p.position.row
+        && p.position.row < rows
+        && 0 <= p.position.column
+        && p.position.column < columns)
+
+    val allUnique =
+      pieces.forall(p =>
+        pieces.filter(_.position == p.position).length == 1)
+
+    val noneCanTakeAnother =
+      pieces.forall(p =>
+        pieces.exists(r =>
+          r.position != p.position && p.canMoveTo(r.position)
+        ).unary_!)
+
+    allInRange && allInRange && noneCanTakeAnother
+  }
+
   override def toString: String = {
     var builder = new StringBuilder()
     for (i <- 0 until rows; j <- 0 until columns) {
