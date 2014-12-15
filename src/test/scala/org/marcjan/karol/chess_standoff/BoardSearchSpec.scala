@@ -32,4 +32,33 @@ class BoardSearchSpec extends UnitSpec {
 
     search.incrPos(Position(0, columns - 1)).column == 0 should be (true)
   }
+
+  it should "decrement the number of a present PieceKind in a KindCounts" in {
+
+    val rows = 4
+    val columns = 7
+
+    val search = new BoardSearch(rows, columns)
+
+    val kinds = Map((King, 4), (Queen, 2))
+
+    val decredKinds = search.decrKind(kinds, King)
+
+    decredKinds.get(King).get should be (3)
+  }
+
+  it should "not insert a new PieceKind when trying to decrement it in " ++
+    "a KindCounts" in {
+
+    val rows = 4
+    val columns = 7
+
+    val search = new BoardSearch(rows, columns)
+
+    val kinds = Map((King, 4), (Queen, 2))
+
+    val decredKinds = search.decrKind(kinds, Rook)
+
+    decredKinds.get(Rook) should be (None)
+  }
 }
