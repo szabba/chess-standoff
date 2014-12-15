@@ -22,4 +22,24 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
       case n => kindCounts - kind + ((kind, n - 1))
     }
   }
+
+  private[chess_standoff] def makeGuesses(guess: Guess): Map[Board, KindCounts] = {
+    val (board, pos, kindCounts) = guess
+
+    kindCounts.flatMap(entry => {
+      val (kind, count) = entry
+
+      if (count == 0 || board.safeAt(pos, kind).unary_!
+        || pos.row < 0 || pos.row >= rows
+        || pos.column < 0 || pos.column >= columns)
+
+        Nil
+
+      else List(
+        (
+          Board(rows, columns,
+            kind(pos) +: board.pieces),
+          decrKind(kindCounts, kind)))
+    })
+  }
 }
