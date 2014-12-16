@@ -1,7 +1,6 @@
 package org.marcjan.karol.chess_standoff
 
-import scala.annotation.tailrec
-
+import scala.collection.immutable.StreamIterator
 
 private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) {
 
@@ -76,27 +75,28 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
     (needsWork, done)
   }
 
-  @tailrec
-  private def loop(guesses: List[Guess], results: List[Board]=Nil): List[Board] = {
+  private def boardStream(guesses: Stream[Guess]): Stream[Board] = {
 
-    guesses match {
-      case Nil => results
-      case guess :: rest =>
-
+    guesses flatMap {
+      case guess =>
         val (needWork, done) = needsWorkAndDone(guess)
 
-        loop(needWork ++ rest, done ++ results)
+        done.toStream ++ boardStream(needWork.toStream)
     }
   }
 
-  def findAll(): List[Board] =
+  def findAll(): Iterator[Board] =
 
     if (pieces.isEmpty)
-      List(Board(rows, columns))
+      Iterator(Board(rows, columns))
 
-    else loop(List((
+    else {
 
-      Board(rows, columns),
-      Position(0, 0),
-      pieces.groupBy(x => x).mapValues(_.length) )))
+      val emptyBoard = Board(0, 0)
+      val startPosition = Position(0, 0)
+      val kindCounts = pieces.groupBy(x => x).mapValues(_.length)
+
+      new StreamIterator(boardStream(
+        (emptyBoard, startPosition, kindCounts) #:: Stream.empty))
+    }
 }

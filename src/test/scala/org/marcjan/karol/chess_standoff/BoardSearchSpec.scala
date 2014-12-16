@@ -209,7 +209,7 @@ class BoardSearchSpec extends UnitSpec {
 
     val boards = new BoardSearch(3, 4, List(King, King, Rook)).findAll
 
-    boards.groupBy(_.toString).forall(_._2.length == 1) should be (true)
+    boards.toSeq.groupBy(_.toString).forall(_._2.length == 1) should be (true)
   }
 
   it should "not place two piece's in one position on any of the boards" in {

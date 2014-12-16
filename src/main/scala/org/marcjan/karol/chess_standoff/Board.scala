@@ -97,6 +97,6 @@ object Board {
   def findSafePlacement(rows: Int, columns: Int, pieces: Iterable[PieceKind]=List()):
     Iterator[Board] = {
 
-    new BoardSearch(rows, columns, pieces.toList).findAll.iterator
+    new BoardSearch(rows, columns, pieces.toList).findAll
   }
 }
