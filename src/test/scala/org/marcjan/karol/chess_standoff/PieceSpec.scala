@@ -26,6 +26,9 @@ class PieceSpec extends UnitSpec with CanVerb {
 
   val movesAlongBoardEdge = standardChessboardMoves filter { _.isAlongBoardEdge }
 
+  printf("diagonals: %s\n\n", diagonalMoves)
+  printf("edge-alongs: %s\n\n", movesAlongBoardEdge)
+
   val dummyPosition = Position(0, 0)
 
   /**
