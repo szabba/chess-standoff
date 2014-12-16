@@ -76,8 +76,6 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
     (needsWork, done)
   }
 
-  private var found = 0
-
   @tailrec
   private def loop(guesses: List[Guess], results: List[Board]=Nil): List[Board] = {
 

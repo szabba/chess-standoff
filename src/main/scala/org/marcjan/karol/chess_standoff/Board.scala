@@ -62,32 +62,6 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
 
   val pieces: Seq[Piece] = piecesGiven
 
-  private val allPositions =
-    0 until rows flatMap (row =>
-      0 until columns map (column =>
-        Position(row, column)))
-
-  private val safePositions =
-    allPositions filter (position =>
-      pieces.forall(
-        ! _.canMoveTo(position))
-    ) filterNot (position =>
-      pieces map(_.position) exists(_ == position)
-    )
-
-  /**
-   * Returns an iterable that contains all positions at which a piece of the
-   * given kind can be placed without danger to it and those already on board.
-   *
-   * @param kind a kind of piece
-   * @return all the positions at which the piece of this kind can be placed
-   *         safely
-   */
-  private[chess_standoff] def safePlacesFor(kind: PieceKind): Seq[Position] =
-    safePositions filterNot (candidatePosition =>
-      pieces exists (piece =>
-        kind(candidatePosition).canMoveTo(piece.position)))
-
   /**
    * Checks whether a piece of the given kind can be placed at the given
    * position on the board.
@@ -102,17 +76,6 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
       piece.canMoveTo(position).unary_!
         && piece.position != position
         && kind.canMoveBy(piece.position - position).unary_!)
-
-  /**
-   * Creates all boards that result from adding a piece of the given kind
-   * somewhere safe.
-   *
-   * @param kind kind of the piece to add
-   * @return possibly empty iterable of boards
-   */
-  def placeWithoutConflict(kind: PieceKind): Seq[Board] =
-    safePlacesFor(kind) map (position =>
-      Board(rows, columns, pieces :+ kind(position)))
 }
 
 /**

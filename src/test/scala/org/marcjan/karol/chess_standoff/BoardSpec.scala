@@ -61,16 +61,6 @@ class BoardSpec extends UnitSpec {
         0 until board.columns map (column =>
           Position(row, column)))
 
-  it should "know that a piece can be safely put anywhere on it when " ++
-    "it's empty" in {
-
-    val board = Board(1, 5)
-
-     positionsOn(board) forall (
-       board.safePlacesFor(King) contains _
-      ) should be (true)
-  }
-
   var canMoveNowhere: PieceKind = new PieceKind {
     /**
      * Returns true if the object can move by the given displacement and false
@@ -81,63 +71,7 @@ class BoardSpec extends UnitSpec {
      */
     override def canMoveBy(move: Move): Boolean = false
   }
-
-  it should "know that a new piece can only be placed safely where an old " ++
-    "one cannot move" in {
-
-    val rook = Rook(Position(2, 2))
-    val board = Board(3, 3, List(rook))
-
-    board.safePlacesFor(canMoveNowhere) forall (! rook.canMoveTo(_)
-      ) should be (true)
-  }
-
-  it should "know that a new piece can only be placed safely in a place " ++
-    "from which it cannot reach an old one" in {
-
-    val rook = Rook(Position(2, 2))
-    val board = Board(5, 5, List(rook))
-
-    board.safePlacesFor(Bishop).filter(safePlace =>
-      Bishop(safePlace).canMoveTo(rook.position)
-      ).isEmpty should be (true)
-  }
-
-  it should "place new piece anywhere if it's empty" in {
-    val board = Board(3, 4)
-
-    val newBoards = board.placeWithoutConflict(Queen)
-
-    positionsOn(board) forall (position =>
-      newBoards exists {
-        _.pieces exists { _.position == position }
-      }) should be (true)
-  }
-
-  it should "not place a new piece anywhere when no position on it is safe" in {
-
-    val board = Board(
-      5, 5,
-      List(
-        Rook(Position(4, 1)), Rook(Position(3, 4)),
-        Queen(Position(2, 2)),
-        Rook(Position(1, 0)), Rook(Position(0, 3))))
-
-    board.placeWithoutConflict(canMoveNowhere).isEmpty should be (true)
-  }
-
-  it should "not place a new piece anywhere when it would have to endanger" ++
-    "an old one to do so" in {
-
-    val board = Board(3, 3,
-      List(
-        King(Position(0, 0)),
-        King(Position(0, 2)),
-        King(Position(2, 0))))
-
-    board.placeWithoutConflict(Queen).isEmpty should be (true)
-  }
-
+  
   "safeAt" should "hold for all positions and piece kinds on an empty board" in {
 
     val board = Board(4, 3)
