@@ -22,6 +22,12 @@ class Move(val xDelta: Int, val yDelta: Int) {
   def ==(move: Move) =
     xDelta == move.xDelta && yDelta == move.yDelta
 
+  override def equals(any: Any) =
+    any match {
+      case move: Move => this == move
+      case _ => false
+    }
+
   /**
    * Returns true when the move is diagonal. Left unspecified when isZero is
    * true.
