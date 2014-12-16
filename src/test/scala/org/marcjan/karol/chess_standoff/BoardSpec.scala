@@ -71,7 +71,7 @@ class BoardSpec extends UnitSpec {
      */
     override def canMoveBy(move: Move): Boolean = false
   }
-  
+
   "safeAt" should "hold for all positions and piece kinds on an empty board" in {
 
     val board = Board(4, 3)
@@ -184,7 +184,7 @@ class BoardSpec extends UnitSpec {
 
     val boards = Board.findSafePlacement(3, 4, List(King, King, Rook))
 
-    boards.groupBy(_.toString).forall(_._2.length == 1) should be (true)
+    boards.toSeq.groupBy(_.toString).forall(_._2.length == 1) should be (true)
   }
 
   it should "not place two piece's in one position on any of the boards" in {

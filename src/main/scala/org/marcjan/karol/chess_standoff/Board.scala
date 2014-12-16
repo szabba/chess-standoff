@@ -94,9 +94,9 @@ object Board {
   def apply(rows: Int, columns: Int, pieces: Seq[Piece]=List()): Board =
     new Board(rows, columns, pieces)
 
-  def findSafePlacement(rows: Int, columns: Int, pieces: Seq[PieceKind]=List()):
-    Seq[Board] = {
+  def findSafePlacement(rows: Int, columns: Int, pieces: Iterable[PieceKind]=List()):
+    Iterator[Board] = {
 
-    new BoardSearch(rows, columns, pieces.toList).findAll
+    new BoardSearch(rows, columns, pieces.toList).findAll.iterator
   }
 }
