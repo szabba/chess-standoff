@@ -19,87 +19,97 @@ class PieceSpec extends UnitSpec with CanVerb {
   def displacementsWithRanges(ofX: Range, ofY: Range): List[Move] =
     ofX.toList.flatMap(xDelta => ofY.toList.map(yDelta => Move(xDelta, yDelta)))
 
-  val standardChessboardMoves =
-    displacementsWithRanges(-8 to 8, -8 to 8) filter { _.isZero }
+  val consideredMoves =
+    (-8 to 8).flatMap(xDelta =>
 
-  val diagonalMoves = standardChessboardMoves filter { _.isDiagonal }
+        (-8 to 8).map(yDelta =>
 
-  val movesAlongBoardEdge = standardChessboardMoves filter { _.isAlongBoardEdge }
+          Move(xDelta, yDelta))
 
-  printf("diagonals: %s\n\n", diagonalMoves)
-  printf("edge-alongs: %s\n\n", movesAlongBoardEdge)
+    ).filterNot( _.isZero )
 
-  val dummyPosition = Position(0, 0)
 
-  /**
-   * Returns a list of all the moves possible on a standard chessboard except
-   * for the one's in the argument list.
-   * @param movesToExclude list of moves to exclude
-   * @return moves possible on a standard chessboard except for those present in
-   *         the argument
-   */
-  def movesExcept(movesToExclude: List[Move]) =
-    standardChessboardMoves filterNot (move =>
-      movesToExclude exists { _ == move })
+  val diagonalMoves = consideredMoves filter { _.isDiagonal }
+
+  val movesAlongBoardEdge = consideredMoves filter { _.isAlongBoardEdge }
 
   val kingMoves = displacementsWithRanges(-1 to 1, -1 to 1) filter (_.isZero)
 
   "A King" should "be able to move by one square in any direction" in {
 
-    kingMoves foreach {
-      King(dummyPosition).canMoveBy(_) should be (true)
+    List(
+    Move(-1, -1), Move(0, -1), Move(1, -1),
+    Move(-1,  0),              Move(1,  0),
+    Move(-1,  1), Move(0,  1), Move(1,  1)
+    ) foreach {
+      King.canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move beyond one square in any direction" in {
-    movesExcept(kingMoves) foreach {
-      King(dummyPosition).canMoveBy(_) should be (false)
+
+    List(
+    Move(-2, -2), Move(-1, -2), Move(0, -2), Move(1, -2), Move(2, -2),
+    Move(-2, -1),                                         Move(2, -1),
+    Move(-2,  0),                                         Move(2,  0),
+    Move(-2,  1),                                         Move(2,  1),
+    Move(-2,  2), Move(-1,  2), Move(0,  2), Move(1,  2), Move(2,  2)
+    ) foreach {
+      King.canMoveBy(_) should be (false)
     }
   }
 
   "A Queen" should "be able to move n squares diagonally in any direction" in {
     diagonalMoves foreach {
-      Queen(dummyPosition).canMoveBy(_) should be (true)
+      Queen.canMoveBy(_) should be (true)
     }
   }
 
   it should "be able to move n squares along the board's edge" in {
     movesAlongBoardEdge foreach {
-      Queen(dummyPosition).canMoveBy(_) should be (true)
+      Queen.canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move unless the displacement is diagonal or " ++
-    "along the board's edge" in {
+  "along the board's edge" in {
 
-    movesExcept(diagonalMoves ++ movesAlongBoardEdge) foreach {
-      Queen(dummyPosition).canMoveBy(_) should be (false)
+    consideredMoves filterNot {
+      case move => move.isDiagonal || move.isAlongBoardEdge
+    } foreach {
+      Queen.canMoveBy(_) should be (false)
     }
   }
 
   "A Rook" should "be able to move n squares along the board's edge" in {
     movesAlongBoardEdge foreach {
-      Rook(dummyPosition).canMoveBy(_) should be (true)
+      Rook.canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move unless the displacements is along the " ++
-    "board's edge" in {
+  "board's edge" in {
 
-    movesExcept(movesAlongBoardEdge) foreach {
-      Rook(dummyPosition).canMoveBy(_) should be (false)
+    consideredMoves filterNot {
+      _.isAlongBoardEdge
+    } foreach {
+      Rook.canMoveBy(_) should be (false)
     }
   }
 
   "A Bishop" should "be able to move n squares diagonally in any direction" in {
     diagonalMoves foreach {
-      Bishop(dummyPosition).canMoveBy(_) should be (true)
+      Bishop.canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move non-diagonally" in {
-    movesExcept(diagonalMoves) foreach {
-      Bishop(dummyPosition).canMoveBy(_) should be (false)
+
+    consideredMoves filterNot {
+      _.isDiagonal
+    } foreach {
+      case move =>
+        Bishop.canMoveBy(move) should be (false)
     }
   }
 
@@ -109,31 +119,35 @@ class PieceSpec extends UnitSpec with CanVerb {
   )
 
   "A Knight" should "be able to move by two squares along one edge and one " ++
-    "along the other" in {
+  "along the other" in {
 
     knightMoves foreach {
-      Knight(dummyPosition).canMoveBy(_) should be (true)
+      Knight.canMoveBy(_) should be (true)
     }
   }
 
   it should "not be able to move unless the displacement is two squares " ++
-    "along one edge and one along the other" in {
+  "along one edge and one along the other" in {
 
-    movesExcept(knightMoves) foreach {
-      Knight(dummyPosition).canMoveBy(_) should be (false)
+    consideredMoves filterNot {
+      knightMoves.contains(_)
+    } foreach {
+      Knight.canMoveBy(_) should be (false)
     }
   }
 
+  val dummyPosition = Position(0, 0)
+
   "A Piece" can "only move to a position if it can move by the end " ++
-    "position's difference with the piece's position" in {
+  "position's difference with the piece's position" in {
+
 
     val pieces = List(
       King(dummyPosition), Queen(dummyPosition),
       Rook(dummyPosition), Bishop(dummyPosition),
       Knight(dummyPosition))
-
     pieces foreach (piece => {
-      standardChessboardMoves foreach (move => {
+      consideredMoves foreach (move => {
 
         piece.canMoveTo(piece.position + move) should be (piece.canMoveBy(move))
       })
