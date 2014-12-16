@@ -79,6 +79,10 @@ class MoveSpec extends UnitSpec {
     Move(-1, -1).isDiagonal should be (true)
   }
 
+  it should "hold for Move(-3, 3)" in {
+    Move(-3, 3).isDiagonal should be (true)
+  }
+
   it should "not hold for Move(2, 3)" in {
     Move(2, 3).isDiagonal should be (false)
   }

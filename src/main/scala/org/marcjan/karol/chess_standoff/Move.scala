@@ -35,7 +35,7 @@ class Move(val xDelta: Int, val yDelta: Int) {
    * @return is the move diagonal?
    */
   def isDiagonal: Boolean =
-    xDelta == yDelta
+    math.abs(xDelta) == math.abs(yDelta)
 
   /**
    * Returns true when the move is along the board's edge. Left unspecified when
