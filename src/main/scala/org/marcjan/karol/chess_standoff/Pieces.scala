@@ -84,7 +84,10 @@ object King extends PieceKind {
  */
 object Queen extends PieceKind {
   override def canMoveBy(move: Move): Boolean =
-    move.yDelta == 0 || move.xDelta == 0 || move.xDelta == move.yDelta
+
+    move.yDelta == 0 ||
+      move.xDelta == 0 ||
+      math.abs(move.xDelta) == math.abs(move.yDelta)
 }
 
 /**
@@ -102,7 +105,7 @@ object Rook extends PieceKind {
  */
 object Bishop extends PieceKind {
   override def canMoveBy(move: Move): Boolean =
-    move.xDelta == move.yDelta
+    math.abs(move.xDelta) == math.abs(move.yDelta)
 }
 
 /**
