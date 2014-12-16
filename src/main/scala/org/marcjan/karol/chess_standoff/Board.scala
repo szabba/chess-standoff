@@ -134,13 +134,6 @@ object Board {
   def findSafePlacement(rows: Int, columns: Int, pieces: Seq[PieceKind]=List()):
     Seq[Board] = {
 
-    def loop(boards: Seq[Board], pieces: Seq[PieceKind]): Seq[Board] =
-      if (pieces.isEmpty) boards
-      else loop(
-        boards.flatMap(_.placeWithoutConflict(pieces.head)),
-        pieces.tail)
-
-    loop(List(Board(rows, columns)), pieces).groupBy(
-      _.toString).toSeq.map(_._2.head)
+    new BoardSearch(rows, columns, pieces.toList).findAll
   }
 }
