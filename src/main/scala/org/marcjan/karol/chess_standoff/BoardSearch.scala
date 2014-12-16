@@ -91,11 +91,14 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
     }
   }
 
-  def findAll(): List[Board] = {
-    loop(List((
+  def findAll(): List[Board] =
+
+    if (pieces.isEmpty)
+      List(Board(rows, columns))
+
+    else loop(List((
+
       Board(rows, columns),
       Position(0, 0),
-      pieces.groupBy(x => x).mapValues(_.length)
-      )))
-  }
+      pieces.groupBy(x => x).mapValues(_.length) )))
 }
