@@ -94,11 +94,12 @@ object King extends PieceKind {
  * number of squares.
  */
 object Queen extends PieceKind {
-  override def canMoveBy(move: Move): Boolean =
-
+  override def canMoveBy(move: Move): Boolean = {
     move.yDelta == 0 ||
       move.xDelta == 0 ||
       math.abs(move.xDelta) == math.abs(move.yDelta)
+
+  }
 }
 
 /**
