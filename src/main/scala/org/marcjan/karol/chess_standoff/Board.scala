@@ -11,12 +11,13 @@ class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil) {
 
   override def toString: String = {
     var builder = new StringBuilder()
-    for (i <- 0 until rows; j <- 0 until columns) {
 
-      val pos = Position(i, j)
-      val piecesAt = pieces filter {
-        _.position == pos
-      }
+    for {
+      i <- 0 until rows
+      j <- 0 until columns
+    } {
+
+      val piecesAt = pieces filter { _.position == Position(i, j) }
 
       if (piecesAt.isEmpty)
         builder ++= "_"
@@ -26,6 +27,7 @@ class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil) {
       if (j + 1 == columns)
         builder += '\n'
     }
+
     builder.toString
   }
 
