@@ -37,7 +37,7 @@ private object PieceCache {
 /**
  * A kind of chess piece.
  */
-trait PieceKind {
+sealed trait PieceKind {
 
   /**
    * Returns true if the piece kind can move by the given displacement and false
