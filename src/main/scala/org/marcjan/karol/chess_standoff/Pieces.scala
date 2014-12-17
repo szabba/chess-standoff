@@ -21,7 +21,7 @@ class Piece(val kind: PieceKind, val position: Position) {
 }
 
 object Piece {
-  val kinds = List(King, Queen, Rook, Bishop, Knight)
+  val kinds: List[PieceKind] = List(King, Queen, Rook, Bishop, Knight)
 }
 
 private object PieceCache {
