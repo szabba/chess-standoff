@@ -1,9 +1,29 @@
 package org.marcjan.karol.chess_standoff
 
+import java.util.Scanner
+
 object App extends scala.App {
 
-  val boards = Board.findSafePlacement(3, 3,
-    List(King, King, Rook))
+  val scanner = new Scanner(Console.in)
 
-  boards foreach (println)
+  val rows = scanner.nextInt
+  val columns = scanner.nextInt
+
+  val pieces = Piece.kinds flatMap {
+    List.fill(scanner.nextInt)(_)
+  }
+
+  val boards = Board.findSafePlacement(
+    rows, columns, pieces)
+
+  var count = 0
+  boards foreach {
+
+    case board =>
+      count = count + 1
+
+      println(board)
+  }
+
+  printf("Found %d unique boards.\n", count)
 }

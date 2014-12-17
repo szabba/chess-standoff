@@ -30,6 +30,10 @@ sealed class Piece(val kind: PieceKind, val position: Position) extends CanMover
     canMoveBy(position - this.position)
 }
 
+object Piece {
+  val kinds = List(King, Queen, Rook, Bishop, Knight)
+}
+
 private object PieceCache {
   private val cache = new HashMap[PieceKind, HashMap[Position, Piece]]()
 
