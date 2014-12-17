@@ -4,18 +4,18 @@ import java.util.Scanner
 
 object Main extends scala.App {
 
-  val pieceKinds = List(King, Queen, Rook, Bishop, Knight)
+  val pieceKindOrder = List(King, Queen, Rook, Bishop, Knight)
   
   val scanner = new Scanner(Console.in)
 
   val rows = scanner.nextInt()
   val columns = scanner.nextInt()
 
-  val pieces = pieceKinds flatMap {
+  val pieceKinds = pieceKindOrder flatMap {
     List.fill(scanner.nextInt)(_)
   }
 
-  val boards = Board.findSafePlacement(rows, columns, pieces)
+  val boards = Board.findSafePlacement(rows, columns, pieceKinds)
 
   var count = 0
   boards foreach {
