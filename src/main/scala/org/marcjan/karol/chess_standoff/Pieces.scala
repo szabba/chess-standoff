@@ -20,10 +20,6 @@ class Piece(val kind: PieceKind, val position: Position) {
     kind.canMoveBy(position - this.position)
 }
 
-object Piece {
-  val kinds: List[PieceKind] = List(King, Queen, Rook, Bishop, Knight)
-}
-
 private object PieceCache {
   private val cache = new HashMap[PieceKind, HashMap[Position, Piece]]()
 
