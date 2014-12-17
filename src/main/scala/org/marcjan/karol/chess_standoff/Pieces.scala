@@ -5,7 +5,7 @@ import scala.collection.mutable.HashMap
 /**
  * A chess piece.
  */
-sealed class Piece(val kind: PieceKind, val position: Position) {
+class Piece(val kind: PieceKind, val position: Position) {
 
   override def toString: String =
     kind.toString ++ " at " ++ position.toString
