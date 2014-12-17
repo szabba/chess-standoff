@@ -20,9 +20,21 @@ class Piece(val kind: PieceKind, val position: Position) {
     kind.canMoveBy(position - this.position)
 }
 
+/**
+ * A cache of Pieces.
+ */
 private object PieceCache {
+
   private val cache = new HashMap[PieceKind, HashMap[Position, Piece]]()
 
+  /**
+   * Returns a piece allocating a new one only when it's the first one with the
+   * given kind an position.
+   *
+   * @param kind kind of the piece
+   * @param position position of the piece
+   * @return a piece
+   */
   def get(kind: PieceKind, position: Position): Piece =
     cache.getOrElseUpdate(
       kind, new HashMap[Position, Piece]()
