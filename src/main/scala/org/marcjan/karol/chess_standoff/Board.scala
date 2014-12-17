@@ -5,9 +5,9 @@ package org.marcjan.karol.chess_standoff
  *
  * @param rows number of rows the board should have
  * @param columns number of columns the board should have
- * @param piecesGiven a sequence of chess pieces you wish to place on the board
+ * @param pieces a sequence of chess pieces you wish to place on the board
  */
-class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
+class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil) {
 
   override def toString: String = {
     var builder = new StringBuilder()
@@ -59,8 +59,6 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
 
     allInRange && allInRange && noneCanTakeAnother
   }
-
-  val pieces: Seq[Piece] = piecesGiven
 
   /**
    * Checks whether a piece of the given kind can be placed at the given
