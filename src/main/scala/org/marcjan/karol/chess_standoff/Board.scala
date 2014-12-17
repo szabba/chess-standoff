@@ -9,6 +9,26 @@ package org.marcjan.karol.chess_standoff
  */
 class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
 
+  override def toString: String = {
+    var builder = new StringBuilder()
+    for (i <- 0 until rows; j <- 0 until columns) {
+
+      val pos = Position(i, j)
+      val piecesAt = pieces filter {
+        _.position == pos
+      }
+
+      if (piecesAt.isEmpty)
+        builder ++= "_"
+      else
+        builder ++= piecesAt.head.kind.toString
+
+      if (j + 1 == columns)
+        builder += '\n'
+    }
+    builder.toString
+  }
+
   /**
    * Returns true when the board is valid, that is:
    * <ul>
@@ -38,26 +58,6 @@ class Board(val rows: Int, val columns: Int, piecesGiven: Seq[Piece]=List()) {
         ).unary_!)
 
     allInRange && allInRange && noneCanTakeAnother
-  }
-
-  override def toString: String = {
-    var builder = new StringBuilder()
-    for (i <- 0 until rows; j <- 0 until columns) {
-
-      val pos = Position(i, j)
-      val piecesAt = pieces filter {
-        _.position == pos
-      }
-
-      if (piecesAt.isEmpty)
-        builder ++= "_"
-      else
-        builder ++= piecesAt.head.kind.toString
-
-      if (j + 1 == columns)
-        builder += '\n'
-    }
-    builder.toString
   }
 
   val pieces: Seq[Piece] = piecesGiven
