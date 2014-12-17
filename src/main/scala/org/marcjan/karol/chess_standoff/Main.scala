@@ -2,7 +2,7 @@ package org.marcjan.karol.chess_standoff
 
 import java.util.Scanner
 
-object App extends scala.App {
+object Main extends scala.App {
 
   val scanner = new Scanner(Console.in)
 
