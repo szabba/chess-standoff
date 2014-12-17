@@ -127,3 +127,10 @@ object Knight extends PieceKind {
     }
   }
 }
+
+/**
+ * A PieceKind that cannot move. Only for testing.
+ */
+private object CanMoveNowhere extends PieceKind {
+  override def canMoveBy(move: Move): Boolean = false
+}

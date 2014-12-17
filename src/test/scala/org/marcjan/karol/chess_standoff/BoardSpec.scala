@@ -61,17 +61,6 @@ class BoardSpec extends UnitSpec {
         0 until board.columns map (column =>
           Position(row, column)))
 
-  var canMoveNowhere: PieceKind = new PieceKind {
-    /**
-     * Returns true if the object can move by the given displacement and false
-     * otherwise. The result for a zero displacement is left unspecified.
-     *
-     * @param move the displacement as a tuple of (xDelta, yDelta)
-     * @return can the object be moved by the given displacement?
-     */
-    override def canMoveBy(move: Move): Boolean = false
-  }
-
   "safeAt" should "hold for all positions and piece kinds on an empty board" in {
 
     val board = Board(4, 3)
@@ -87,14 +76,14 @@ class BoardSpec extends UnitSpec {
     val knight = Knight(Position(2, 2))
     val board = Board(5, 5, List(knight))
 
-    board.safeAt(Position(0, 1), canMoveNowhere) should be (false)
-    board.safeAt(Position(0, 3), canMoveNowhere) should be (false)
-    board.safeAt(Position(1, 0), canMoveNowhere) should be (false)
-    board.safeAt(Position(1, 4), canMoveNowhere) should be (false)
-    board.safeAt(Position(3, 0), canMoveNowhere) should be (false)
-    board.safeAt(Position(3, 4), canMoveNowhere) should be (false)
-    board.safeAt(Position(4, 1), canMoveNowhere) should be (false)
-    board.safeAt(Position(4, 3), canMoveNowhere) should be (false)
+    board.safeAt(Position(0, 1), CanMoveNowhere) should be (false)
+    board.safeAt(Position(0, 3), CanMoveNowhere) should be (false)
+    board.safeAt(Position(1, 0), CanMoveNowhere) should be (false)
+    board.safeAt(Position(1, 4), CanMoveNowhere) should be (false)
+    board.safeAt(Position(3, 0), CanMoveNowhere) should be (false)
+    board.safeAt(Position(3, 4), CanMoveNowhere) should be (false)
+    board.safeAt(Position(4, 1), CanMoveNowhere) should be (false)
+    board.safeAt(Position(4, 3), CanMoveNowhere) should be (false)
   }
 
   it should "not hold for positions where a piece already resides" in {
