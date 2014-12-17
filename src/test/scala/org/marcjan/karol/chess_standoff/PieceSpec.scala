@@ -149,7 +149,7 @@ class PieceSpec extends UnitSpec with CanVerb {
     pieces foreach (piece => {
       consideredMoves foreach (move => {
 
-        piece.canMoveTo(piece.position + move) should be (piece.canMoveBy(move))
+        piece.canMoveTo(piece.position + move) should be (piece.kind.canMoveBy(move))
       })
     })
   }

@@ -5,20 +5,10 @@ import scala.collection.mutable.HashMap
 /**
  * A chess piece.
  */
-sealed class Piece(val kind: PieceKind, val position: Position) extends CanMoverBy {
+sealed class Piece(val kind: PieceKind, val position: Position) {
 
   override def toString: String =
     kind.toString ++ " at " ++ position.toString
-
-  /**
-   * Returns true if the object can move by the given displacement and false
-   * otherwise. The result for a zero displacement is left unspecified.
-   *
-   * @param move the displacement as a tuple of (xDelta, yDelta)
-   * @return can the object be moved by the given displacement?
-   */
-  override def canMoveBy(move: Move): Boolean =
-    kind.canMoveBy(move)
 
   /**
     * Returns true if the Piece could be moved to the specified position.
@@ -27,7 +17,7 @@ sealed class Piece(val kind: PieceKind, val position: Position) extends CanMover
    * @return could the piece be moved to the specified position?
    */
   def canMoveTo(position: Position): Boolean =
-    canMoveBy(position - this.position)
+    kind.canMoveBy(position - this.position)
 }
 
 object Piece {
@@ -47,7 +37,16 @@ private object PieceCache {
 /**
  * A kind of chess piece.
  */
-trait PieceKind extends CanMoverBy {
+trait PieceKind {
+
+  /**
+   * Returns true if the piece kind can move by the given displacement and false
+   * otherwise. The result for a zero displacement is left unspecified.
+   *
+   * @param move the displacement as a tuple of (xDelta, yDelta)
+   * @return can the object be moved by the given displacement?
+   */
+  def canMoveBy(move: Move): Boolean
 
   /**
    * Shortcut for creating a piece of this kind.
