@@ -8,7 +8,7 @@ import scala.collection.mutable.HashMap
 class Piece(val kind: PieceKind, val position: Position) {
 
   override def toString: String =
-    kind.toString ++ " at " ++ position.toString
+    "Piece(%s, %s)".format(kind, position)
 
   /**
     * Returns true if the Piece could be moved to the specified position.
