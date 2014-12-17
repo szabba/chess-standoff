@@ -8,8 +8,8 @@ object Main extends scala.App {
   
   val scanner = new Scanner(Console.in)
 
-  val rows = scanner.nextInt
-  val columns = scanner.nextInt
+  val rows = scanner.nextInt()
+  val columns = scanner.nextInt()
 
   val pieces = pieceKinds flatMap {
     List.fill(scanner.nextInt)(_)
@@ -20,10 +20,11 @@ object Main extends scala.App {
   var count = 0
   boards foreach {
 
-    case board =>
+    case board => {
       count = count + 1
 
       println(board)
+    }
   }
 
   printf("Found %d unique boards.\n", count)
