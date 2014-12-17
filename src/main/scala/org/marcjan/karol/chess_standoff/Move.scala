@@ -55,10 +55,6 @@ class Move(val xDelta: Int, val yDelta: Int) {
     xDelta == 0 && yDelta == 0
 }
 
-/**
- * Object containing functions that deal with displacements/chess moves
- * represented as Int tuples.
- */
 object Move {
 
   private val cache: HashMap[Int, HashMap[Int, Move]] =
