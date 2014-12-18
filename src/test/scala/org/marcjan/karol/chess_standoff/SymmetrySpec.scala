@@ -23,7 +23,7 @@ class SymmetrySpec extends UnitSpec {
     val position = Position(2, 3)
     val transformed = MirrorRows(rows, columns, position)
 
-    transformed.row should be (position.row)
+    transformed.row should be (2)
   }
 
   it should "flip column values in a row" in {
@@ -34,6 +34,6 @@ class SymmetrySpec extends UnitSpec {
     val position = Position(2, 3)
     val transformed = MirrorRows(rows, columns, position)
 
-    transformed.column should be (columns - position.column - 1)
+    transformed.column should be (0)
   }
 }
