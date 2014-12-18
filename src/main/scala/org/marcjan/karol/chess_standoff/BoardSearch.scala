@@ -95,13 +95,21 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
     (needsWork, rawDone.keys.toList)
   }
 
+  /**
+   * Given a stream of guesses produces a stream of valid boards that can be
+   * produced by guessing further.
+   *
+   * @param guesses stream of guesses
+   * @return stream of valid boards
+   */
   private def boardStream(guesses: Stream[Guess]): Stream[Board] = {
 
     guesses flatMap {
-      case guess =>
+      case guess => {
         val (needWork, done) = needWorkAndDone(guess)
 
         done.toStream ++ boardStream(needWork.toStream)
+      }
     }
   }
 
