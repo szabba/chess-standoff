@@ -11,6 +11,12 @@ import scala.collection.mutable.HashMap
  */
 class Position(val row: Int, val column: Int) {
 
+  override def equals(p: Any): Boolean =
+    p match {
+      case p: Position => this == p
+      case _ => false
+    }
+
   /**
    * Returns true if the value is equal to p.
    *
@@ -19,12 +25,6 @@ class Position(val row: Int, val column: Int) {
    */
   def ==(p: Position): Boolean =
     row == p.row && column == p.column
-
-  override def equals(p: Any): Boolean =
-    p match {
-      case p: Position => this == p
-      case _ => false
-    }
 
   override def toString: String =
     "Position(" ++ row.toString ++ ", " ++ column.toString ++ ")"
