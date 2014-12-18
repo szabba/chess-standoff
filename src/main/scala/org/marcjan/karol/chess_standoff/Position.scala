@@ -3,7 +3,8 @@ package org.marcjan.karol.chess_standoff
 import scala.collection.mutable.HashMap
 
 /**
- * A position of a square on the chessboard.
+ * A position of a square on the chessboard. The rows are counted (unlike
+ * normally in chess) top to bottom, and the columns are counted left to right.
  *
  * @param row row containing the square
  * @param column column containing the square
