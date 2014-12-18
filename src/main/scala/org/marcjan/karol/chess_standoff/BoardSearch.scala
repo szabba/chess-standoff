@@ -2,7 +2,15 @@ package org.marcjan.karol.chess_standoff
 
 import scala.collection.immutable.StreamIterator
 
-private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) {
+/**
+ * A board search knows how to produce all board configurations for a given
+ * board size and sequence of piece kinds.
+ *
+ * @param rows the number of rows in the result boards
+ * @param columns the number of columns in the result boards
+ * @param pieceKinds kinds of pieces to place on the board
+ */
+private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] = Nil) {
 
   private[chess_standoff] type KindCounts = Map[PieceKind, Int]
   private[chess_standoff] type Guess = (Board, Position, KindCounts)
@@ -54,11 +62,11 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
     val done = expanded.map(
       _._1
     ).filter(
-        _.pieces.length == pieces.length
+        _.pieces.length == pieceKinds.length
       ).toList
 
     val mightNeedWork = expanded.filterNot(
-      _._1.pieces.length == pieces.length
+      _._1.pieces.length == pieceKinds.length
     ).map {
       case (board, kindCounts) => (board, nextPos, kindCounts)
     }
@@ -87,14 +95,14 @@ private class BoardSearch(rows: Int, columns: Int, pieces: List[PieceKind]=Nil) 
 
   def findAll(): Iterator[Board] =
 
-    if (pieces.isEmpty)
+    if (pieceKinds.isEmpty)
       Iterator(Board(rows, columns))
 
     else {
 
       val emptyBoard = Board(0, 0)
       val startPosition = Position(0, 0)
-      val kindCounts = pieces.groupBy(x => x).mapValues(_.length)
+      val kindCounts = pieceKinds.groupBy(x => x).mapValues(_.length)
 
       new StreamIterator(boardStream(
         (emptyBoard, startPosition, kindCounts) #:: Stream.empty))
