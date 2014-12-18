@@ -91,7 +91,7 @@ object Board {
    * @param pieces a sequence of chess pieces you wish to place on the board
    * @return a board
    */
-  def apply(rows: Int, columns: Int, pieces: Seq[Piece]=List()): Board =
+  def apply(rows: Int, columns: Int, pieces: Seq[Piece] = List()): Board =
     new Board(rows, columns, pieces)
 
   def findSafePlacement(rows: Int, columns: Int, pieces: Iterable[PieceKind] = List()): Iterator[Board] =
