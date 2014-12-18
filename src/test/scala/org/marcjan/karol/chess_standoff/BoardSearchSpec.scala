@@ -20,7 +20,7 @@ class BoardSearchSpec extends UnitSpec {
 
     val search = new BoardSearch(rows, columns)
 
-    search.incrPos(Position(0, columns - 1)).row == 1 should be (true)
+    search.incrPos(Position(0, columns - 1)).row should be (1)
   }
 
   it should "set column to zero when a row ends" in {
@@ -30,7 +30,7 @@ class BoardSearchSpec extends UnitSpec {
 
     val search = new BoardSearch(rows, columns)
 
-    search.incrPos(Position(0, columns - 1)).column == 0 should be (true)
+    search.incrPos(Position(0, columns - 1)).column should be (0)
   }
 
   it should "decrement the number of a present PieceKind in a KindCounts" in {
@@ -76,7 +76,7 @@ class BoardSearchSpec extends UnitSpec {
       kindCounts
       ))
 
-    guesses.keys.toSeq.length == guessCountExpected should be (true)
+    guesses.keys.toSeq.length should be (guessCountExpected)
   }
 
   it should "put a piece at the right position when making guesses" in {
