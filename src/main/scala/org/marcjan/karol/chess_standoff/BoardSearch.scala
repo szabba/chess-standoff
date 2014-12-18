@@ -61,42 +61,45 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
     })
   }
 
-  private def needsWorkAndDone(guess: Guess): (List[Guess], List[Board]) = {
+  /**
+   * Find all the guesses and finished boards that result from applying
+   * makeGuesses to it's argument.
+   *
+   * @param guess a tuple containing a board, position to guess at and piece
+   *              kind count map
+   * @return list of all boards and guesses to use
+   */
+  private def needWorkAndDone(guess: Guess): (List[Guess], List[Board]) = {
 
     val (board, pos, kindCounts) = guess
     val nextPos = incrPos(pos)
 
     val expanded = makeGuesses(guess)
 
-    val done = expanded.map(
-      _._1
-    ).filter(
-        _.pieces.length == pieceKinds.length
-      ).toList
-
-    val mightNeedWork = expanded.filterNot(
+    val (rawDone, rawGuesses) = expanded partition {
       _._1.pieces.length == pieceKinds.length
-    ).map {
-      case (board, kindCounts) => (board, nextPos, kindCounts)
     }
 
     val needsWork =
+      if (nextPos != Position(rows, 0)) {
 
-      if (nextPos != Position(rows, 0))
+        rawGuesses.map({
+          case (board, kindCounts) => (board, nextPos, kindCounts)
 
-        mightNeedWork.toList ++
-          List((board, nextPos, kindCounts))
+        }).toList ++ List((board, nextPos, kindCounts))
 
-      else Nil
+      } else {
+        Nil
+      }
 
-    (needsWork, done)
+    (needsWork, rawDone.keys.toList)
   }
 
   private def boardStream(guesses: Stream[Guess]): Stream[Board] = {
 
     guesses flatMap {
       case guess =>
-        val (needWork, done) = needsWorkAndDone(guess)
+        val (needWork, done) = needWorkAndDone(guess)
 
         done.toStream ++ boardStream(needWork.toStream)
     }
