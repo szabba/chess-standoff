@@ -1,0 +1,67 @@
+# Chess Standoff
+
+A Scala program that finds all configurations of the specified chess pieces on a
+(possibly non-square) chess board such, that none of the pieces could take
+another one.
+
+# Input format
+
+The program reads seven numbers from standard input -- first the numbers of rows
+and columns the board should have and then the number of kings, queens, rooks,
+bishops and knights to place, respectively.
+
+# Example
+
+```
+$ scala chess-standoff_2.11-0.1.jar
+4 4
+0 0 2 0 4
+
+R___
+_N_N
+__R_
+_N_N
+
+N_N_
+_R__
+N_N_
+___R
+
+N_N_
+___R
+N_N_
+_R__
+
+_R__
+N_N_
+___R
+N_N_
+
+_N_N
+R___
+_N_N
+__R_
+
+_N_N
+__R_
+_N_N
+R___
+
+__R_
+_N_N
+R___
+_N_N
+
+___R
+N_N_
+_R__
+N_N_
+
+Found 8 unique boards.
+```
+
+# Build
+
+```
+$ sbt package
+```
