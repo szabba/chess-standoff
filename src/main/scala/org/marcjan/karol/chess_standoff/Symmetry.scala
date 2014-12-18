@@ -34,3 +34,19 @@ private sealed trait Symmetry {
    */
   def apply(rows: Int, columns: Int, position: Position): Position
 }
+
+/**
+ * A symmetry that transforms a board into itself.
+ */
+private object Identity extends Symmetry {
+  /**
+   * Returns a position transformed through the symmetry assuming the given
+   * board dimensions.
+   *
+   * @param rows number of board rows
+   * @param columns number of board columns
+   * @param position position to transform
+   * @return transformed position
+   */
+  override def apply(rows: Int, columns: Int, position: Position): Position = position
+}
