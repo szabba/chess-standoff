@@ -34,7 +34,15 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
 
   import BoardSearch._
 
-  private[chess_standoff] def makeGuesses(guess: Guess): Map[Board, KindCounts] = {
+  /**
+   * Returns a map whose keys are boards produced by making all valid guesses
+   * about the content of the guessing position. The values are piece kind count
+   * maps adjusted after making each guess.
+   *
+   * @param guess a tuple containing a board, position to guess at and piece
+   *              kind count map
+   */
+  def makeGuesses(guess: Guess): Map[Board, KindCounts] = {
     val (board, pos, kindCounts) = guess
 
     kindCounts.flatMap(entry => {
@@ -46,10 +54,9 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
 
         Nil
 
-      else List(
-        (
-          Board(rows, columns,
-            kind(pos) +: board.pieces),
+      else
+        List((
+          Board(rows, columns, kind(pos) +: board.pieces),
           decrKind(kindCounts, kind)))
     })
   }
