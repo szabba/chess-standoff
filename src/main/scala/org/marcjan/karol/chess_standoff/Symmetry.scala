@@ -67,3 +67,20 @@ private object MirrorRows extends Symmetry {
   override def apply(rows: Int, columns: Int, position: Position): Position =
     Position(position.row, columns - position.column - 1)
 }
+
+/**
+ * A symmetry that mirrors each column of the board.
+ */
+private object MirrorColumns extends Symmetry {
+  /**
+   * Returns a position transformed through the symmetry assuming the given
+   * board dimensions.
+   *
+   * @param rows number of board rows
+   * @param columns number of board columns
+   * @param position position to transform
+   * @return transformed position
+   */
+  override def apply(rows: Int, columns: Int, position: Position): Position =
+    Position(rows - position.row - 1, position.column)
+}

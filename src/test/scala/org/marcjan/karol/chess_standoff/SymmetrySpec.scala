@@ -36,4 +36,26 @@ class SymmetrySpec extends UnitSpec {
 
     transformed.column should be (0)
   }
+
+  "The MirrorColumns symmetry" should "not change position columns" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = MirrorColumns(rows, columns, position)
+
+    transformed.column should be (3)
+  }
+
+  it should "flip row values in a column" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = MirrorColumns(rows, columns, position)
+
+    transformed.row should be (4)
+  }
 }
