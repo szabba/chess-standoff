@@ -15,14 +15,23 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
   private[chess_standoff] type KindCounts = Map[PieceKind, Int]
   private[chess_standoff] type Guess = (Board, Position, KindCounts)
 
-  private[chess_standoff] def incrPos(pos: Position) = {
+  /**
+   * Returns the position that should be considered for adding a piece after pos
+   * is.
+   *
+   * @param pos position we are considering to add a piece at
+   * @return next position to consider adding a piece at
+   */
+  def incrPos(pos: Position) = {
 
-    if (pos.row == rows) pos
+    if (pos.row == rows)
+      pos
 
     else if (pos.column + 1 == columns)
       Position(pos.row + 1, 0)
 
-    else Position(pos.row, pos.column + 1)
+    else
+      Position(pos.row, pos.column + 1)
   }
 
   private[chess_standoff] def decrKind(kindCounts: KindCounts, kind: PieceKind) = {
