@@ -80,4 +80,14 @@ class SymmetrySpec extends UnitSpec {
 
     transformed.column should be (0)
   }
+
+  "The MirrorDiagonal symmetry" should "not change positions on the main diagonal" in {
+
+    val edgeLength = 7
+
+    val position = Position(2, 2)
+    val transformed = MirrorDiagonal(edgeLength, edgeLength, position)
+
+    transformed should be (position)
+  }
 }
