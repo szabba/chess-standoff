@@ -113,12 +113,19 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
     }
   }
 
+  /**
+   * Returns an iterator over the valid boards that satisfy this search's
+   * conditions.
+   *
+   * @return iterator producing boards
+   */
   def findAll(): Iterator[Board] =
 
-    if (pieceKinds.isEmpty)
+    if (pieceKinds.isEmpty) {
+
       Iterator(Board(rows, columns))
 
-    else {
+    } else {
 
       val emptyBoard = Board(0, 0)
       val startPosition = Position(0, 0)
