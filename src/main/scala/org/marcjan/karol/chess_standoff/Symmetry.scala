@@ -84,3 +84,20 @@ private object MirrorColumns extends Symmetry {
   override def apply(rows: Int, columns: Int, position: Position): Position =
     Position(rows - position.row - 1, position.column)
 }
+
+/**
+ * A symmetry that rotates a board by 180 degrees.
+ */
+private object RotateRightBy180Degrees extends Symmetry {
+  /**
+   * Returns a position transformed through the symmetry assuming the given
+   * board dimensions.
+   *
+   * @param rows number of board rows
+   * @param columns number of board columns
+   * @param position position to transform
+   * @return transformed position
+   */
+  override def apply(rows: Int, columns: Int, position: Position): Position =
+    Position(rows - position.row - 1, columns - position.column - 1)
+}

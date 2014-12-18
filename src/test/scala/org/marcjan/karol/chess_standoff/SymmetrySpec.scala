@@ -58,4 +58,26 @@ class SymmetrySpec extends UnitSpec {
 
     transformed.row should be (4)
   }
+
+  "The RotateRightBy180Degrees symmetry" should "flip row values in a column" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = RotateRightBy180Degrees(rows, columns, position)
+
+    transformed.row should be (4)
+  }
+
+  it should "flip column values in a row" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = RotateRightBy180Degrees(rows, columns, position)
+
+    transformed.column should be (0)
+  }
 }
