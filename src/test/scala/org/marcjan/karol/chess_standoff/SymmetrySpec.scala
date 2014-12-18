@@ -14,4 +14,26 @@ class SymmetrySpec extends UnitSpec {
 
     Identity(rows, columns, position) should be (position)
   }
+
+  "The MirrorRows symmetry" should "not change position row" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = MirrorRows(rows, columns, position)
+
+    transformed.row should be (position.row)
+  }
+
+  it should "flip column values in a row" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = MirrorRows(rows, columns, position)
+
+    transformed.column should be (columns - position.column - 1)
+  }
 }
