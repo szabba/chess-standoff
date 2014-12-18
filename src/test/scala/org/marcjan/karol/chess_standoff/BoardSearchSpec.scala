@@ -38,11 +38,9 @@ class BoardSearchSpec extends UnitSpec {
     val rows = 4
     val columns = 7
 
-    val search = new BoardSearch(rows, columns)
-
     val kinds = Map((King, 4), (Queen, 2))
 
-    val decredKinds = search.decrKind(kinds, King)
+    val decredKinds = BoardSearch.decrKind(kinds, King)
 
     decredKinds.get(King).get should be (3)
   }
@@ -53,11 +51,9 @@ class BoardSearchSpec extends UnitSpec {
     val rows = 4
     val columns = 7
 
-    val search = new BoardSearch(rows, columns)
-
     val kinds = Map((King, 4), (Queen, 2))
 
-    val decredKinds = search.decrKind(kinds, Rook)
+    val decredKinds = BoardSearch.decrKind(kinds, Rook)
 
     decredKinds.get(Rook) should be (None)
   }

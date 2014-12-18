@@ -12,8 +12,6 @@ import scala.collection.immutable.StreamIterator
  */
 private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] = Nil) {
 
-  private[chess_standoff] type KindCounts = Map[PieceKind, Int]
-  private[chess_standoff] type Guess = (Board, Position, KindCounts)
 
   /**
    * Returns the position that should be considered for adding a piece after pos
@@ -34,12 +32,7 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
       Position(pos.row, pos.column + 1)
   }
 
-  private[chess_standoff] def decrKind(kindCounts: KindCounts, kind: PieceKind) = {
-    kindCounts.getOrElse(kind, 0) match {
-      case 0 => kindCounts
-      case n => kindCounts - kind + ((kind, n - 1))
-    }
-  }
+  import BoardSearch._
 
   private[chess_standoff] def makeGuesses(guess: Guess): Map[Board, KindCounts] = {
     val (board, pos, kindCounts) = guess
@@ -116,4 +109,24 @@ private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] =
       new StreamIterator(boardStream(
         (emptyBoard, startPosition, kindCounts) #:: Stream.empty))
     }
+}
+
+private object BoardSearch {
+
+  type KindCounts = Map[PieceKind, Int]
+  type Guess = (Board, Position, KindCounts)
+
+  /**
+   * Decrement the count for the given piece kind in the kind counts map.
+   *
+   * @param kindCounts map of kind counts
+   * @param kind kind to decrement count for
+   * @return map with decremented kind
+   */
+  def decrKind(kindCounts: KindCounts, kind: PieceKind) = {
+    kindCounts.getOrElse(kind, 0) match {
+      case 0 => kindCounts
+      case n => kindCounts - kind + ((kind, n - 1))
+    }
+  }
 }
