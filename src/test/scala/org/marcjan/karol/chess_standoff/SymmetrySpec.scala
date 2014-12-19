@@ -228,6 +228,17 @@ class SymmetrySpec extends UnitSpec {
     transformed should be (Position(edgeLength - 1, edgeLength - 1))
   }
 
+  it should "cancel out with it's inverse" in {
+
+    val edgeLength = 7
+
+    val position = Position(2, 3)
+    val transformed = RotateRightBy90Degrees.inverse(edgeLength, edgeLength,
+      RotateRightBy90Degrees(edgeLength, edgeLength, position))
+
+    transformed should be (position)
+  }
+
   "The RotateRightBy270Degrees symmetry" should "be invariant with respect " +
     "to the middle position on an odd-edge square board" in {
 
