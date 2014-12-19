@@ -101,4 +101,15 @@ class SymmetrySpec extends UnitSpec {
     transformed.row should be (position.column)
     transformed.column should be (position.row)
   }
+
+  "The MirrorAntidiagonal symmetry" should "not change positions on the " +
+    "antidiagonal" in {
+
+    val edgeLength = 7
+
+    val position = Position(1, 5)
+    val transformed = MirrorAntidiagonal(edgeLength, edgeLength, position)
+
+    transformed should be (position)
+  }
 }
