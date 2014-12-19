@@ -1,5 +1,9 @@
 package org.marcjan.karol.chess_standoff
 
+private class SymmetrySearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] = Nil) {
+  def findAll(): Iterator[Board] = Nil.iterator
+}
+
 private object SymmetrySearch {
 
   type Nexter = Position => Position
