@@ -183,6 +183,17 @@ class SymmetrySpec extends UnitSpec {
     transformed.column should be (5)
   }
 
+  it should "cancel out with it's inverse" in {
+
+    val edgeLength = 7
+
+    val position = Position(2, 3)
+    val transformed = MirrorAntidiagonal.inverse(edgeLength, edgeLength,
+      MirrorAntidiagonal(edgeLength, edgeLength, position))
+
+    transformed should be (position)
+  }
+
   "The RotateRightBy90Degrees symmetry" should "put the (0, 0) position at " +
     "the 0-th column of the last row" in {
 
