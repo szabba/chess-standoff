@@ -148,6 +148,16 @@ class SymmetrySpec extends UnitSpec {
     transformed should be (position)
   }
 
+  it should "transform the lower left corner into the lower right one" in {
+
+    val edgeLength = 7
+
+    val position = Position(edgeLength - 1, 0)
+    val transformed = RotateRightBy90Degrees(edgeLength, edgeLength, position)
+
+    transformed should be (Position(edgeLength - 1, edgeLength - 1))
+  }
+
   "The RotateRightBy270Degrees symmetry" should "be invariant with respect " +
     "to the middle position on an odd-edge square board" in {
 
