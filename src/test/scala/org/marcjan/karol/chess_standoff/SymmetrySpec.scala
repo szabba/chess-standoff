@@ -147,4 +147,16 @@ class SymmetrySpec extends UnitSpec {
 
     transformed should be (position)
   }
+
+  "The RotateRightBy270Degrees symmetry" should "be invariant with respect " +
+    "to the middle position on an odd-edge square board" in {
+
+    val edgeLength = 7
+    val edgeMiddle = (edgeLength - 1) / 2
+
+    val position = Position(edgeMiddle, edgeMiddle)
+    val transformed = RotateRightBy270Degrees(edgeLength, edgeLength, position)
+
+    transformed should be (position)
+  }
 }
