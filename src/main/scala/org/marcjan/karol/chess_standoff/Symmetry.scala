@@ -111,6 +111,8 @@ private object RotateRightBy180Degrees extends Symmetry {
    */
   override def apply(rows: Int, columns: Int, position: Position): Position =
     Position(rows - position.row - 1, columns - position.column - 1)
+
+  override val inverse: Symmetry = this
 }
 
 /**
