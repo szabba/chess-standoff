@@ -156,6 +156,10 @@ private object RotateRightBy90Degrees extends Symmetry {
     Position(columns - position.column - 1, position.row)
 }
 
+/**
+ * A symmetry that rotates the board by 270 degrees to the right. The results
+ * are undefined for a non-square board.
+ */
 private object RotateRightBy270Degrees extends Symmetry {
   /**
    * Returns a position transformed through the symmetry assuming the given
