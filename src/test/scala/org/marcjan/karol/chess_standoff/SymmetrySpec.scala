@@ -271,4 +271,15 @@ class SymmetrySpec extends UnitSpec {
 
     transformed should be (Position(0, 0))
   }
+
+  it should "cancel out with it's inverse" in {
+
+    val edgeLength = 7
+
+    val position = Position(2, 3)
+    val transformed = RotateRightBy270Degrees.inverse(edgeLength, edgeLength,
+      RotateRightBy270Degrees(edgeLength, edgeLength, position))
+
+    transformed should be (position)
+  }
 }

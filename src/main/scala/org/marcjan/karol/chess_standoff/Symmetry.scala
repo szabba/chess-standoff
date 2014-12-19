@@ -194,4 +194,6 @@ private object RotateRightBy270Degrees extends Symmetry {
       RotateRightBy90Degrees(rows, columns,
         RotateRightBy90Degrees(rows, columns, position)))
   }
+
+  override val inverse: Symmetry = RotateRightBy90Degrees
 }
