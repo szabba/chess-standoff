@@ -15,6 +15,18 @@ class SymmetrySpec extends UnitSpec {
     Identity(rows, columns, position) should be (position)
   }
 
+  it should "cancel out with it's inverse" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = Identity.inverse(rows, columns,
+      Identity(rows, columns, position))
+
+    transformed should be (position)
+  }
+
   "The MirrorRows symmetry" should "not change position row" in {
 
     val rows = 7

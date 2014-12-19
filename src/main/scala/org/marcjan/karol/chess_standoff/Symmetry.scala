@@ -54,6 +54,8 @@ private object Identity extends Symmetry {
    * @return transformed position
    */
   override def apply(rows: Int, columns: Int, position: Position): Position = position
+
+  override val inverse: Symmetry = this
 }
 
 /**
