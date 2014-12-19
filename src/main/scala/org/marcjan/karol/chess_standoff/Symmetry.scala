@@ -33,6 +33,11 @@ private sealed trait Symmetry {
    * @return transformed position
    */
   def apply(rows: Int, columns: Int, position: Position): Position
+
+  /**
+   * Symmetry inverting the effects of the containing one.
+   */
+  val inverse: Symmetry
 }
 
 /**
