@@ -247,8 +247,6 @@ class SymmetrySpec extends UnitSpec {
     val position = Position(0, 0)
     val transformed = RotateRightBy270Degrees(edgeLength, edgeLength, position)
 
-    println(position)
-    println(transformed)
     transformed.row should be (0)
     transformed.column should be (edgeLength - 1)
   }
