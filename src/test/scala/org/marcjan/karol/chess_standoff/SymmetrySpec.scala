@@ -182,4 +182,14 @@ class SymmetrySpec extends UnitSpec {
     transformed.row should be (0)
     transformed.column should be (edgeLength - 1)
   }
+
+  it should "transform the lower left corner into the upper left one" in {
+
+    val edgeLength = 7
+
+    val position = Position(edgeLength - 1, 0)
+    val transformed = RotateRightBy270Degrees(edgeLength, edgeLength, position)
+
+    transformed should be (Position(0, 0))
+  }
 }

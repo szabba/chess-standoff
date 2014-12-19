@@ -167,6 +167,8 @@ private object RotateRightBy270Degrees extends Symmetry {
    * @return transformed position
    */
   override def apply(rows: Int, columns: Int, position: Position): Position = {
-    Position(position.row, columns - position.column - 1)
+    RotateRightBy90Degrees(rows, columns,
+      RotateRightBy90Degrees(rows, columns,
+        RotateRightBy90Degrees(rows, columns, position)))
   }
 }
