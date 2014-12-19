@@ -135,4 +135,16 @@ class SymmetrySpec extends UnitSpec {
     transformed.column should be (0)
     transformed.row should be (edgeLength - 1)
   }
+
+  it should "be invrariant with respect to the middle position on an " +
+    "odd-edge square board" in {
+
+    val edgeLength = 7
+    val edgeMiddle = (edgeLength - 1) / 2
+
+    val position = Position(edgeMiddle, edgeMiddle)
+    val transformed = RotateRightBy90Degrees(edgeLength, edgeLength, position)
+
+    transformed should be (position)
+  }
 }
