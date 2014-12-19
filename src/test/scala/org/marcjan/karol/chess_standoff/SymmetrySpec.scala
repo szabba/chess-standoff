@@ -49,6 +49,18 @@ class SymmetrySpec extends UnitSpec {
     transformed.column should be (0)
   }
 
+  it should "cancel out with it's inverse" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = MirrorRows.inverse(rows, columns,
+      MirrorRows(rows, columns, position))
+
+    transformed should be (position)
+  }
+
   "The MirrorColumns symmetry" should "not change position columns" in {
 
     val rows = 7

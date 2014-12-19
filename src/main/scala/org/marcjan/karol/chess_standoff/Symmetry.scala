@@ -73,6 +73,8 @@ private object MirrorRows extends Symmetry {
    */
   override def apply(rows: Int, columns: Int, position: Position): Position =
     Position(position.row, columns - position.column - 1)
+
+  override val inverse: Symmetry = this
 }
 
 /**
