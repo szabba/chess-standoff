@@ -83,6 +83,18 @@ class SymmetrySpec extends UnitSpec {
     transformed.row should be (4)
   }
 
+  it should "cancel out with it's inverse" in {
+
+    val rows = 7
+    val columns = 4
+
+    val position = Position(2, 3)
+    val transformed = MirrorColumns.inverse(rows, columns,
+      MirrorColumns(rows, columns, position))
+
+    transformed should be (position)
+  }
+
   "The RotateRightBy180Degrees symmetry" should "flip row values in a column" in {
 
     val rows = 7

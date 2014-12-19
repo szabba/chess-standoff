@@ -92,6 +92,8 @@ private object MirrorColumns extends Symmetry {
    */
   override def apply(rows: Int, columns: Int, position: Position): Position =
     Position(rows - position.row - 1, position.column)
+
+  override val inverse: Symmetry = this
 }
 
 /**
