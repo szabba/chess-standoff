@@ -8,6 +8,8 @@ private object SymmetrySearch {
 
   type Nexter = Position => Position
   type KindCounts = Map[PieceKind, Int]
+  type BoardClass = Map[Symmetry, Board]
+  type Guess = (BoardClass, Position, KindCounts)
 
   private val rectangleSymmetries = Set(
     Identity, MirrorRows, MirrorColumns, RotateRightBy180Degrees)
