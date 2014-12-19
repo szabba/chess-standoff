@@ -90,4 +90,15 @@ class SymmetrySpec extends UnitSpec {
 
     transformed should be (position)
   }
+
+  it should "swap position coordinates" in {
+
+    val edgeLegth = 7
+
+    val position = Position(1, 3)
+    val transformed = MirrorDiagonal(edgeLegth, edgeLegth, position)
+
+    transformed.row should be (position.column)
+    transformed.column should be (position.row)
+  }
 }
