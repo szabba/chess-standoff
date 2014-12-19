@@ -112,4 +112,15 @@ class SymmetrySpec extends UnitSpec {
 
     transformed should be (position)
   }
+
+  it should "mirror positions with respect to the antidiagonal" in {
+
+    val edgeLength = 7
+
+    val position = Position(1, 2)
+    val transformed = MirrorAntidiagonal(edgeLength, edgeLength, position)
+
+    transformed.row should be (4)
+    transformed.column should be (5)
+  }
 }

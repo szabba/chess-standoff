@@ -135,5 +135,5 @@ private object MirrorAntidiagonal extends Symmetry {
    * @return transformed position
    */
   override def apply(rows: Int, columns: Int, position: Position): Position =
-    position
+    Position(columns - position.column - 1, rows - position.row - 1)
 }
