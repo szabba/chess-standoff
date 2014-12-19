@@ -123,4 +123,16 @@ class SymmetrySpec extends UnitSpec {
     transformed.row should be (4)
     transformed.column should be (5)
   }
+
+  "The RotateRightBy90Degrees symmetry" should "put the (0, 0) position at " +
+    "the 0-th column of the last row" in {
+
+    val edgeLength = 7
+
+    val position = Position(0, 0)
+    val transformed = RotateRightBy90Degrees(edgeLength, edgeLength, position)
+
+    transformed.column should be (0)
+    transformed.row should be (edgeLength - 1)
+  }
 }

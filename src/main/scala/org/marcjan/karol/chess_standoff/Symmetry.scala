@@ -137,3 +137,21 @@ private object MirrorAntidiagonal extends Symmetry {
   override def apply(rows: Int, columns: Int, position: Position): Position =
     Position(columns - position.column - 1, rows - position.row - 1)
 }
+
+/**
+ * A symmetry that rotates the board by 90 degrees to the right. The results are
+ * undefined for a non-square board.
+ */
+private object RotateRightBy90Degrees extends Symmetry {
+  /**
+   * Returns a position transformed through the symmetry assuming the given
+   * board dimensions.
+   *
+   * @param rows number of board rows
+   * @param columns number of board columns
+   * @param position position to transform
+   * @return transformed position
+   */
+  override def apply(rows: Int, columns: Int, position: Position): Position =
+    Position(rows - 1, 0)
+}
