@@ -159,4 +159,17 @@ class SymmetrySpec extends UnitSpec {
 
     transformed should be (position)
   }
+
+  it should "put the (0, 0) position at the last column of the 0-th row" in {
+
+    val edgeLength = 7
+
+    val position = Position(0, 0)
+    val transformed = RotateRightBy270Degrees(edgeLength, edgeLength, position)
+
+    println(position)
+    println(transformed)
+    transformed.row should be (0)
+    transformed.column should be (edgeLength - 1)
+  }
 }
