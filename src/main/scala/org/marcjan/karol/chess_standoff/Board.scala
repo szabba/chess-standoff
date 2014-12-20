@@ -7,7 +7,7 @@ package org.marcjan.karol.chess_standoff
  * @param columns number of columns the board should have
  * @param pieces a sequence of chess pieces you wish to place on the board
  */
-class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil) {
+class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil, space: Option[Seq[Position]] = None) {
 
   override def toString: String = {
     var builder = new StringBuilder()
@@ -29,6 +29,31 @@ class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil) {
     }
 
     builder.toString
+  }
+
+  override def  equals(other: Any) = {
+    other match {
+      case board: Board => toString == board.toString
+      case _ => false
+    }
+  }
+
+  private[chess_standoff] lazy val safeSpace = {
+    space match {
+      case None => {
+        for {
+          i <- 0 until rows
+          j <- 0 until columns
+
+          position = Position(i, j)
+          if (pieces.exists(_.canMoveTo(position)).unary_!)
+          if (pieces.map(_.position).contains(position).unary_!)
+
+        } yield position
+      }
+
+      case Some(space) => space
+    }
   }
 
   /**
