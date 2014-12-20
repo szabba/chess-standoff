@@ -40,7 +40,7 @@ class Board(val rows: Int, val columns: Int, val pieces: Seq[Piece] = Nil, space
 
   override def hashCode: Int = 41 + toString.hashCode
 
-  private[chess_standoff] lazy val safeSpace = {
+  private[chess_standoff] val safeSpace = {
     space match {
       case None => {
         for {
