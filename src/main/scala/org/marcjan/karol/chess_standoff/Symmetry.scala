@@ -20,7 +20,11 @@ private sealed trait Symmetry {
       }
     }
 
-    new Board(board.rows, board.columns, pieces)
+    val safeSpace = board.safeSpace map {
+      apply(board.rows, board.columns, _)
+    }
+
+    new Board(board.rows, board.columns, pieces, Some(safeSpace))
   }
 
   /**
