@@ -37,7 +37,7 @@ private class SymmetrySearch(rows: Int, columns: Int, pieceKinds: List[PieceKind
   }
 
   private def needWorkAndDone(guesses: Set[(BoardClass, KindCounts)]): (Set[Guess], Set[Board]) = {
-    val (needWork, doneGuessing): (Set[Guess], Set[Guess]) = guesses.flatMap {
+    val (needWork, doneGuessing) = guesses.flatMap {
       makeGuesses(_)
     } partition {
       case (_, counts) => counts.values.sum > 0
@@ -62,7 +62,10 @@ private class SymmetrySearch(rows: Int, columns: Int, pieceKinds: List[PieceKind
     board.safeSpace flatMap {
       case position => {
 
-        if (board.pieces exists {
+        if (counts.getOrElse(kind, 0) <= 0) {
+          Set.empty[Guess]
+
+        } else if (board.pieces exists {
           case piece => kind.canMoveBy(piece.position - position)
         }) {
           Set.empty[Guess]

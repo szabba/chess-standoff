@@ -12,7 +12,6 @@ import scala.collection.immutable.StreamIterator
  */
 private class BoardSearch(rows: Int, columns: Int, pieceKinds: List[PieceKind] = Nil) {
 
-
   /**
    * Returns the position that should be considered for adding a piece after pos
    * is.
