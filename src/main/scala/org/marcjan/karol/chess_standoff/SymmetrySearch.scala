@@ -6,12 +6,18 @@ private class SymmetrySearch(rows: Int, columns: Int, pieceKinds: List[PieceKind
 
   def findAll(): Iterator[Board] = {
 
-    val counts = pieceKinds.groupBy(x => x).mapValues(_.length)
     val emptyBoard = new Board(rows, columns)
 
-    val initialGuess = (Set(emptyBoard), counts)
+    if (pieceKinds.isEmpty) {
+      Iterator(emptyBoard)
 
-    loop(Set(initialGuess)).toIterator
+    } else {
+
+      val counts = pieceKinds.groupBy(x => x).mapValues(_.length)
+      val initialGuess = (Set(emptyBoard), counts)
+
+      loop(Set(initialGuess)).toIterator
+    }
   }
 
   import SymmetrySearch._
