@@ -94,7 +94,6 @@ private class SymmetrySearch(rows: Int, columns: Int, pieceKinds: List[PieceKind
 
 private object SymmetrySearch {
 
-  type Nexter = Position => Position
   type KindCounts = Map[PieceKind, Int]
   type BoardClass = Set[Board]
   type Guess = (BoardClass, KindCounts)
