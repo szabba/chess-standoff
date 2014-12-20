@@ -1,6 +1,8 @@
 package org.marcjan.karol.chess_standoff
 
-class SymmetrySearchSpec extends UnitSpec {
+import org.scalatest.prop.TableDrivenPropertyChecks
+
+class SymmetrySearchSpec extends UnitSpec with TableDrivenPropertyChecks {
 
   "SymmetrySearch.findAll" should "contain only empty boards when given no " ++
     "pieces" in {
@@ -47,12 +49,24 @@ class SymmetrySearchSpec extends UnitSpec {
 
   it should "contain as many pieces in every board as many kinds were given" in {
 
-    val kinds = List(King, King, Rook)
+    val pieceCountCases =
+      Table(
+        ("rows", "columns", "pieceKinds", "pieceCount"),
+        (3, 4, List(King, King, Rook), 3),
+        (3, 3, List(Rook, Knight, Bishop), 3)
+      )
 
-    val boards = new SymmetrySearch(3, 4, kinds).findAll
 
-    boards.isEmpty should be (false)
-    boards.forall(_.pieces.length == kinds.length) should be (true)
+    forAll(pieceCountCases) {
+      (rows: Int, columns: Int, pieceKinds: List[PieceKind], pieceCount: Int) => {
+
+        val boards = new SymmetrySearch(rows, columns, pieceKinds).findAll()
+
+        boards foreach {
+          _.pieces.length should be (pieceCount)
+        }
+      }
+    }
   }
 
   it should "not contain duplicate boards" in {
