@@ -120,5 +120,5 @@ object Board {
     new Board(rows, columns, pieces)
 
   def findSafePlacement(rows: Int, columns: Int, pieces: Iterable[PieceKind] = List()): Iterator[Board] =
-    new BoardSearch(rows, columns, pieces.toList).findAll()
+    new SymmetrySearch(rows, columns, pieces.toList).findAll()
 }
